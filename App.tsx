@@ -9,6 +9,9 @@ import Register from './src/components/Auth/Register';
 import Home from './src/components/Home/Home';
 import ProductDetail from './src/components/Home/ProductDetail';
 import Profile from './src/components/Profile/Profile';
+import Cart from './src/components/Cart/Cart';
+import Order from './src/components/Cart/Order';
+import History from './src/components/History/History';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -30,6 +33,23 @@ function HomeStack() {
   );
 }
 
+function CartStack() {
+  return (
+    <Stack.Navigator initialRouteName="Cart">
+      <Stack.Screen
+        name="Cart"
+        component={Cart}
+        options={{title: 'Keranjang'}}
+      />
+      <Stack.Screen
+        name="Order"
+        component={Order}
+        options={{title: 'Detail Pesanan'}}
+      />
+    </Stack.Navigator>
+  );
+}
+
 function MainTabs() {
   return (
     <Tab.Navigator
@@ -41,6 +61,12 @@ function MainTabs() {
             iconName = 'home';
           } else if (route.name === 'Profile') {
             iconName = 'user';
+          } else if (route.name === 'Cart') {
+            iconName = 'shoppingcart';
+          } else if (route.name === 'History') {
+            iconName = 'reload1';
+          } else {
+            iconName = '';
           }
 
           return <AntDesign name={iconName} size={size} color={color} />;
@@ -52,6 +78,16 @@ function MainTabs() {
         name="Home"
         component={HomeStack}
         options={{headerShown: false}}
+      />
+      <Tab.Screen
+        name="Cart"
+        component={CartStack}
+        options={{headerShown: false}}
+      />
+      <Tab.Screen
+        name="History"
+        component={History}
+        options={{title: 'Riwayat'}}
       />
       <Tab.Screen
         name="Profile"

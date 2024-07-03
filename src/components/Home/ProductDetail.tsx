@@ -12,7 +12,7 @@ export default function ProductDetail({route, navigation}: any) {
   const {product} = route.params;
   console.log(product);
   return (
-    <SafeAreaView>
+    <SafeAreaView className="flex-1">
       <ScrollView contentInsetAdjustmentBehavior="automatic" className="pt-5">
         <View className="px-6">
           <Image
@@ -40,13 +40,17 @@ export default function ProductDetail({route, navigation}: any) {
               <Text className="">{product.description}</Text>
             </View>
           </View>
-          <TouchableOpacity className="mt-5 rounded-lg bg-stone-800 py-3">
-            <Text className="text-center text-lg font-medium text-white">
-              Masukkan ke Keranjang
-            </Text>
-          </TouchableOpacity>
         </View>
       </ScrollView>
+      <View className="px-2 py-2">
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Cart')}
+          className="mt-5 rounded-lg bg-stone-800 py-3">
+          <Text className="text-center text-lg font-medium text-white">
+            Masukkan ke Keranjang
+          </Text>
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 }
