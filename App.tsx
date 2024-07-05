@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import BootSplash from 'react-native-bootsplash';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -12,6 +12,7 @@ import Profile from './src/components/Profile/Profile';
 import Cart from './src/components/Cart/Cart';
 import Order from './src/components/Cart/Order';
 import History from './src/components/History/History';
+import {AuthContext, AuthProvider} from './src/contexts/AuthContext';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -53,15 +54,16 @@ function CartStack() {
 function MainTabs() {
   return (
     <Tab.Navigator
+      initialRouteName="HomeStack"
       screenOptions={({route}) => ({
         tabBarIcon: ({focused, color, size}) => {
           let iconName;
 
-          if (route.name === 'Home') {
+          if (route.name === 'HomeStack') {
             iconName = 'home';
           } else if (route.name === 'Profile') {
             iconName = 'user';
-          } else if (route.name === 'Cart') {
+          } else if (route.name === 'CartStack') {
             iconName = 'shoppingcart';
           } else if (route.name === 'History') {
             iconName = 'reload1';
@@ -75,14 +77,14 @@ function MainTabs() {
         tabBarInactiveTintColor: 'gray',
       })}>
       <Tab.Screen
-        name="Home"
+        name="HomeStack"
         component={HomeStack}
-        options={{headerShown: false}}
+        options={{headerShown: false, title: 'Home'}}
       />
       <Tab.Screen
-        name="Cart"
+        name="CartStack"
         component={CartStack}
-        options={{headerShown: false}}
+        options={{headerShown: false, title: 'Keranjang'}}
       />
       <Tab.Screen
         name="History"
@@ -99,6 +101,8 @@ function MainTabs() {
 }
 
 function App(): React.JSX.Element {
+  const {auth}: any = useContext(AuthContext);
+  console.log('INI AUTH === ', auth);
   useEffect(() => {
     const init = async () => {
       console.log('splash screen');
@@ -114,6 +118,12 @@ function App(): React.JSX.Element {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login">
         <Stack.Screen
+          name="MainTabs"
+          component={MainTabs}
+          options={{headerShown: false}}
+        />
+
+        <Stack.Screen
           name="Login"
           component={Login}
           options={{headerShown: false}}
@@ -121,11 +131,6 @@ function App(): React.JSX.Element {
         <Stack.Screen
           name="Register"
           component={Register}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="MainTabs"
-          component={MainTabs}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

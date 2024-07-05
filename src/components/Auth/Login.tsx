@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Image,
   SafeAreaView,
@@ -8,10 +8,14 @@ import {
   TextInput,
   Pressable,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login({navigation}: any): React.JSX.Element {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const {
     control,
     handleSubmit,
@@ -23,10 +27,31 @@ export default function Login({navigation}: any): React.JSX.Element {
     },
   });
 
-  const onSubmit = (data: any) => {
-    console.log(data);
-    navigation.navigate('MainTabs');
+  const onSubmit = async (data: any) => {
+    setIsLoading(true);
+    try {
+      const response = await axios.post(`${process.env.API_URL}/user/login`, {
+        Email: data.email,
+        Password: data.password,
+      });
+      await AsyncStorage.setItem('auth', JSON.stringify(response.data));
+      navigation.navigate('MainTabs');
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
+    }
   };
+
+  useEffect(() => {
+    const getUserData = async () => {
+      const userData = await AsyncStorage.getItem('user');
+      console.log('INI LOGIN ASYNC ==== ', userData);
+    };
+
+    getUserData();
+  }, []);
+
   return (
     <SafeAreaView className="p-5">
       <ScrollView contentInsetAdjustmentBehavior="automatic" className="p-4">
@@ -40,9 +65,7 @@ export default function Login({navigation}: any): React.JSX.Element {
         <View className="mt-10">
           <Controller
             control={control}
-            rules={{
-              required: true,
-            }}
+            rules={{required: true}}
             render={({field: {onChange, onBlur, value}}) => (
               <TextInput
                 placeholder="Email"
@@ -60,9 +83,7 @@ export default function Login({navigation}: any): React.JSX.Element {
 
           <Controller
             control={control}
-            rules={{
-              required: true,
-            }}
+            rules={{required: true}}
             render={({field: {onChange, onBlur, value}}) => (
               <TextInput
                 placeholder="Password"
@@ -74,16 +95,26 @@ export default function Login({navigation}: any): React.JSX.Element {
             )}
             name="password"
           />
+          {errors.password && (
+            <Text className="mt-2 pl-4 text-red-500">Password wajib diisi</Text>
+          )}
         </View>
-        {errors.password && (
-          <Text className="mt-2 pl-4 text-red-500">Password wajib diisi</Text>
-        )}
         <TouchableOpacity
+          disabled={isLoading}
           onPress={handleSubmit(onSubmit)}
-          className="mt-5 rounded-full bg-amber-500 p-3">
-          <Text className="text-center text-xl font-semibold text-white">
-            Masuk
-          </Text>
+          className="mt-5 flex flex-row items-center justify-center space-x-3 rounded-full bg-amber-500 p-3">
+          {isLoading ? (
+            <>
+              <ActivityIndicator size="small" color="#0000ff" />
+              <Text className="text-center text-xl font-semibold text-white">
+                Tunggu sebentar
+              </Text>
+            </>
+          ) : (
+            <Text className="text-center text-xl font-semibold text-white">
+              Masuk
+            </Text>
+          )}
         </TouchableOpacity>
         <View className="mt-5 flex-row justify-center">
           <Text>Belum punya akun?</Text>

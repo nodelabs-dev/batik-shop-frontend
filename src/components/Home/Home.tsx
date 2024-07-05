@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import images from '../../assets/images/batik/image';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
 
 const tabCategories = [
   {
@@ -95,6 +97,32 @@ const latestBatik = [
 ];
 
 export default function Home({navigation}: any) {
+  const [auth, setAuth] = useState<any>(null);
+
+  useEffect(() => {
+    const getUserLogin = async () => {
+      const data = await AsyncStorage.getItem('auth');
+      if (data) {
+        setAuth(JSON.parse(data));
+      }
+    };
+
+    getUserLogin();
+  }, []);
+
+  useEffect(() => {
+    if (auth) {
+      console.log('INI AUTH HOME === ', JSON.stringify(auth));
+    }
+
+    const getUserData = async () => {
+      const response = await axios.get(`${process.env.API_URL}/verify/user`);
+      await AsyncStorage.setItem('user', JSON.stringify(response.data));
+      console.log('INI DATA USER === ', response.data);
+    };
+
+    getUserData();
+  }, [auth]);
   return (
     <SafeAreaView className="p-4">
       <ScrollView contentInsetAdjustmentBehavior="automatic" className="p-4">

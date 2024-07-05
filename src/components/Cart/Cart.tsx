@@ -1,3 +1,5 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -9,6 +11,16 @@ import {
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 export default function Cart({navigation}: any) {
+  useEffect(() => {
+    const getUserData = async () => {
+      const userData = await AsyncStorage.getItem('user');
+      console.log('INI USER DATA DI CART ==== ', userData);
+
+      return userData;
+    };
+
+    getUserData();
+  }, []);
   return (
     <SafeAreaView className="flex-1">
       <ScrollView contentInsetAdjustmentBehavior="automatic" className="p-4">
@@ -16,7 +28,7 @@ export default function Cart({navigation}: any) {
           <View className="rounded-lg bg-white p-2">
             <Image
               source={require('../../assets/images/batik/batik-3.png')}
-              className="mx-auto h-36 w-36 rounded-xl border-4 border-white"
+              className="mx-auto h-36 w-36 rounded-xl"
             />
             <View className="p-2">
               <Text className="mt-2">Batik Gajah Oling</Text>
@@ -48,7 +60,7 @@ export default function Cart({navigation}: any) {
           <View className="rounded-lg bg-white p-2">
             <Image
               source={require('../../assets/images/batik/batik-2.png')}
-              className="mx-auto h-36 w-36 rounded-xl border-4 border-white"
+              className="mx-auto h-36 w-36 rounded-xl"
             />
             <View className="p-2">
               <Text className="mt-2">Batik Gudeng</Text>
@@ -80,7 +92,7 @@ export default function Cart({navigation}: any) {
           <View className="rounded-lg bg-white p-2">
             <Image
               source={require('../../assets/images/batik/batik-5.png')}
-              className="mx-auto h-36 w-36 rounded-xl border-4 border-white"
+              className="mx-auto h-36 w-36 rounded-xl"
             />
             <View className="p-2">
               <Text className="mt-2">Batik Gudeng</Text>
@@ -112,7 +124,7 @@ export default function Cart({navigation}: any) {
           <View className="rounded-lg bg-white p-2">
             <Image
               source={require('../../assets/images/batik/batik-4.png')}
-              className="mx-auto h-36 w-36 rounded-xl border-4 border-white"
+              className="mx-auto h-36 w-36 rounded-xl"
             />
             <View className="p-2">
               <Text className="mt-2">Batik Gudeng</Text>
