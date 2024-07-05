@@ -9,6 +9,7 @@ import {
   Pressable,
   TouchableOpacity,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import axios from 'axios';
@@ -40,10 +41,18 @@ export default function Login({navigation}: any): React.JSX.Element {
     } catch (error) {
       console.error(error);
       setIsLoading(false);
+      loginErrorAlert();
     }
   };
 
   useEffect(() => {
+    const getProductsHandler = async () => {
+      const response = await axios.get(`${process.env.API_URL}/produk`);
+      console.log('RESPONSE FROM LOGIN ===== ', response.data);
+    };
+
+    getProductsHandler();
+
     const getUserData = async () => {
       const userData = await AsyncStorage.getItem('user');
       console.log('INI LOGIN ASYNC ==== ', userData);
@@ -51,6 +60,14 @@ export default function Login({navigation}: any): React.JSX.Element {
 
     getUserData();
   }, []);
+
+  const loginErrorAlert = () =>
+    Alert.alert('Gagal Masuk', 'Email atau password Anda salah.', [
+      {
+        text: 'Oke',
+        onPress: () => console.log('Oke pressed'),
+      },
+    ]);
 
   return (
     <SafeAreaView className="p-5">
