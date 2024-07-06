@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useCallback} from 'react';
+import React, {useState, useCallback} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import {
@@ -9,6 +9,7 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -49,10 +50,19 @@ export default function Cart({navigation}: any) {
       setCart((prevCart: any) =>
         prevCart.filter((item: any) => item.id !== id),
       );
+      deleteProductAlert();
     } catch (error) {
       console.error(error);
     }
   };
+
+  const deleteProductAlert = () =>
+    Alert.alert('Sukses', 'Produk berhasil dihapus.', [
+      {
+        text: 'Oke',
+        onPress: () => console.log('Oke pressed'),
+      },
+    ]);
 
   return (
     <SafeAreaView className="flex-1 justify-center">
@@ -63,12 +73,16 @@ export default function Cart({navigation}: any) {
           <ScrollView
             contentInsetAdjustmentBehavior="automatic"
             className="px-2 py-4">
-            <View className="mx-auto flex max-w-sm flex-row flex-wrap gap-5">
+            <View className="flex flex-row flex-wrap justify-between px-2">
               {cart?.map((product: any) => (
                 <View
-                  className="mx-auto rounded-lg bg-white p-2"
+                  className="mb-4 rounded-lg bg-white p-2"
+                  style={{width: '48%'}}
                   key={product?.id}>
-                  <View className="flex flex-row items-center justify-end">
+                  <View className="flex flex-row items-center justify-between">
+                    <Text className="text-sm text-slate-700">
+                      {product?.total_produk} pcs
+                    </Text>
                     <TouchableOpacity
                       onPress={() => {
                         deleteProductHandler(product?.id);
