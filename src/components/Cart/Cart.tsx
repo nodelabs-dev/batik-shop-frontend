@@ -17,6 +17,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 export default function Cart({navigation}: any) {
   const [cart, setCart] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isOrderLoading, setIsOrderLoading] = useState(false);
 
   const getCartHandler = async () => {
     setIsLoading(true);
@@ -51,8 +52,24 @@ export default function Cart({navigation}: any) {
         prevCart.filter((item: any) => item.id !== id),
       );
       deleteProductAlert();
+      navigation.navigate('Order');
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const postOrderHandler = async () => {
+    setIsOrderLoading(true);
+    try {
+      const response = await axios.post(
+        `${process.env.API_URL}/pesanan/create`,
+      );
+      console.log(response.data);
+      setIsOrderLoading(false);
+      navigation.navigate('Order');
+    } catch (error) {
+      console.error(error);
+      setIsOrderLoading(false);
     }
   };
 
@@ -104,11 +121,16 @@ export default function Cart({navigation}: any) {
           </ScrollView>
           <View className="mb-3 px-2">
             <TouchableOpacity
-              onPress={() => navigation.navigate('Order')}
+              disabled={isOrderLoading}
+              onPress={postOrderHandler}
               className="mt-5 w-96 rounded-xl bg-stone-800 py-3">
-              <Text className="text-center text-lg font-medium text-white">
-                Bayar Sekarang
-              </Text>
+              {isOrderLoading ? (
+                <ActivityIndicator size={'small'} color={'white'} />
+              ) : (
+                <Text className="text-center text-lg font-medium text-white">
+                  Pesan Sekarang
+                </Text>
+              )}
             </TouchableOpacity>
           </View>
         </>
