@@ -1,5 +1,6 @@
+import React, {useEffect, useState, useCallback} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useEffect} from 'react';
+import axios from 'axios';
 import {
   SafeAreaView,
   ScrollView,
@@ -7,163 +8,97 @@ import {
   View,
   Image,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
+import {useFocusEffect} from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 export default function Cart({navigation}: any) {
-  useEffect(() => {
-    const getUserData = async () => {
-      const userData = await AsyncStorage.getItem('user');
-      console.log('INI USER DATA DI CART ==== ', userData);
+  const [cart, setCart] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-      return userData;
-    };
+  const getCartHandler = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(`${process.env.API_URL}/keranjang`);
+      const processedCart = response?.data?.data?.map((product: any) => ({
+        ...product,
+        image: product?.UrlImage1.replace('./', `${process.env.API_URL}/`),
+      }));
+      console.log('DATA DI KERANJANG ==== ', processedCart);
+      setCart(processedCart);
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
+    }
+  };
 
-    getUserData();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getCartHandler();
+    }, []),
+  );
+
+  const deleteProductHandler = async (id: any) => {
+    try {
+      const response = await axios.delete(
+        `${process.env.API_URL}/keranjang/delete/${id}`,
+      );
+      console.log(response.data);
+      setCart((prevCart: any) =>
+        prevCart.filter((item: any) => item.id !== id),
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <SafeAreaView className="flex-1">
-      <ScrollView contentInsetAdjustmentBehavior="automatic" className="p-4">
-        <View className="flex max-w-sm flex-row flex-wrap gap-5 px-2">
-          <View className="rounded-lg bg-white p-2">
-            <Image
-              source={require('../../assets/images/batik/batik-3.png')}
-              className="mx-auto h-36 w-36 rounded-xl"
-            />
-            <View className="p-2">
-              <Text className="mt-2">Batik Gajah Oling</Text>
-              <Text className="mt-2 font-semibold">Rp175.000</Text>
+    <SafeAreaView className="flex-1 justify-center">
+      {isLoading ? (
+        <ActivityIndicator size={'large'} color={'black'} />
+      ) : (
+        <>
+          <ScrollView
+            contentInsetAdjustmentBehavior="automatic"
+            className="px-2 py-4">
+            <View className="mx-auto flex max-w-sm flex-row flex-wrap gap-5">
+              {cart?.map((product: any) => (
+                <View
+                  className="mx-auto rounded-lg bg-white p-2"
+                  key={product?.id}>
+                  <View className="flex flex-row items-center justify-end">
+                    <TouchableOpacity
+                      onPress={() => {
+                        deleteProductHandler(product?.id);
+                      }}>
+                      <AntDesign name="delete" size={22} color={'red'} />
+                    </TouchableOpacity>
+                  </View>
+                  <Image
+                    source={{uri: product?.image}}
+                    className="mx-auto h-28 w-28"
+                  />
+                  <View className="p-2">
+                    <Text className="mt-2">{product?.nama_produk}</Text>
+                    <Text className="mt-2 font-semibold">{product?.harga}</Text>
+                  </View>
+                </View>
+              ))}
             </View>
-            <View className="flex flex-row items-center justify-between p-2">
-              <View className="flex flex-row items-center space-x-3">
-                <TouchableOpacity
-                  onPress={() => {
-                    // Add product quantity logic here
-                  }}
-                  className="flex items-center justify-center rounded-lg p-1">
-                  <Text className="text-lg">-</Text>
-                </TouchableOpacity>
-                <Text className="text-md">2</Text>
-                <TouchableOpacity
-                  onPress={() => {
-                    // Subtract product quantity logic here
-                  }}
-                  className="flex items-center justify-center rounded-lg p-1">
-                  <Text>+</Text>
-                </TouchableOpacity>
-              </View>
-              <TouchableOpacity>
-                <AntDesign name="delete" size={18} color={'red'} />
-              </TouchableOpacity>
-            </View>
+          </ScrollView>
+          <View className="mb-3 px-2">
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Order')}
+              className="mt-5 w-96 rounded-xl bg-stone-800 py-3">
+              <Text className="text-center text-lg font-medium text-white">
+                Bayar Sekarang
+              </Text>
+            </TouchableOpacity>
           </View>
-          <View className="rounded-lg bg-white p-2">
-            <Image
-              source={require('../../assets/images/batik/batik-2.png')}
-              className="mx-auto h-36 w-36 rounded-xl"
-            />
-            <View className="p-2">
-              <Text className="mt-2">Batik Gudeng</Text>
-              <Text className="mt-2 font-semibold">Rp200.000</Text>
-            </View>
-            <View className="flex flex-row items-center justify-between p-2">
-              <View className="flex flex-row items-center space-x-3">
-                <TouchableOpacity
-                  onPress={() => {
-                    // Add product quantity logic here
-                  }}
-                  className="flex items-center justify-center rounded-lg p-1">
-                  <Text className="text-lg">-</Text>
-                </TouchableOpacity>
-                <Text className="text-md">2</Text>
-                <TouchableOpacity
-                  onPress={() => {
-                    // Subtract product quantity logic here
-                  }}
-                  className="flex items-center justify-center rounded-lg p-1">
-                  <Text>+</Text>
-                </TouchableOpacity>
-              </View>
-              <TouchableOpacity>
-                <AntDesign name="delete" size={18} color={'red'} />
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View className="rounded-lg bg-white p-2">
-            <Image
-              source={require('../../assets/images/batik/batik-5.png')}
-              className="mx-auto h-36 w-36 rounded-xl"
-            />
-            <View className="p-2">
-              <Text className="mt-2">Batik Gudeng</Text>
-              <Text className="mt-2 font-semibold">Rp200.000</Text>
-            </View>
-            <View className="flex flex-row items-center justify-between p-2">
-              <View className="flex flex-row items-center space-x-3">
-                <TouchableOpacity
-                  onPress={() => {
-                    // Add product quantity logic here
-                  }}
-                  className="flex items-center justify-center rounded-lg p-1">
-                  <Text className="text-lg">-</Text>
-                </TouchableOpacity>
-                <Text className="text-md">2</Text>
-                <TouchableOpacity
-                  onPress={() => {
-                    // Subtract product quantity logic here
-                  }}
-                  className="flex items-center justify-center rounded-lg p-1">
-                  <Text>+</Text>
-                </TouchableOpacity>
-              </View>
-              <TouchableOpacity>
-                <AntDesign name="delete" size={18} color={'red'} />
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View className="rounded-lg bg-white p-2">
-            <Image
-              source={require('../../assets/images/batik/batik-4.png')}
-              className="mx-auto h-36 w-36 rounded-xl"
-            />
-            <View className="p-2">
-              <Text className="mt-2">Batik Gudeng</Text>
-              <Text className="mt-2 font-semibold">Rp200.000</Text>
-            </View>
-            <View className="flex flex-row items-center justify-between p-2">
-              <View className="flex flex-row items-center space-x-3">
-                <TouchableOpacity
-                  onPress={() => {
-                    // Add product quantity logic here
-                  }}
-                  className="flex items-center justify-center rounded-lg p-1">
-                  <Text className="text-lg">-</Text>
-                </TouchableOpacity>
-                <Text className="text-md">2</Text>
-                <TouchableOpacity
-                  onPress={() => {
-                    // Subtract product quantity logic here
-                  }}
-                  className="flex items-center justify-center rounded-lg p-1">
-                  <Text>+</Text>
-                </TouchableOpacity>
-              </View>
-              <TouchableOpacity>
-                <AntDesign name="delete" size={18} color={'red'} />
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </ScrollView>
-      <View className="mb-3 px-2">
-        <TouchableOpacity
-          onPress={() => navigation.navigate('Order')}
-          className="mt-5 rounded-xl bg-stone-800 py-3">
-          <Text className="text-center text-lg font-medium text-white">
-            Bayar Sekarang
-          </Text>
-        </TouchableOpacity>
-      </View>
+        </>
+      )}
     </SafeAreaView>
   );
 }

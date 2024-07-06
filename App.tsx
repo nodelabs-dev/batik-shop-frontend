@@ -1,5 +1,4 @@
 import React, {useContext, useEffect} from 'react';
-import BootSplash from 'react-native-bootsplash';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -103,16 +102,6 @@ function MainTabs() {
 function App(): React.JSX.Element {
   const {auth}: any = useContext(AuthContext);
   console.log('INI AUTH === ', auth);
-  useEffect(() => {
-    const init = async () => {
-      console.log('splash screen');
-    };
-
-    init().finally(async () => {
-      await BootSplash.hide({fade: true});
-      console.log('BootSplash has been hidden successfully');
-    });
-  }, []);
 
   return (
     <NavigationContainer>

@@ -46,13 +46,6 @@ export default function Login({navigation}: any): React.JSX.Element {
   };
 
   useEffect(() => {
-    const getProductsHandler = async () => {
-      const response = await axios.get(`${process.env.API_URL}/produk`);
-      console.log('RESPONSE FROM LOGIN ===== ', response.data);
-    };
-
-    getProductsHandler();
-
     const getUserData = async () => {
       const userData = await AsyncStorage.getItem('user');
       console.log('INI LOGIN ASYNC ==== ', userData);
@@ -133,10 +126,12 @@ export default function Login({navigation}: any): React.JSX.Element {
             </Text>
           )}
         </TouchableOpacity>
-        <View className="mt-5 flex-row justify-center">
-          <Text>Belum punya akun?</Text>
-          <Pressable onPress={() => navigation.navigate('Register')}>
-            <Text className="text-amber-600"> Daftar disini</Text>
+        <View className="mt-5 flex-row items-center justify-center">
+          <Text className="h-14 text-lg">Belum punya akun?</Text>
+          <Pressable
+            onPress={() => navigation.navigate('Register')}
+            className="h-14">
+            <Text className="text-lg text-amber-600"> Daftar disini</Text>
           </Pressable>
         </View>
       </ScrollView>

@@ -9,6 +9,7 @@ import {
   Pressable,
   TouchableOpacity,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import axios from 'axios';
@@ -48,6 +49,7 @@ export default function Register({navigation}: any): React.JSX.Element {
     } catch (error) {
       console.error(error);
       setIsLoading(false);
+      registerErrorAlert();
     }
   };
 
@@ -59,6 +61,14 @@ export default function Register({navigation}: any): React.JSX.Element {
 
     getUserData();
   }, []);
+
+  const registerErrorAlert = () =>
+    Alert.alert('Gagal Daftar', 'Email sudah digunakan.', [
+      {
+        text: 'Oke',
+        onPress: () => console.log('Oke pressed'),
+      },
+    ]);
   return (
     <SafeAreaView>
       <ScrollView contentInsetAdjustmentBehavior="automatic" className="p-4">
@@ -172,9 +182,11 @@ export default function Register({navigation}: any): React.JSX.Element {
           )}
         </TouchableOpacity>
         <View className="mt-5 flex-row justify-center">
-          <Text>Sudah punya akun?</Text>
-          <Pressable onPress={() => navigation.navigate('Login')}>
-            <Text className="text-amber-600"> Masuk disini</Text>
+          <Text className="h-14 text-lg">Sudah punya akun?</Text>
+          <Pressable
+            onPress={() => navigation.navigate('Login')}
+            className="h-14">
+            <Text className="text-lg text-amber-600"> Masuk disini</Text>
           </Pressable>
         </View>
       </ScrollView>
