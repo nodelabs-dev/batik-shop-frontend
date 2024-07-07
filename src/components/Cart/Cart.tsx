@@ -87,52 +87,62 @@ export default function Cart({navigation}: any) {
         <ActivityIndicator size={'large'} color={'black'} />
       ) : (
         <>
-          <ScrollView
-            contentInsetAdjustmentBehavior="automatic"
-            className="px-2 py-4">
-            <View className="flex flex-row flex-wrap justify-between px-2">
-              {cart?.map((product: any) => (
-                <View
-                  className="mb-4 rounded-lg bg-white p-2"
-                  style={{width: '48%'}}
-                  key={product?.id}>
-                  <View className="flex flex-row items-center justify-between">
-                    <Text className="text-sm text-slate-700">
-                      {product?.total_produk} pcs
-                    </Text>
-                    <TouchableOpacity
-                      onPress={() => {
-                        deleteProductHandler(product?.id);
-                      }}>
-                      <AntDesign name="delete" size={22} color={'red'} />
-                    </TouchableOpacity>
-                  </View>
-                  <Image
-                    source={{uri: product?.image}}
-                    className="mx-auto h-28 w-28"
-                  />
-                  <View className="p-2">
-                    <Text className="mt-2">{product?.nama_produk}</Text>
-                    <Text className="mt-2 font-semibold">{product?.harga}</Text>
-                  </View>
+          {cart ? (
+            <>
+              <ScrollView
+                contentInsetAdjustmentBehavior="automatic"
+                className="px-2 py-4">
+                <View className="flex flex-row flex-wrap justify-between px-2">
+                  {cart?.map((product: any) => (
+                    <View
+                      className="mb-4 rounded-lg bg-white p-2"
+                      style={{width: '48%'}}
+                      key={product?.id}>
+                      <View className="flex flex-row items-center justify-between">
+                        <Text className="text-sm text-slate-700">
+                          {product?.total_produk} Pcs
+                        </Text>
+                        <TouchableOpacity
+                          onPress={() => {
+                            deleteProductHandler(product?.id);
+                          }}>
+                          <AntDesign name="delete" size={22} color={'red'} />
+                        </TouchableOpacity>
+                      </View>
+                      <Image
+                        source={{uri: product?.image}}
+                        className="mx-auto h-28 w-28"
+                      />
+                      <View className="p-2">
+                        <Text className="mt-2">{product?.nama_produk}</Text>
+                        <Text className="mt-1 font-semibold">
+                          {product?.harga?.replace('RP ', 'Rp')}
+                        </Text>
+                      </View>
+                    </View>
+                  ))}
                 </View>
-              ))}
+              </ScrollView>
+              <View className="mb-3 px-2">
+                <TouchableOpacity
+                  disabled={isOrderLoading}
+                  onPress={postOrderHandler}
+                  className="mt-5 w-96 rounded-xl bg-stone-800 py-3">
+                  {isOrderLoading ? (
+                    <ActivityIndicator size={'small'} color={'white'} />
+                  ) : (
+                    <Text className="text-center text-lg font-medium text-white">
+                      Pesan Sekarang
+                    </Text>
+                  )}
+                </TouchableOpacity>
+              </View>
+            </>
+          ) : (
+            <View>
+              <Text className="text-center text-lg">Keranjang Kosong</Text>
             </View>
-          </ScrollView>
-          <View className="mb-3 px-2">
-            <TouchableOpacity
-              disabled={isOrderLoading}
-              onPress={postOrderHandler}
-              className="mt-5 w-96 rounded-xl bg-stone-800 py-3">
-              {isOrderLoading ? (
-                <ActivityIndicator size={'small'} color={'white'} />
-              ) : (
-                <Text className="text-center text-lg font-medium text-white">
-                  Pesan Sekarang
-                </Text>
-              )}
-            </TouchableOpacity>
-          </View>
+          )}
         </>
       )}
     </SafeAreaView>

@@ -7,7 +7,6 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import images from '../../assets/images/batik/image';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
@@ -40,60 +39,6 @@ const tabCategories = [
     id: 5,
 
     name: 'Batik Magetan',
-  },
-];
-
-const produkSolo = [
-  {
-    id: 1,
-
-    name: 'Batik Parang Rusak',
-
-    price: 'Rp250.000',
-
-    description:
-      'Batik motif Parang Rusak dengan corak klasik khas Solo. Cocok untuk acara formal dan santai.',
-
-    image: 'batik-2.png',
-  },
-
-  {
-    id: 2,
-
-    name: 'Batik Kawung',
-
-    price: 'Rp300.000',
-
-    description:
-      'Batik motif Kawung dengan desain elegan dan penuh makna sejarah. Terbuat dari bahan berkualitas tinggi.',
-
-    image: 'batik-3.png',
-  },
-
-  {
-    id: 3,
-
-    name: 'Batik Mega Mendung',
-
-    price: 'Rp280.000',
-
-    description:
-      'Batik motif Mega Mendung yang menggambarkan awan mendung. Memberikan kesan anggun dan menawan.',
-
-    image: 'batik-4.png',
-  },
-
-  {
-    id: 4,
-
-    name: 'Batik Sido Asih',
-
-    price: 'Rp350.000',
-
-    description:
-      'Batik motif Sido Asih yang melambangkan cinta kasih. Cocok sebagai hadiah untuk orang terkasih.',
-
-    image: 'batik-5.png',
   },
 ];
 
