@@ -52,7 +52,7 @@ export default function Cart({navigation}: any) {
         prevCart.filter((item: any) => item.id !== id),
       );
       deleteProductAlert();
-      navigation.navigate('Order');
+      getCartHandler();
     } catch (error) {
       console.error(error);
     }
@@ -65,8 +65,9 @@ export default function Cart({navigation}: any) {
         `${process.env.API_URL}/pesanan/create`,
       );
       console.log(response.data);
+      const orderId = response.data.id;
       setIsOrderLoading(false);
-      navigation.navigate('Order');
+      navigation.navigate('Order', {orderId});
     } catch (error) {
       console.error(error);
       setIsOrderLoading(false);

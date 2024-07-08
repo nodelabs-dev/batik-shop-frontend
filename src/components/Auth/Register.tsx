@@ -44,7 +44,8 @@ export default function Register({navigation}: any): React.JSX.Element {
         },
       );
       console.log('REGISTER RESPONSE === ', response.data);
-      navigation.navigate('Login');
+      const email = data?.email;
+      navigation.navigate('EmailVerification', {email});
       setIsLoading(false);
     } catch (error) {
       console.error(error);
@@ -63,7 +64,7 @@ export default function Register({navigation}: any): React.JSX.Element {
   }, []);
 
   const registerErrorAlert = () =>
-    Alert.alert('Gagal Daftar', 'Email sudah digunakan.', [
+    Alert.alert('Gagal Mendaftar', 'Email sudah digunakan.', [
       {
         text: 'Oke',
         onPress: () => console.log('Oke pressed'),

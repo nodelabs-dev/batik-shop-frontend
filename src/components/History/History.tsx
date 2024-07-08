@@ -1,26 +1,33 @@
 import {useFocusEffect} from '@react-navigation/native';
 import axios from 'axios';
-import {useCallback, useEffect, useState} from 'react';
+import {useCallback, useState} from 'react';
 import {
   ActivityIndicator,
+  Alert,
   Image,
+  Linking,
   SafeAreaView,
   ScrollView,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function History({navigation}: any) {
   const [history, setHistory] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [isHistoryLoading, setIsHistoryLoading] = useState(false);
+  const [isPaymentLoading, setIsPaymentLoading] = useState(false);
 
   const getHistoryHandler = async () => {
     setIsHistoryLoading(true);
     try {
       const response = await axios.get(`${process.env.API_URL}/pesanan`);
-      setHistory(response?.data?.data);
+      const sortedHistory = response?.data?.data.sort(
+        (a: any, b: any) =>
+          (new Date(b.created_at) as any) - (new Date(a.created_at) as any),
+      );
+      setHistory(sortedHistory);
       setIsHistoryLoading(false);
     } catch (error) {
       console.error(error);
@@ -33,6 +40,19 @@ export default function History({navigation}: any) {
       getHistoryHandler();
     }, []),
   );
+
+  const postPaymentTransaction = async (id: any) => {
+    setIsPaymentLoading(true);
+    try {
+      const response = await axios.post(`${process.env.API_URL}/send/${id}`);
+      console.log(response.data);
+      navigation.replace('Success');
+      setIsPaymentLoading(false);
+    } catch (error) {
+      console.error(error);
+      setIsPaymentLoading(false);
+    }
+  };
 
   console.log('RESPONSE HISTORY === ', history);
   return (
@@ -89,16 +109,37 @@ export default function History({navigation}: any) {
                           {order?.total_harga?.replace('RP ', 'Rp')}
                         </Text>
                         <Text className="text-xs text-slate-700">
-                          Belum dibayar
+                          {order?.status === 'Proses'
+                            ? 'Belum Dibayar'
+                            : 'Sudah Dibayar'}
                         </Text>
                       </View>
-                      <TouchableOpacity
-                        onPress={() => navigation.navigate('Order', {order})}
-                        className="rounded-lg bg-stone-800 px-6 py-3">
-                        <Text className="text-center font-medium text-white">
-                          Bayar
-                        </Text>
-                      </TouchableOpacity>
+                      {order?.status === 'Proses' ? (
+                        <TouchableOpacity
+                          onPress={() =>
+                            navigation.navigate('HistoryOrder', {order})
+                          }
+                          className="rounded-lg bg-stone-800 px-6 py-3">
+                          <Text className="text-center font-medium text-white">
+                            Bayar
+                          </Text>
+                        </TouchableOpacity>
+                      ) : (
+                        <TouchableOpacity
+                          onPress={() => {
+                            Linking.openURL('https://wa.me/6285157711068');
+                          }}
+                          className="flex flex-row items-center space-x-2 rounded-lg bg-stone-800 px-6 py-3">
+                          <FontAwesome
+                            name="whatsapp"
+                            size={18}
+                            color={'white'}
+                          />
+                          <Text className="text-center font-medium text-white">
+                            Chat Penjual
+                          </Text>
+                        </TouchableOpacity>
+                      )}
                     </View>
                   </View>
                 </View>

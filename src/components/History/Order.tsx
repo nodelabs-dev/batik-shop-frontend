@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -7,41 +7,27 @@ import {
   View,
   Image,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import {priceTotalWithoutOngkir} from '../../lib';
 
 export default function Order({route, navigation}: any) {
-  const {orderId} = route?.params;
+  const {order} = route.params;
   const [isPaymentLoading, setIsPaymentLoading] = useState(false);
-  const [order, setOrder] = useState<any>(null);
-  console.log('ORDER ID ===== ', orderId);
-
-  useEffect(() => {
-    const getOrderByIdHandler = async () => {
-      const response = await axios.get(
-        `${process.env.API_URL}/pesanan/${orderId}`,
-      );
-
-      console.log('ORDER DATA RESPONSE === ', response.data);
-      setOrder(response.data.data);
-    };
-
-    getOrderByIdHandler();
-  }, []);
+  console.log('ORDER DATA ===== ', order);
 
   const postPaymentTransaction = async (id: any) => {
     setIsPaymentLoading(true);
     try {
       const response = await axios.post(`${process.env.API_URL}/send/${id}`);
       console.log(response.data);
-      navigation.replace('Success');
+      navigation.replace('SuccessHistory');
       setIsPaymentLoading(false);
     } catch (error) {
       console.error(error);
       setIsPaymentLoading(false);
     }
   };
-
   return (
     <SafeAreaView className="flex-1">
       <ScrollView contentInsetAdjustmentBehavior="automatic" className="p-4">
@@ -86,7 +72,7 @@ export default function Order({route, navigation}: any) {
           <View className="flex w-1/2 space-y-3">
             <Text className="font-normal">{order?.total_produk} Item</Text>
             <Text className="font-normal">
-              {priceTotalWithoutOngkir(order.ongkir, order.total_harga)}
+              {priceTotalWithoutOngkir(order?.ongkir, order?.total_harga)}
             </Text>
             <Text className="font-normal">
               {order?.ongkir?.replace('RP ', 'Rp')}
@@ -103,10 +89,14 @@ export default function Order({route, navigation}: any) {
           onPress={() => {
             postPaymentTransaction(order?.ID);
           }}
-          className="mt-5 rounded-xl bg-stone-800 py-3">
-          <Text className="text-center text-lg font-medium text-white">
-            Buat Pesanan
-          </Text>
+          className="mt-5 flex items-center justify-center rounded-xl bg-stone-800 py-3">
+          {isPaymentLoading ? (
+            <ActivityIndicator size={'large'} color={'white'} />
+          ) : (
+            <Text className="text-center text-lg font-medium text-white">
+              Buat Pesanan
+            </Text>
+          )}
         </TouchableOpacity>
       </View>
     </SafeAreaView>

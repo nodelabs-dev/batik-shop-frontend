@@ -6,6 +6,7 @@ import {
   View,
   Image,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
@@ -87,6 +88,7 @@ const latestBatik = [
 export default function Home({navigation}: any) {
   const [auth, setAuth] = useState<any>(null);
   const [products, setProducts] = useState<any>(null);
+  const [isRecommendationLoading, setIsRecommendationLoading] = useState(false);
 
   useEffect(() => {
     const getUserLogin = async () => {
@@ -100,15 +102,22 @@ export default function Home({navigation}: any) {
     getUserLogin();
 
     const getProductsHandler = async () => {
-      const response = await axios.get(`${process.env.API_URL}/produk`);
-      const processedProducts = response?.data?.data?.map((product: any) => ({
-        ...product,
-        image: product.image[0].url_image1.replace(
-          './',
-          `${process.env.API_URL}/`,
-        ),
-      }));
-      setProducts(processedProducts);
+      setIsRecommendationLoading(true);
+      try {
+        const response = await axios.get(`${process.env.API_URL}/produk`);
+        const processedProducts = response?.data?.data?.map((product: any) => ({
+          ...product,
+          image: product.image[0].url_image1.replace(
+            './',
+            `${process.env.API_URL}/`,
+          ),
+        }));
+        setProducts(processedProducts);
+        setIsRecommendationLoading(false);
+      } catch (error) {
+        console.error(error);
+        setIsRecommendationLoading(false);
+      }
     };
 
     getProductsHandler();
@@ -169,42 +178,52 @@ export default function Home({navigation}: any) {
           <View className="flex flex-row items-center justify-between">
             <Text className="text-xl font-bold">Rekomendasi</Text>
 
-            <TouchableOpacity className="rounded-lg bg-stone-800 px-4 py-1.5">
+            {/* <TouchableOpacity className="rounded-lg bg-stone-800 px-4 py-1.5">
               <Text className="text-sm text-white">Lainnya</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
 
-          <ScrollView horizontal className="mt-4 flex space-x-3">
-            {products?.map((product: any) => (
-              <TouchableOpacity
-                onPress={() => navigation.navigate('ProductDetail', {product})}
-                key={product?.ID}
-                className="flex-row items-center justify-between rounded-2xl bg-gray-200 px-6 py-2">
-                <View>
-                  <Text className="max-w-[120px] text-2xl font-bold text-stone-800">
-                    {product?.product_name}
-                  </Text>
-
-                  <View className="mt-3">
-                    <Text className="text-md text-center font-semibold text-stone-800">
-                      {product?.price}
+          {isRecommendationLoading ? (
+            <ActivityIndicator
+              size={'large'}
+              color={'black'}
+              className="h-44"
+            />
+          ) : (
+            <ScrollView horizontal className="mt-4 flex space-x-3">
+              {products?.map((product: any) => (
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate('ProductDetail', {product})
+                  }
+                  key={product?.ID}
+                  className="flex-row items-center justify-between rounded-2xl bg-gray-200 px-6 py-2">
+                  <View>
+                    <Text className="max-w-[120px] text-2xl font-bold text-stone-800">
+                      {product?.product_name}
                     </Text>
-                  </View>
-                </View>
 
-                <Image source={{uri: product?.image}} className="h-44 w-44" />
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
+                    <View className="mt-3">
+                      <Text className="text-md text-left font-semibold text-stone-800">
+                        {product?.price?.replace('RP ', 'Rp')}
+                      </Text>
+                    </View>
+                  </View>
+
+                  <Image source={{uri: product?.image}} className="h-44 w-44" />
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          )}
         </View>
 
         <View className="mt-10">
           <View className="flex flex-row items-center justify-between">
             <Text className="text-xl font-bold">Batik Terpopuler</Text>
 
-            <TouchableOpacity className="rounded-lg bg-stone-800 px-4 py-1.5">
+            {/* <TouchableOpacity className="rounded-lg bg-stone-800 px-4 py-1.5">
               <Text className="text-sm text-white">Lainnya</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
 
           <ScrollView horizontal className="mt-4 flex space-x-3">

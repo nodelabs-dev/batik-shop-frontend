@@ -8,6 +8,7 @@ import {
   View,
   Image,
   TouchableOpacity,
+  Linking,
 } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
@@ -50,13 +51,21 @@ export default function Profile({navigation}: any) {
         <View className="mt-6 p-4">
           <Text className="text-2xl font-semibold text-slate-800">Akun</Text>
           <View className="mt-4 flex space-y-6 rounded-lg bg-white p-4">
-            <TouchableOpacity className="flex flex-row items-center space-x-3">
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Edit')}
+              className="flex flex-row items-center space-x-3">
               <AntDesign name={'user'} size={20} color={'grey'} />
               <Text className="text-lg font-medium text-stone-700">
                 Edit Profile
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity className="flex flex-row items-center space-x-3">
+            <TouchableOpacity
+              onPress={() => {
+                Linking.openURL(
+                  'https://www.termsfeed.com/live/5e1fdee7-d342-4aae-b990-74bad531c599',
+                );
+              }}
+              className="flex flex-row items-center space-x-3">
               <AntDesign name={'infocirlceo'} size={20} color={'grey'} />
               <Text className="text-lg font-medium text-stone-700">
                 Kebijakan Privasi
@@ -73,7 +82,11 @@ export default function Profile({navigation}: any) {
         <View className="p-4">
           <Text className="text-2xl font-semibold text-slate-800">Aksi</Text>
           <View className="mt-4 flex space-y-6 rounded-lg bg-white p-4">
-            <TouchableOpacity className="flex flex-row items-center space-x-3">
+            <TouchableOpacity
+              onPress={() => {
+                Linking.openURL('https://wa.me/6285157711068');
+              }}
+              className="flex flex-row items-center space-x-3">
               <AntDesign name={'warning'} size={20} color={'grey'} />
               <Text className="text-lg font-medium text-stone-700">
                 Laporkan Masalah
