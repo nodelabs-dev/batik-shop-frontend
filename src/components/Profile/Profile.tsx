@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useFocusEffect} from '@react-navigation/native';
 import axios from 'axios';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -15,14 +16,16 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 export default function Profile({navigation}: any) {
   const [user, setUser] = useState<any>({});
 
-  useEffect(() => {
-    const getUserData = async () => {
-      const userData = await AsyncStorage.getItem('user');
-      setUser(JSON.parse(userData || ''));
-    };
+  const getUserData = async () => {
+    const userData = await AsyncStorage.getItem('user');
+    setUser(JSON.parse(userData || ''));
+  };
 
-    getUserData();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getUserData();
+    }, []),
+  );
 
   const handleLogout = async () => {
     try {

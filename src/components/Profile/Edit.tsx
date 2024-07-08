@@ -45,7 +45,7 @@ export default function Edit() {
       const response = await axios.put(
         `${process.env.API_URL}/verify/user/update`,
         {
-          Fullname: data.fullname,
+          Fullname: data.Fullname,
           Email: user?.data?.Email,
           PhoneNumber: data.PhoneNumber,
           Password: user?.data?.Password,
