@@ -83,7 +83,7 @@ export default function Cart({navigation}: any) {
     ]);
 
   return (
-    <SafeAreaView className="flex-1 justify-center">
+    <SafeAreaView className="flex flex-1 justify-center">
       {isLoading ? (
         <ActivityIndicator size={'large'} color={'black'} />
       ) : (
@@ -92,12 +92,12 @@ export default function Cart({navigation}: any) {
             <>
               <ScrollView
                 contentInsetAdjustmentBehavior="automatic"
-                className="px-2 py-4">
-                <View className="flex flex-row flex-wrap justify-between px-2">
+                className="px-2 py-2">
+                <View className="flex flex-row flex-wrap justify-between gap-2">
                   {cart?.map((product: any) => (
                     <View
-                      className="mb-4 rounded-lg bg-white p-2"
-                      style={{width: '48%'}}
+                      className="rounded-lg bg-white p-2"
+                      style={{width: '47.5%'}}
                       key={product?.id}>
                       <View className="flex flex-row items-center justify-between">
                         <Text className="text-sm text-slate-700">
