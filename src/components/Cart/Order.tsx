@@ -34,7 +34,7 @@ export default function Order({route, navigation}: any) {
     try {
       const response = await axios.post(`${process.env.API_URL}/send/${id}`);
       console.log(response.data);
-      navigation.replace('Success');
+      navigation.navigate('Success');
       setIsPaymentLoading(false);
     } catch (error) {
       console.error(error);
@@ -86,7 +86,7 @@ export default function Order({route, navigation}: any) {
           <View className="flex w-1/2 space-y-3">
             <Text className="font-normal">{order?.total_produk} Item</Text>
             <Text className="font-normal">
-              {priceTotalWithoutOngkir(order.ongkir, order.total_harga)}
+              {priceTotalWithoutOngkir(order?.ongkir, order?.total_harga)}
             </Text>
             <Text className="font-normal">
               {order?.ongkir?.replace('RP ', 'Rp')}

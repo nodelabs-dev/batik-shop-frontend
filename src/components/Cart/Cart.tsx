@@ -25,7 +25,7 @@ export default function Cart({navigation}: any) {
       const response = await axios.get(`${process.env.API_URL}/keranjang`);
       const processedCart = response?.data?.data?.map((product: any) => ({
         ...product,
-        image: product?.UrlImage1.replace('./', `${process.env.API_URL}/`),
+        image: product?.UrlImage1?.replace('./', `${process.env.API_URL}/`),
       }));
       console.log('DATA DI KERANJANG ==== ', processedCart);
       setCart(processedCart);

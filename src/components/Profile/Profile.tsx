@@ -51,7 +51,7 @@ export default function Profile({navigation}: any) {
             {user?.data?.Email}
           </Text>
         </View>
-        <View className="mt-6 p-4">
+        <View className="mt-6 p-2">
           <Text className="text-2xl font-semibold text-slate-800">Akun</Text>
           <View className="mt-4 flex space-y-6 rounded-lg bg-white p-4">
             <TouchableOpacity
@@ -74,7 +74,11 @@ export default function Profile({navigation}: any) {
                 Kebijakan Privasi
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity className="flex flex-row items-center space-x-3">
+            <TouchableOpacity
+              onPress={() => {
+                Linking.openURL('https://nodelabs.my.id');
+              }}
+              className="flex flex-row items-center space-x-3">
               <AntDesign name={'shoppingcart'} size={20} color={'grey'} />
               <Text className="text-lg font-medium text-stone-700">
                 Daftarkan Toko
@@ -82,7 +86,7 @@ export default function Profile({navigation}: any) {
             </TouchableOpacity>
           </View>
         </View>
-        <View className="p-4">
+        <View className="mt-4 p-2">
           <Text className="text-2xl font-semibold text-slate-800">Aksi</Text>
           <View className="mt-4 flex space-y-6 rounded-lg bg-white p-4">
             <TouchableOpacity
@@ -90,16 +94,16 @@ export default function Profile({navigation}: any) {
                 Linking.openURL('https://wa.me/6285157711068');
               }}
               className="flex flex-row items-center space-x-3">
-              <AntDesign name={'warning'} size={20} color={'grey'} />
-              <Text className="text-lg font-medium text-stone-700">
+              <AntDesign name={'warning'} size={20} color={'orange'} />
+              <Text className="text-lg font-medium text-orange-400">
                 Laporkan Masalah
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               className="flex flex-row items-center space-x-3"
               onPress={handleLogout}>
-              <AntDesign name={'logout'} size={20} color={'grey'} />
-              <Text className="text-lg font-medium text-stone-700">Keluar</Text>
+              <AntDesign name={'logout'} size={20} color={'red'} />
+              <Text className="text-lg font-medium text-red-500">Keluar</Text>
             </TouchableOpacity>
           </View>
         </View>

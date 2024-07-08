@@ -29,7 +29,7 @@ export default function ProductDetail({route, navigation}: any) {
       );
       console.log('POST CART RESPONSE ---- ', response?.data);
       setIsLoading(false);
-      navigation.navigate('Cart');
+      navigation.navigate('CartStack');
     } catch (error) {
       console.error(error);
       setIsLoading(false);
