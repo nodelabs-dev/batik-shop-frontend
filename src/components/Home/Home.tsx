@@ -139,11 +139,12 @@ export default function Home({navigation}: any) {
   }, [auth]);
 
   console.log('INI HOME PRODUCTS === ', products);
+  console.log(`${process.env.API_URL}`);
 
   return (
-    <SafeAreaView className="p-4">
-      <ScrollView contentInsetAdjustmentBehavior="automatic" className="p-4">
-        <View className="flex-row items-center justify-between rounded-2xl bg-stone-800 px-6 py-2">
+    <SafeAreaView>
+      <ScrollView contentInsetAdjustmentBehavior="automatic" className="p-2">
+        <View className="flex-row items-center justify-between rounded-2xl bg-stone-800 px-4 py-2">
           <View>
             <Text className="max-w-[120px] text-2xl font-bold text-white">
               Batik Asli Indonesia
@@ -158,7 +159,7 @@ export default function Home({navigation}: any) {
 
           <Image
             source={require('../../assets/images/batik/batik-1.png')}
-            className="h-44 w-44"
+            className="h-52 w-52"
           />
         </View>
 

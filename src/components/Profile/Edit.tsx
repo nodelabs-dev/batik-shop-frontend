@@ -32,6 +32,13 @@ export default function Edit() {
     },
   });
 
+  const fetchtUserData = async () => {
+    const response = await axios.get(`${process.env.API_URL}/verify/user`);
+    await AsyncStorage.setItem('user', JSON.stringify(response.data));
+
+    console.log('INI DATA USER === ', response.data);
+  };
+
   const onSubmit = async (data: any) => {
     setIsLoading(true);
     try {
@@ -48,6 +55,7 @@ export default function Edit() {
 
       console.log('EDIT DATA RESPONSE ====', response.data);
       setIsLoading(false);
+      fetchtUserData();
       editSuccessAlert();
     } catch (error) {
       console.error(error);

@@ -38,8 +38,7 @@ export default function EmailVerification({route, navigation}: any) {
         },
       );
       console.log('REGISTER RESPONSE === ', response.data);
-      const email = data?.email;
-      navigation.navigate('EmailVerification', {email});
+      navigation.navigate('Login');
       setIsLoading(false);
     } catch (error) {
       console.error(error);

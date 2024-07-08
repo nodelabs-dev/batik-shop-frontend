@@ -174,7 +174,7 @@ function App(): React.JSX.Element {
         <Stack.Screen
           name="EmailVerification"
           component={EmailVerification}
-          options={{headerShown: false}}
+          options={{headerShown: true}}
         />
       </Stack.Navigator>
     </NavigationContainer>
