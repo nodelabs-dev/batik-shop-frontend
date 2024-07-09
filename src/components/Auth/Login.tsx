@@ -14,9 +14,11 @@ import {
 import {useForm, Controller} from 'react-hook-form';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import FeatherIcon from 'react-native-vector-icons/Feather';
 
 export default function Login({navigation}: any): React.JSX.Element {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const {
     control,
     handleSubmit,
@@ -96,13 +98,25 @@ export default function Login({navigation}: any): React.JSX.Element {
             control={control}
             rules={{required: true}}
             render={({field: {onChange, onBlur, value}}) => (
-              <TextInput
-                placeholder="Password"
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-                className="mt-6 rounded-full border border-slate-300 p-4"
-              />
+              <View className="relative mt-6">
+                <TextInput
+                  placeholder="Password"
+                  secureTextEntry={!isPasswordVisible}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  className="rounded-full border border-slate-300 p-4 pr-12"
+                />
+                <Pressable
+                  onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                  className="absolute right-6 top-3">
+                  {isPasswordVisible ? (
+                    <FeatherIcon name="eye" size={24} color={'orange'} />
+                  ) : (
+                    <FeatherIcon name="eye-off" size={24} color={'orange'} />
+                  )}
+                </Pressable>
+              </View>
             )}
             name="password"
           />
