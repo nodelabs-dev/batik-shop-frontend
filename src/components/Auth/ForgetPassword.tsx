@@ -38,6 +38,7 @@ export default function ForgetPassword({navigation}: any) {
     } catch (error) {
       console.error(error);
       setIsLoading(false);
+      resetErrorAlert();
     }
   };
 
@@ -46,6 +47,14 @@ export default function ForgetPassword({navigation}: any) {
       {
         text: 'Oke',
         onPress: () => navigation.navigate('Login'),
+      },
+    ]);
+
+  const resetErrorAlert = () =>
+    Alert.alert('Gagal Terkirim', 'Email yang Anda masukkan tidak terdaftar.', [
+      {
+        text: 'Oke',
+        onPress: () => console.log('oke'),
       },
     ]);
   return (
