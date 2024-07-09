@@ -7,6 +7,7 @@ import {
   View,
   Image,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import {priceTotalWithoutOngkir} from '../../lib';
 
@@ -103,10 +104,14 @@ export default function Order({route, navigation}: any) {
           onPress={() => {
             postPaymentTransaction(order?.ID);
           }}
-          className="mt-5 rounded-xl bg-stone-800 py-3">
-          <Text className="text-center text-lg font-medium text-white">
-            Buat Pesanan
-          </Text>
+          className="mt-5 flex items-center justify-center rounded-xl bg-stone-800 py-3">
+          {isPaymentLoading ? (
+            <ActivityIndicator size={'small'} color={'white'} />
+          ) : (
+            <Text className="text-center text-lg font-medium text-white">
+              Buat Pesanan
+            </Text>
+          )}
         </TouchableOpacity>
       </View>
     </SafeAreaView>

@@ -8,9 +8,12 @@ export default function Success({navigation}: any) {
         <View className="mx-auto mb-7 flex h-44 w-44 items-center justify-center rounded-full bg-yellow-400">
           <AntDesign name="check" size={100} color={'green'} />
         </View>
-        <Text className="max-w-[350px] text-center text-lg text-slate-800">
+        <Text className="max-w-[330px] text-center text-lg text-slate-800">
           Pesanan mu sudah kami terima dan akan segera dipersiapkan, silakan cek
-          email Anda untuk detail pembayaran!
+          email Anda untuk detail pembayaran.
+        </Text>
+        <Text className="mt-3 text-center text-2xl font-bold text-stone-700">
+          Terima Kasih! 👍
         </Text>
         <View>
           <TouchableOpacity

@@ -17,6 +17,7 @@ import SuccessHistory from './src/components/History/Success';
 import HistoryOrder from './src/components/History/Order';
 import EmailVerification from './src/components/Auth/EmailVerification';
 import Edit from './src/components/Profile/Edit';
+import Products from './src/components/Home/Products';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -30,9 +31,14 @@ function HomeStack() {
         options={{headerShown: false}}
       />
       <Stack.Screen
+        name="Products"
+        component={Products}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
         name="ProductDetail"
         component={ProductDetail}
-        options={({route}: any) => ({title: route.params.product.name})}
+        options={({route}: any) => ({title: route.params.product.product_name})}
       />
     </Stack.Navigator>
   );

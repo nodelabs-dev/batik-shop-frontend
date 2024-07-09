@@ -36,6 +36,7 @@ export default function Login({navigation}: any): React.JSX.Element {
         Password: data.password,
       });
       await AsyncStorage.setItem('auth', JSON.stringify(response.data));
+      console.log(response.data);
       navigation.navigate('MainTabs');
       setIsLoading(false);
     } catch (error) {
@@ -47,7 +48,7 @@ export default function Login({navigation}: any): React.JSX.Element {
 
   useEffect(() => {
     const getUserData = async () => {
-      const userData = await AsyncStorage.getItem('user');
+      const userData = await AsyncStorage.getItem('auth');
       console.log('INI LOGIN ASYNC ==== ', userData);
     };
 

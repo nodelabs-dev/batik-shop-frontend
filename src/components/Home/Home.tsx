@@ -178,10 +178,11 @@ export default function Home({navigation}: any) {
         <View className="mt-10">
           <View className="flex flex-row items-center justify-between">
             <Text className="text-xl font-bold">Rekomendasi</Text>
-
-            {/* <TouchableOpacity className="rounded-lg bg-stone-800 px-4 py-1.5">
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Products')}
+              className="rounded-lg bg-stone-800 px-4 py-1.5">
               <Text className="text-sm text-white">Lainnya</Text>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
           </View>
 
           {isRecommendationLoading ? (

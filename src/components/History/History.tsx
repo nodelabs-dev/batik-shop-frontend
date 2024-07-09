@@ -116,7 +116,7 @@ export default function History({navigation}: any) {
                             }
                             className="rounded-lg bg-stone-800 px-6 py-3">
                             <Text className="text-center font-medium text-white">
-                              Bayar
+                              Detail
                             </Text>
                           </TouchableOpacity>
                         ) : (

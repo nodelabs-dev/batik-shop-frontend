@@ -91,7 +91,7 @@ export default function Order({route, navigation}: any) {
           }}
           className="mt-5 flex items-center justify-center rounded-xl bg-stone-800 py-3">
           {isPaymentLoading ? (
-            <ActivityIndicator size={'large'} color={'white'} />
+            <ActivityIndicator size={'small'} color={'white'} />
           ) : (
             <Text className="text-center text-lg font-medium text-white">
               Buat Pesanan
