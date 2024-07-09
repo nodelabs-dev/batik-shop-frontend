@@ -18,6 +18,7 @@ import HistoryOrder from './src/components/History/Order';
 import EmailVerification from './src/components/Auth/EmailVerification';
 import Edit from './src/components/Profile/Edit';
 import Products from './src/components/Home/Products';
+import ForgetPassword from './src/components/Auth/ForgetPassword';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -181,6 +182,11 @@ function App(): React.JSX.Element {
           name="EmailVerification"
           component={EmailVerification}
           options={{headerShown: true}}
+        />
+        <Stack.Screen
+          name="ForgetPassword"
+          component={ForgetPassword}
+          options={{headerShown: false}}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -106,14 +106,26 @@ export default function Login({navigation}: any): React.JSX.Element {
             )}
             name="password"
           />
-          {errors.password && (
-            <Text className="mt-2 pl-4 text-red-500">Password wajib diisi</Text>
-          )}
+          <View
+            className={`flex flex-row items-center ${errors.password ? 'justify-between' : 'justify-end'}`}>
+            {errors.password && (
+              <Text className="mt-2 pl-4 text-red-500">
+                Password wajib diisi
+              </Text>
+            )}
+            <Pressable
+              onPress={() => navigation.navigate('ForgetPassword')}
+              className="mt-1">
+              <Text className="text-right text-lg text-amber-600">
+                Lupa password?
+              </Text>
+            </Pressable>
+          </View>
         </View>
         <TouchableOpacity
           disabled={isLoading}
           onPress={handleSubmit(onSubmit)}
-          className="mt-5 flex flex-row items-center justify-center space-x-3 rounded-full bg-amber-500 p-3">
+          className="mt-10 flex flex-row items-center justify-center space-x-3 rounded-full bg-amber-500 p-3">
           {isLoading ? (
             <>
               <ActivityIndicator size="small" color="#0000ff" />
