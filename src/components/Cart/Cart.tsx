@@ -24,7 +24,7 @@ export default function Cart({navigation}: any) {
     const user = await AsyncStorage.getItem('user');
     const userAddress = JSON.parse(user || '');
     console.log('ADRESS USER ==== ', userAddress);
-    setAddress(userAddress?.data?.Address); // Corrected "Adress" to "Address"
+    setAddress(userAddress?.data?.Address);
   };
 
   const getCartHandler = async () => {
