@@ -12,11 +12,20 @@ import {
 } from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Cart({navigation}: any) {
   const [cart, setCart] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isOrderLoading, setIsOrderLoading] = useState(false);
+  const [address, setAddress] = useState<any>(null);
+
+  const getUserLoginHandler = async () => {
+    const user = await AsyncStorage.getItem('user');
+    const userAddress = JSON.parse(user);
+    console.log('ADRESS USER ==== ', userAddress);
+    setAddress(userAddress?.data?.Address); // Corrected "Adress" to "Address"
+  };
 
   const getCartHandler = async () => {
     setIsLoading(true);
@@ -38,6 +47,7 @@ export default function Cart({navigation}: any) {
   useFocusEffect(
     useCallback(() => {
       getCartHandler();
+      getUserLoginHandler();
     }, []),
   );
 
@@ -125,18 +135,28 @@ export default function Cart({navigation}: any) {
                 </View>
               </ScrollView>
               <View className="mb-3 px-1">
-                <TouchableOpacity
-                  disabled={isOrderLoading}
-                  onPress={postOrderHandler}
-                  className="mt-5 w-96 rounded-xl bg-stone-800 py-3">
-                  {isOrderLoading ? (
-                    <ActivityIndicator size={'small'} color={'white'} />
-                  ) : (
+                {address ? (
+                  <TouchableOpacity
+                    disabled={isOrderLoading}
+                    onPress={postOrderHandler}
+                    className="mt-5 w-96 rounded-xl bg-stone-800 py-3">
+                    {isOrderLoading ? (
+                      <ActivityIndicator size={'small'} color={'white'} />
+                    ) : (
+                      <Text className="text-center text-lg font-medium text-white">
+                        Pesan Sekarang
+                      </Text>
+                    )}
+                  </TouchableOpacity>
+                ) : (
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate('ProfileStack')}
+                    className="mt-5 w-96 rounded-xl bg-stone-800 py-3">
                     <Text className="text-center text-lg font-medium text-white">
-                      Pesan Sekarang
+                      Isi alamat terlebih dahulu
                     </Text>
-                  )}
-                </TouchableOpacity>
+                  </TouchableOpacity>
+                )}
               </View>
             </>
           ) : (
