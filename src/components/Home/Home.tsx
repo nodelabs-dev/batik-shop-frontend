@@ -11,48 +11,6 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-const latestBatik = [
-  {
-    id: 1,
-
-    name: 'Batik Jodeg',
-
-    price: 'Rp200.000',
-
-    image: require('../../assets/images/batik/batik-3.png'),
-  },
-
-  {
-    id: 2,
-
-    name: 'Batik Jodeg',
-
-    price: 'Rp200.000',
-
-    image: require('../../assets/images/batik/batik-1.png'),
-  },
-
-  {
-    id: 3,
-
-    name: 'Batik Jodeg',
-
-    price: 'Rp200.000',
-
-    image: require('../../assets/images/batik/batik-2.png'),
-  },
-
-  {
-    id: 4,
-
-    name: 'Batik Jodeg',
-
-    price: 'Rp200.000',
-
-    image: require('../../assets/images/batik/batik-4.png'),
-  },
-];
-
 export default function Home({navigation}: any) {
   const [auth, setAuth] = useState<any>(null);
   const [products, setProducts] = useState<any>(null);
@@ -61,7 +19,6 @@ export default function Home({navigation}: any) {
   useEffect(() => {
     const getUserLogin = async () => {
       const data = await AsyncStorage.getItem('auth');
-
       if (data) {
         setAuth(JSON.parse(data));
       }
@@ -99,15 +56,15 @@ export default function Home({navigation}: any) {
     const getUserData = async () => {
       const response = await axios.get(`${process.env.API_URL}/verify/user`);
       await AsyncStorage.setItem('user', JSON.stringify(response.data));
-
       console.log('INI DATA USER === ', response.data);
     };
 
     getUserData();
   }, [auth]);
 
-  console.log('INI HOME PRODUCTS === ', products);
-  console.log(`${process.env.API_URL}`);
+  const popularProducts = products
+    ? [...products].sort((a, b) => b.count - a.count)
+    : [];
 
   return (
     <SafeAreaView>
@@ -155,9 +112,15 @@ export default function Home({navigation}: any) {
                     navigation.navigate('ProductDetail', {product})
                   }
                   key={product?.ID}
-                  className="flex-row items-center justify-between rounded-2xl bg-gray-200 px-6 py-2">
+                  className="flex-row items-center justify-between rounded-2xl bg-gray-200 px-5 py-2">
                   <View>
-                    <Text className="max-w-[120px] text-2xl font-bold text-stone-800">
+                    <View className="mb-4 max-w-[100px] rounded-full border border-stone-300 bg-stone-300 py-1">
+                      <Text className="text-center text-xs text-stone-800">
+                        {product?.nama_toko}
+                      </Text>
+                    </View>
+
+                    <Text className="max-w-[180px] text-xl font-bold text-stone-800">
                       {product?.product_name}
                     </Text>
 
@@ -178,33 +141,46 @@ export default function Home({navigation}: any) {
         <View className="mt-5">
           <View className="flex flex-row items-center justify-between">
             <Text className="text-xl font-bold">Batik Terpopuler</Text>
-
-            {/* <TouchableOpacity className="rounded-lg bg-stone-800 px-4 py-1.5">
-              <Text className="text-sm text-white">Lainnya</Text>
-            </TouchableOpacity> */}
           </View>
 
-          <ScrollView horizontal className="mt-4 flex space-x-3">
-            {latestBatik.map(product => (
-              <View
-                key={product.id}
-                className="flex-row items-center justify-between rounded-2xl bg-gray-200 px-6 py-2">
-                <View>
-                  <Text className="max-w-[120px] text-2xl font-bold text-stone-800">
-                    {product.name}
-                  </Text>
+          {isRecommendationLoading ? (
+            <ActivityIndicator
+              size={'large'}
+              color={'black'}
+              className="h-44"
+            />
+          ) : (
+            <ScrollView horizontal className="mt-4 flex space-x-3">
+              {popularProducts?.map((product: any) => (
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate('ProductDetail', {product})
+                  }
+                  key={product?.ID}
+                  className="flex-row items-center justify-between rounded-2xl bg-gray-200 px-6 py-2">
+                  <View>
+                    <View className="mb-4 max-w-[100px] rounded-full border border-stone-300 bg-stone-300 py-1">
+                      <Text className="text-center text-xs text-stone-800">
+                        {product?.nama_toko}
+                      </Text>
+                    </View>
 
-                  <View className="mt-3">
-                    <Text className="text-md text-center font-semibold text-stone-800">
-                      {product.price}
+                    <Text className="max-w-[180px] text-xl font-bold text-stone-800">
+                      {product?.product_name}
                     </Text>
-                  </View>
-                </View>
 
-                <Image source={product.image} className="h-44 w-44" />
-              </View>
-            ))}
-          </ScrollView>
+                    <View className="mt-3">
+                      <Text className="text-md text-left font-semibold text-stone-800">
+                        {product?.price?.replace('RP ', 'Rp')}
+                      </Text>
+                    </View>
+                  </View>
+
+                  <Image source={{uri: product?.image}} className="h-44 w-44" />
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
