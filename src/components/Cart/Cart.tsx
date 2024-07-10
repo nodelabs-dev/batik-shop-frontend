@@ -90,6 +90,7 @@ export default function Cart({navigation}: any) {
           {cart ? (
             <>
               <ScrollView
+                showsVerticalScrollIndicator={false}
                 contentInsetAdjustmentBehavior="automatic"
                 className="px-2 py-2">
                 <View className="flex flex-row flex-wrap justify-between gap-2">
@@ -123,7 +124,7 @@ export default function Cart({navigation}: any) {
                   ))}
                 </View>
               </ScrollView>
-              <View className="mb-3 px-2">
+              <View className="mb-3 px-1">
                 <TouchableOpacity
                   disabled={isOrderLoading}
                   onPress={postOrderHandler}

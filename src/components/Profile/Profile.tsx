@@ -41,7 +41,10 @@ export default function Profile({navigation}: any) {
   console.log('INI USER DATA DI PROFILE USESTATE ==== ', user?.data?.Fullname);
   return (
     <SafeAreaView>
-      <ScrollView contentInsetAdjustmentBehavior="automatic" className="p-0">
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentInsetAdjustmentBehavior="automatic"
+        className="p-0">
         <View className="flex items-center justify-center rounded-b-3xl bg-stone-800 px-6 py-8">
           <AntDesign name={'user'} size={128} color={'white'} />
           <Text className="mt-4 text-center text-2xl font-semibold text-white">

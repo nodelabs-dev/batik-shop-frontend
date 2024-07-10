@@ -45,7 +45,10 @@ export default function Order({route, navigation}: any) {
 
   return (
     <SafeAreaView className="flex-1">
-      <ScrollView contentInsetAdjustmentBehavior="automatic" className="p-4">
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentInsetAdjustmentBehavior="automatic"
+        className="p-4">
         <View className="flex flex-row justify-between space-x-10 rounded-lg border border-slate-300 bg-white px-6 py-4">
           <View className="flex space-y-3">
             <Text className="text-slate-700">Nama Pemesan</Text>

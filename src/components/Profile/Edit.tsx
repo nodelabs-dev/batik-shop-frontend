@@ -91,7 +91,7 @@ export default function Edit() {
 
   return (
     <SafeAreaView className="flex flex-1 bg-white">
-      <ScrollView className="p-4">
+      <ScrollView className="p-4" showsVerticalScrollIndicator={false}>
         <View className="mt-1">
           <Controller
             control={control}

@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import LinearGradient from 'react-native-linear-gradient';
 
 export default function Home({navigation}: any) {
   const [auth, setAuth] = useState<any>(null);
@@ -68,7 +69,10 @@ export default function Home({navigation}: any) {
 
   return (
     <SafeAreaView>
-      <ScrollView contentInsetAdjustmentBehavior="automatic" className="p-2">
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentInsetAdjustmentBehavior="automatic"
+        className="p-2">
         <View className="flex-row items-center justify-between rounded-2xl bg-stone-800 px-4 py-2">
           <View>
             <Text className="max-w-[120px] text-2xl font-bold text-white">
@@ -105,33 +109,44 @@ export default function Home({navigation}: any) {
               className="h-44"
             />
           ) : (
-            <ScrollView horizontal className="mt-4 flex space-x-3">
+            <ScrollView
+              showsHorizontalScrollIndicator={false}
+              horizontal
+              className="mt-4 flex space-x-3">
               {products?.map((product: any) => (
                 <TouchableOpacity
                   onPress={() =>
                     navigation.navigate('ProductDetail', {product})
                   }
-                  key={product?.ID}
-                  className="flex-row items-center justify-between rounded-2xl bg-gray-200 px-5 py-2">
-                  <View>
-                    <View className="mb-4 max-w-[100px] rounded-full border border-stone-300 bg-stone-300 py-1">
-                      <Text className="text-center text-xs text-stone-800">
-                        {product?.nama_toko}
+                  key={product?.ID}>
+                  <LinearGradient
+                    colors={['#ECCD5F', '#C5FF7B']}
+                    start={{x: 0, y: 0}}
+                    end={{x: 1, y: 1}}
+                    className="flex-row items-center justify-between rounded-2xl px-5 py-2">
+                    <View>
+                      <View className="mb-4 max-w-[100px] rounded-full border border-lime-100 bg-lime-100 py-1">
+                        <Text className="text-center text-xs text-stone-800">
+                          🏠 {product?.nama_toko}
+                        </Text>
+                      </View>
+
+                      <Text className="max-w-[180px] text-xl font-bold text-stone-800">
+                        {product?.product_name}
                       </Text>
+
+                      <View className="mt-3">
+                        <Text className="text-md text-left font-semibold text-stone-800">
+                          {product?.price?.replace('RP ', 'Rp')}
+                        </Text>
+                      </View>
                     </View>
 
-                    <Text className="max-w-[180px] text-xl font-bold text-stone-800">
-                      {product?.product_name}
-                    </Text>
-
-                    <View className="mt-3">
-                      <Text className="text-md text-left font-semibold text-stone-800">
-                        {product?.price?.replace('RP ', 'Rp')}
-                      </Text>
-                    </View>
-                  </View>
-
-                  <Image source={{uri: product?.image}} className="h-44 w-44" />
+                    <Image
+                      source={{uri: product?.image}}
+                      className="h-44 w-44"
+                    />
+                  </LinearGradient>
                 </TouchableOpacity>
               ))}
             </ScrollView>
@@ -150,33 +165,44 @@ export default function Home({navigation}: any) {
               className="h-44"
             />
           ) : (
-            <ScrollView horizontal className="mt-4 flex space-x-3">
+            <ScrollView
+              showsHorizontalScrollIndicator={false}
+              horizontal
+              className="mt-4 flex space-x-3">
               {popularProducts?.map((product: any) => (
                 <TouchableOpacity
                   onPress={() =>
                     navigation.navigate('ProductDetail', {product})
                   }
-                  key={product?.ID}
-                  className="flex-row items-center justify-between rounded-2xl bg-gray-200 px-6 py-2">
-                  <View>
-                    <View className="mb-4 max-w-[100px] rounded-full border border-stone-300 bg-stone-300 py-1">
-                      <Text className="text-center text-xs text-stone-800">
-                        {product?.nama_toko}
+                  key={product?.ID}>
+                  <LinearGradient
+                    colors={['#ECCD5F', '#C5FF7B']}
+                    start={{x: 0, y: 0}}
+                    end={{x: 1, y: 1}}
+                    className="flex-row items-center justify-between rounded-2xl px-5 py-2">
+                    <View>
+                      <View className="mb-4 max-w-[100px] rounded-full border border-lime-100 bg-lime-100 py-1">
+                        <Text className="text-center text-xs text-stone-800">
+                          🏠 {product?.nama_toko}
+                        </Text>
+                      </View>
+
+                      <Text className="max-w-[180px] text-xl font-bold text-stone-800">
+                        {product?.product_name}
                       </Text>
+
+                      <View className="mt-3">
+                        <Text className="text-md text-left font-semibold text-stone-800">
+                          {product?.price?.replace('RP ', 'Rp')}
+                        </Text>
+                      </View>
                     </View>
 
-                    <Text className="max-w-[180px] text-xl font-bold text-stone-800">
-                      {product?.product_name}
-                    </Text>
-
-                    <View className="mt-3">
-                      <Text className="text-md text-left font-semibold text-stone-800">
-                        {product?.price?.replace('RP ', 'Rp')}
-                      </Text>
-                    </View>
-                  </View>
-
-                  <Image source={{uri: product?.image}} className="h-44 w-44" />
+                    <Image
+                      source={{uri: product?.image}}
+                      className="h-44 w-44"
+                    />
+                  </LinearGradient>
                 </TouchableOpacity>
               ))}
             </ScrollView>

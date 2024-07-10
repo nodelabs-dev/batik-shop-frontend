@@ -51,6 +51,7 @@ export default function History({navigation}: any) {
         <>
           {history ? (
             <ScrollView
+              showsVerticalScrollIndicator={false}
               contentInsetAdjustmentBehavior="automatic"
               className="px-2">
               <View>

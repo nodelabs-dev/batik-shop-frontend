@@ -38,7 +38,10 @@ export default function ProductDetail({route, navigation}: any) {
 
   return (
     <SafeAreaView className="flex-1">
-      <ScrollView contentInsetAdjustmentBehavior="automatic" className="pt-5">
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentInsetAdjustmentBehavior="automatic"
+        className="pt-5">
         <View className="px-6">
           <Image
             source={{uri: product?.image}}
