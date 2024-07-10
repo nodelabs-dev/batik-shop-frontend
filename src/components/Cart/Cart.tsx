@@ -22,7 +22,7 @@ export default function Cart({navigation}: any) {
 
   const getUserLoginHandler = async () => {
     const user = await AsyncStorage.getItem('user');
-    const userAddress = JSON.parse(user);
+    const userAddress = JSON.parse(user || '');
     console.log('ADRESS USER ==== ', userAddress);
     setAddress(userAddress?.data?.Address); // Corrected "Adress" to "Address"
   };
