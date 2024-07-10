@@ -11,38 +11,6 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-const tabCategories = [
-  {
-    id: 1,
-
-    name: 'Batik Solo',
-  },
-
-  {
-    id: 2,
-
-    name: 'Batik Yogyakarta',
-  },
-
-  {
-    id: 3,
-
-    name: 'Batik Ngawi',
-  },
-
-  {
-    id: 4,
-
-    name: 'Batik Ponorogo',
-  },
-
-  {
-    id: 5,
-
-    name: 'Batik Magetan',
-  },
-];
-
 const latestBatik = [
   {
     id: 1,
@@ -163,19 +131,7 @@ export default function Home({navigation}: any) {
           />
         </View>
 
-        <ScrollView horizontal className="flex space-x-3 py-2">
-          {tabCategories.map(category => (
-            <TouchableOpacity
-              key={category.id}
-              className="rounded-full bg-stone-800 px-5 py-3">
-              <Text className="text-lg font-medium text-white">
-                {category.name}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-
-        <View className="mt-10">
+        <View className="mt-5">
           <View className="flex flex-row items-center justify-between">
             <Text className="text-xl font-bold">Rekomendasi</Text>
             <TouchableOpacity
@@ -219,7 +175,7 @@ export default function Home({navigation}: any) {
           )}
         </View>
 
-        <View className="mt-10">
+        <View className="mt-5">
           <View className="flex flex-row items-center justify-between">
             <Text className="text-xl font-bold">Batik Terpopuler</Text>
 

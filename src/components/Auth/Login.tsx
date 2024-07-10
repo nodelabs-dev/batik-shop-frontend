@@ -34,7 +34,7 @@ export default function Login({navigation}: any): React.JSX.Element {
     setIsLoading(true);
     try {
       const response = await axios.post(`${process.env.API_URL}/user/login`, {
-        Email: data.email,
+        Email: data.email.toLowerCase(),
         Password: data.password,
       });
       await AsyncStorage.setItem('auth', JSON.stringify(response.data));

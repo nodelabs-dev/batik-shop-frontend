@@ -37,7 +37,7 @@ export default function Register({navigation}: any): React.JSX.Element {
       const response = await axios.post(
         `${process.env.API_URL}/user/register`,
         {
-          Email: data.email,
+          Email: data.email.toLowerCase(),
           Fullname: data.fullname,
           PhoneNumber: data.phoneNumber,
           Password: data.password,

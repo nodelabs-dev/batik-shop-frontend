@@ -11,6 +11,38 @@ import {
   View,
 } from 'react-native';
 
+const tabCategories = [
+  {
+    id: 1,
+
+    name: 'Batik Solo',
+  },
+
+  {
+    id: 2,
+
+    name: 'Batik Yogyakarta',
+  },
+
+  {
+    id: 3,
+
+    name: 'Batik Ngawi',
+  },
+
+  {
+    id: 4,
+
+    name: 'Batik Ponorogo',
+  },
+
+  {
+    id: 5,
+
+    name: 'Batik Magetan',
+  },
+];
+
 export default function Products({navigation}: any) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [products, setProducts] = useState<any>(null);
@@ -82,6 +114,17 @@ export default function Products({navigation}: any) {
               />
             </TouchableOpacity>
           </View>
+          <ScrollView horizontal className="mt-2 flex space-x-3 py-2">
+            {tabCategories.map(category => (
+              <TouchableOpacity
+                key={category.id}
+                className="rounded-full bg-stone-800 px-5 py-3">
+                <Text className="text-lg font-medium text-white">
+                  {category.name}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
         </View>
         <View className="mt-5 px-2">
           {isLoading ? (
