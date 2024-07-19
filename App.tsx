@@ -21,6 +21,7 @@ import Products from './src/components/Home/Products';
 import ForgetPassword from './src/components/Auth/ForgetPassword';
 import ProductDetailCart from './src/components/Cart/ProductDetail';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Text} from 'react-native';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -41,7 +42,13 @@ function HomeStack() {
       <Stack.Screen
         name="ProductDetail"
         component={ProductDetail}
-        options={({route}: any) => ({title: route.params.product.product_name})}
+        options={({route}: any) => ({
+          headerTitle: props => (
+            <Text className="font-jakarta text-lg font-medium" {...props}>
+              {route.params.product.product_name}
+            </Text>
+          ),
+        })}
       />
     </Stack.Navigator>
   );
@@ -53,12 +60,26 @@ function CartStack() {
       <Stack.Screen
         name="Cart"
         component={Cart}
-        options={{title: 'Keranjang'}}
+        options={{
+          title: 'Keranjang',
+          headerTitle: props => (
+            <Text className="font-jakarta text-lg font-medium" {...props}>
+              Keranjang
+            </Text>
+          ),
+        }}
       />
       <Stack.Screen
         name="Order"
         component={Order}
-        options={{title: 'Detail Pesanan'}}
+        options={{
+          title: 'Detail Pesanan',
+          headerTitle: props => (
+            <Text className="font-jakarta text-lg font-medium" {...props}>
+              Detail Pesanan
+            </Text>
+          ),
+        }}
       />
       <Stack.Screen
         name="Success"
@@ -68,7 +89,13 @@ function CartStack() {
       <Stack.Screen
         name="ProductDetailCart"
         component={ProductDetailCart}
-        options={({route}: any) => ({title: route.params.product.nama_produk})}
+        options={({route}: any) => ({
+          headerTitle: props => (
+            <Text className="font-jakarta text-lg font-medium" {...props}>
+              {route.params.product.nama_produk}
+            </Text>
+          ),
+        })}
       />
     </Stack.Navigator>
   );
@@ -80,12 +107,26 @@ function HistoryStack() {
       <Stack.Screen
         name="History"
         component={History}
-        options={{title: 'Riwayat'}}
+        options={{
+          title: 'Riwayat',
+          headerTitle: props => (
+            <Text className="font-jakarta text-lg font-medium" {...props}>
+              Riwayat
+            </Text>
+          ),
+        }}
       />
       <Stack.Screen
         name="HistoryOrder"
         component={HistoryOrder}
-        options={{title: 'Detail Pesanan'}}
+        options={{
+          title: 'Detail Pesanan',
+          headerTitle: props => (
+            <Text className="font-jakarta text-lg font-medium" {...props}>
+              Detail Pesanan
+            </Text>
+          ),
+        }}
       />
       <Stack.Screen
         name="SuccessHistory"
@@ -107,7 +148,14 @@ function ProfileStack() {
       <Stack.Screen
         name="Edit"
         component={Edit}
-        options={{title: 'Edit Profile'}}
+        options={{
+          title: 'Edit Profile',
+          headerTitle: props => (
+            <Text className="font-jakarta text-lg font-medium" {...props}>
+              Edit Profile
+            </Text>
+          ),
+        }}
       />
     </Stack.Navigator>
   );
@@ -207,12 +255,26 @@ function App(): React.JSX.Element {
         <Stack.Screen
           name="EmailVerification"
           component={EmailVerification}
-          options={{headerShown: true}}
+          options={{
+            title: 'Verifikasi Email',
+            headerTitle: props => (
+              <Text className="font-jakarta text-lg font-medium" {...props}>
+                Verifikasi Email
+              </Text>
+            ),
+          }}
         />
         <Stack.Screen
           name="ForgetPassword"
           component={ForgetPassword}
-          options={{title: 'Reset Password'}}
+          options={{
+            title: 'Reset Password',
+            headerTitle: props => (
+              <Text className="font-jakarta text-lg font-medium" {...props}>
+                Reset Password
+              </Text>
+            ),
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

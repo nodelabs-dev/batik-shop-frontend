@@ -76,7 +76,7 @@ export default function EmailVerification({route, navigation}: any) {
       <View>
         <View className="mb-8 max-w-[250px]">
           <Text className="font-jakarta text-center text-lg font-semibold text-slate-800">
-            Verifikasi Email
+            Verifikasi Email Anda
           </Text>
           <Text className="font-jakarta text-center">
             Kami telah mengirimkan kode verifikasi, cek email Anda!

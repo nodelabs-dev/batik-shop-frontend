@@ -117,18 +117,18 @@ export default function Login({navigation}: any): React.JSX.Element {
             control={control}
             rules={{required: true}}
             render={({field: {onChange, onBlur, value}}) => (
-              <View className="relative mt-6">
+              <View className="mt-6 flex flex-row items-center">
                 <TextInput
                   placeholder="Password"
                   secureTextEntry={!isPasswordVisible}
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
-                  className="rounded-full border border-slate-300 p-4 pr-12"
+                  className="w-full rounded-full  border border-slate-300 p-4 pr-12"
                 />
                 <Pressable
                   onPress={() => setIsPasswordVisible(!isPasswordVisible)}
-                  className="absolute right-6 top-3">
+                  className="absolute right-7">
                   {isPasswordVisible ? (
                     <FeatherIcon name="eye" size={24} color={'orange'} />
                   ) : (
