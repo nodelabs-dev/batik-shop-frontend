@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
 const tabCategories = [
   {
@@ -136,7 +137,11 @@ export default function Products({navigation}: any) {
                     navigation.navigate('ProductDetail', {product})
                   }
                   key={product?.ID}>
-                  <View className="flex-row items-center justify-between rounded-2xl bg-lime-500 px-6 py-4">
+                  <LinearGradient
+                    colors={['#ECCD5F', '#C5FF7B']}
+                    start={{x: 0, y: 0}}
+                    end={{x: 1, y: 1}}
+                    className="flex-row items-center justify-between rounded-2xl px-6 py-4">
                     <View className="pl-3">
                       <View className="mb-3">
                         <View className="mb-2 w-16 rounded-full border border-yellow-100 bg-yellow-100 px-2 py-1">
@@ -152,12 +157,12 @@ export default function Products({navigation}: any) {
                           </Text>
                         </View>
                       </View>
-                      <Text className="max-w-[200px] text-2xl font-bold text-white">
+                      <Text className="max-w-[200px] text-2xl font-bold text-stone-700">
                         {product?.product_name}
                       </Text>
 
                       <View className="mt-1">
-                        <Text className="text-md text-left font-semibold text-white">
+                        <Text className="text-md text-left font-semibold text-stone-700">
                           {product?.price?.replace('RP ', 'Rp')}
                         </Text>
                       </View>
@@ -172,7 +177,7 @@ export default function Products({navigation}: any) {
                       }}
                       className="h-44 w-44"
                     />
-                  </View>
+                  </LinearGradient>
                 </TouchableOpacity>
               ))}
             </View>

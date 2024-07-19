@@ -34,7 +34,7 @@ export default function Home({navigation}: any) {
         setProducts(response?.data?.data);
         setIsRecommendationLoading(false);
       } catch (error) {
-        console.error(error);
+        console.log(error);
         setIsRecommendationLoading(false);
       }
 

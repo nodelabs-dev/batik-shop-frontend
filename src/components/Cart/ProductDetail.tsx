@@ -21,7 +21,9 @@ export default function ProductDetail({route, navigation}: any) {
     const getProductOnCartById = async () => {
       setIsScreenLoading(true);
       try {
-        setQuantity(product?.total_produk);
+        const totalProduct = Number(product?.total_produk);
+        console.log(totalProduct);
+        setQuantity(totalProduct);
         setIsScreenLoading(false);
       } catch (error) {
         console.error(error);
@@ -38,16 +40,18 @@ export default function ProductDetail({route, navigation}: any) {
       await axios.put(
         `${process.env.API_URL}/keranjang/update/${product?.id}`,
         {
-          totalProduk: `${quantity}`,
+          TotalProduk: quantity,
         },
       );
       setIsLoading(false);
-      navigation.navigate('CartStack');
+      navigation.navigate('Cart');
     } catch (error) {
       console.error(error);
       setIsLoading(false);
     }
   };
+
+  console.log('CART ID ===== ', product?.id);
 
   const filteredImages = product?.image
     ?.filter((img: any) => img && img?.trim() !== '')
