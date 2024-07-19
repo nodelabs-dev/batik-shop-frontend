@@ -78,7 +78,9 @@ export default function Register({navigation}: any): React.JSX.Element {
             source={require('../../assets/images/logo.png')}
             className="mb-3 h-28 w-28 flex-row items-center justify-center rounded-full"
           />
-          <Text className="text-2xl font-semibold">Selamat datang!</Text>
+          <Text className="font-jakarta text-2xl font-semibold">
+            Selamat datang!
+          </Text>
         </View>
         <View className="mt-10">
           <Controller
@@ -92,13 +94,15 @@ export default function Register({navigation}: any): React.JSX.Element {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                className="rounded-full border border-slate-300 p-4"
+                className="font-jakarta rounded-full border border-slate-300 p-4"
               />
             )}
             name="email"
           />
           {errors.email && (
-            <Text className="mt-2 pl-4 text-red-500">Email wajib diisi</Text>
+            <Text className="font-jakarta mt-2 pl-4 text-red-500">
+              Email wajib diisi
+            </Text>
           )}
 
           <Controller
@@ -112,13 +116,13 @@ export default function Register({navigation}: any): React.JSX.Element {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                className="mt-6 rounded-full border border-slate-300 p-4"
+                className="font-jakarta mt-6 rounded-full border border-slate-300 p-4"
               />
             )}
             name="fullname"
           />
           {errors.fullname && (
-            <Text className="mt-2 pl-4 text-red-500">
+            <Text className="font-jakarta mt-2 pl-4 text-red-500">
               Nama lengkap wajib diisi
             </Text>
           )}
@@ -134,13 +138,13 @@ export default function Register({navigation}: any): React.JSX.Element {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                className="mt-6 rounded-full border border-slate-300 p-4"
+                className="font-jakarta mt-6 rounded-full border border-slate-300 p-4"
               />
             )}
             name="phoneNumber"
           />
           {errors.phoneNumber && (
-            <Text className="mt-2 pl-4 text-red-500">
+            <Text className="font-jakarta mt-2 pl-4 text-red-500">
               Nomor WhatsApp wajib diisi
             </Text>
           )}
@@ -156,14 +160,16 @@ export default function Register({navigation}: any): React.JSX.Element {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                className="mt-6 rounded-full border border-slate-300 p-4"
+                className="font-jakarta mt-6 rounded-full border border-slate-300 p-4"
               />
             )}
             name="password"
           />
         </View>
         {errors.password && (
-          <Text className="mt-2 pl-4 text-red-500">Password wajib diisi</Text>
+          <Text className="font-jakarta mt-2 pl-4 text-red-500">
+            Password wajib diisi
+          </Text>
         )}
         <TouchableOpacity
           disabled={isLoading}
@@ -172,22 +178,25 @@ export default function Register({navigation}: any): React.JSX.Element {
           {isLoading ? (
             <>
               <ActivityIndicator size="small" color="#0000ff" />
-              <Text className="text-center text-xl font-semibold text-white">
+              <Text className="font-jakarta text-center text-xl font-semibold text-white">
                 Tunggu sebentar
               </Text>
             </>
           ) : (
-            <Text className="text-center text-xl font-semibold text-white">
+            <Text className="font-jakarta text-center text-xl font-semibold text-white">
               Daftar
             </Text>
           )}
         </TouchableOpacity>
         <View className="mt-5 flex-row justify-center">
-          <Text className="h-14 text-lg">Sudah punya akun?</Text>
+          <Text className="font-jakarta h-14 text-lg">Sudah punya akun?</Text>
           <Pressable
             onPress={() => navigation.navigate('Login')}
             className="h-14">
-            <Text className="text-lg text-amber-600"> Masuk disini</Text>
+            <Text className="font-jakarta text-lg text-amber-600">
+              {' '}
+              Masuk disini
+            </Text>
           </Pressable>
         </View>
       </ScrollView>

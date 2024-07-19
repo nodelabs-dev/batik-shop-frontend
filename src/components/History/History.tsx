@@ -74,13 +74,13 @@ export default function History({navigation}: any) {
                           />
                         </View>
                         <View className="flex flex-1">
-                          <Text className="text-md font-bold text-slate-800">
+                          <Text className="font-jakarta text-md font-bold text-slate-800">
                             {product?.NamaProduk}
                           </Text>
-                          <Text className="">
+                          <Text className="font-jakarta ">
                             {product?.harga?.replace('RP ', 'Rp')}
                           </Text>
-                          <Text className="mt-3">
+                          <Text className="font-jakarta mt-3">
                             {product?.total_produk} Pcs
                           </Text>
                         </View>
@@ -89,22 +89,28 @@ export default function History({navigation}: any) {
                     <View className="rounded-lg bg-slate-100 p-4">
                       <View className="flex flex-row items-start justify-between">
                         <View className="flex space-y-2">
-                          <Text className="text-slate-700">Jumlah Item</Text>
-                          <Text className="text-slate-700">Ongkos Kirim</Text>
+                          <Text className="font-jakarta text-slate-700">
+                            Jumlah Item
+                          </Text>
+                          <Text className="font-jakarta text-slate-700">
+                            Ongkos Kirim
+                          </Text>
                         </View>
                         <View className="flex space-y-2">
-                          <Text className="font-medium">
+                          <Text className="font-jakarta font-medium">
                             {order?.total_produk} Pcs
                           </Text>
-                          <Text className="font-medium">{order?.ongkir}</Text>
+                          <Text className="font-jakarta font-medium">
+                            {order?.ongkir}
+                          </Text>
                         </View>
                       </View>
                       <View className="mt-6 flex flex-row items-center justify-between">
                         <View>
-                          <Text className="text-lg font-semibold">
+                          <Text className="font-jakarta text-lg font-semibold">
                             {order?.total_harga?.replace('RP ', 'Rp')}
                           </Text>
-                          <Text className="text-xs text-slate-700">
+                          <Text className="font-jakarta text-xs text-slate-700">
                             {order?.status === 'Proses'
                               ? 'Belum Dibayar'
                               : 'Sudah Dibayar'}
@@ -116,7 +122,7 @@ export default function History({navigation}: any) {
                               navigation.navigate('HistoryOrder', {order})
                             }
                             className="rounded-lg bg-stone-800 px-6 py-3">
-                            <Text className="text-center font-medium text-white">
+                            <Text className="font-jakarta text-center font-medium text-white">
                               Detail
                             </Text>
                           </TouchableOpacity>
@@ -131,7 +137,7 @@ export default function History({navigation}: any) {
                               size={18}
                               color={'white'}
                             />
-                            <Text className="text-center font-medium text-white">
+                            <Text className="font-jakarta text-center font-medium text-white">
                               Chat Penjual
                             </Text>
                           </TouchableOpacity>
@@ -144,7 +150,9 @@ export default function History({navigation}: any) {
             </ScrollView>
           ) : (
             <View className="">
-              <Text className="text-center text-lg">Riwayat Kosong</Text>
+              <Text className="font-jakarta text-center text-lg">
+                Riwayat Kosong
+              </Text>
             </View>
           )}
         </>

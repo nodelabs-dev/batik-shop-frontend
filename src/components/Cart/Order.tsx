@@ -51,14 +51,16 @@ export default function Order({route, navigation}: any) {
         className="p-4">
         <View className="flex flex-row justify-between space-x-10 rounded-lg border border-slate-300 bg-white px-6 py-4">
           <View className="flex space-y-3">
-            <Text className="text-slate-700">Nama Pemesan</Text>
-            <Text className="text-slate-700">Nomor Hp</Text>
-            <Text className="text-slate-700">Alamat</Text>
+            <Text className="font-jakarta text-slate-700">Nama Pemesan</Text>
+            <Text className="font-jakarta text-slate-700">Nomor Hp</Text>
+            <Text className="font-jakarta text-slate-700">Alamat</Text>
           </View>
           <View className="flex w-1/2 space-y-3">
-            <Text className="font-medium">{order?.fullname}</Text>
-            <Text className="font-medium">{order?.phone_number}</Text>
-            <Text className="font-medium">{order?.address}</Text>
+            <Text className="font-jakarta font-medium">{order?.fullname}</Text>
+            <Text className="font-jakarta font-medium">
+              {order?.phone_number}
+            </Text>
+            <Text className="font-jakarta font-medium">{order?.address}</Text>
           </View>
         </View>
         <View className="mt-3 flex space-y-4 rounded-lg border border-slate-300 bg-white px-6 py-4">
@@ -71,31 +73,41 @@ export default function Order({route, navigation}: any) {
                 />
               </View>
               <View className="flex flex-1">
-                <Text className="text-lg font-bold text-slate-800">
+                <Text className="font-jakarta text-lg font-bold text-slate-800">
                   {product?.NamaProduk}
                 </Text>
-                <Text className="">{product?.harga?.replace('RP ', 'Rp')}</Text>
-                <Text className="mt-3">{product?.total_produk} Pcs</Text>
+                <Text className="font-jakarta ">
+                  {product?.harga?.replace('RP ', 'Rp')}
+                </Text>
+                <Text className="font-jakarta mt-3">
+                  {product?.total_produk} Pcs
+                </Text>
               </View>
             </View>
           ))}
         </View>
         <View className="mt-3 flex flex-row justify-between space-x-10 rounded-lg border border-slate-300 bg-white px-6 py-4">
           <View className="flex space-y-3">
-            <Text className="text-slate-700">Jumlah item</Text>
-            <Text className="text-slate-700">Total harga barang</Text>
-            <Text className="text-slate-700">Ongkos kirim</Text>
-            <Text className="font-bold text-slate-700">Total pesanan</Text>
+            <Text className="font-jakarta text-slate-700">Jumlah item</Text>
+            <Text className="font-jakarta text-slate-700">
+              Total harga barang
+            </Text>
+            <Text className="font-jakarta text-slate-700">Ongkos kirim</Text>
+            <Text className="font-jakarta font-bold text-slate-700">
+              Total pesanan
+            </Text>
           </View>
           <View className="flex w-1/2 space-y-3">
-            <Text className="font-normal">{order?.total_produk} Item</Text>
-            <Text className="font-normal">
+            <Text className="font-jakarta font-normal">
+              {order?.total_produk} Item
+            </Text>
+            <Text className="font-jakarta font-normal">
               {priceTotalWithoutOngkir(order?.ongkir, order?.total_harga)}
             </Text>
-            <Text className="font-normal">
+            <Text className="font-jakarta font-normal">
               {order?.ongkir?.replace('RP ', 'Rp')}
             </Text>
-            <Text className="font-bold">
+            <Text className="font-jakarta font-bold">
               {order?.total_harga?.replace('RP ', 'Rp')}
             </Text>
           </View>
@@ -111,7 +123,7 @@ export default function Order({route, navigation}: any) {
           {isPaymentLoading ? (
             <ActivityIndicator size={'small'} color={'white'} />
           ) : (
-            <Text className="text-center text-lg font-medium text-white">
+            <Text className="font-jakarta text-center text-lg font-medium text-white">
               Buat Pesanan
             </Text>
           )}

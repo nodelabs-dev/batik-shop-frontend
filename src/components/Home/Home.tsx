@@ -76,12 +76,12 @@ export default function Home({navigation}: any) {
           imageStyle={{borderRadius: 20}}
           className="flex-row items-center justify-between rounded-2xl bg-stone-800 px-4 py-2">
           <View>
-            <Text className="max-w-[120px] text-2xl font-bold text-white">
+            <Text className="font-jakarta max-w-[120px] text-2xl font-bold text-white">
               Batik Asli Indonesia
             </Text>
 
             <View className="mt-2 rounded-full bg-orange-400 p-3">
-              <Text className="text-md text-center font-semibold text-white">
+              <Text className="font-jakarta text-md text-center font-semibold text-white">
                 Original
               </Text>
             </View>
@@ -95,11 +95,11 @@ export default function Home({navigation}: any) {
 
         <View className="mt-5">
           <View className="flex flex-row items-center justify-between">
-            <Text className="text-xl font-bold">Rekomendasi</Text>
+            <Text className="font-jakarta text-xl font-bold">Rekomendasi</Text>
             <TouchableOpacity
               onPress={() => navigation.navigate('Products')}
               className="rounded-lg bg-stone-800 px-4 py-1.5">
-              <Text className="text-sm text-white">Lainnya</Text>
+              <Text className="font-jakarta text-sm text-white">Lainnya</Text>
             </TouchableOpacity>
           </View>
 
@@ -125,17 +125,17 @@ export default function Home({navigation}: any) {
                     rounded-2xl bg-amber-400 px-5 py-2">
                     <View className="pl-4">
                       <View className="mb-4 max-w-[100px] rounded-full border border-lime-100 bg-lime-100 py-1">
-                        <Text className="text-center text-xs text-stone-800">
+                        <Text className="font-jakarta text-center text-xs text-stone-800">
                           🏠 {product?.nama_toko}
                         </Text>
                       </View>
 
-                      <Text className="max-w-[180px] text-xl font-bold text-white">
+                      <Text className="font-jakarta max-w-[180px] text-xl font-bold text-white">
                         {product?.product_name}
                       </Text>
 
                       <View className="mt-3">
-                        <Text className="text-md text-left font-semibold text-white">
+                        <Text className="font-jakarta text-md text-left font-semibold text-white">
                           {product?.price?.replace('RP ', 'Rp')}
                         </Text>
                       </View>
@@ -161,7 +161,9 @@ export default function Home({navigation}: any) {
 
         <View className="mt-5">
           <View className="flex flex-row items-center justify-between">
-            <Text className="text-xl font-bold">Batik Terpopuler</Text>
+            <Text className="font-jakarta text-xl font-bold">
+              Batik Terpopuler
+            </Text>
           </View>
 
           {isRecommendationLoading ? (
@@ -186,17 +188,17 @@ export default function Home({navigation}: any) {
                     rounded-2xl bg-lime-500 px-5 py-2">
                     <View className="pl-4">
                       <View className="mb-4 max-w-[100px] rounded-full border border-lime-100 bg-lime-100 py-1">
-                        <Text className="text-center text-xs text-stone-800">
+                        <Text className="font-jakarta text-center text-xs text-stone-800">
                           🏠 {product?.nama_toko}
                         </Text>
                       </View>
 
-                      <Text className="max-w-[180px] text-xl font-bold text-white">
+                      <Text className="font-jakarta max-w-[180px] text-xl font-bold text-white">
                         {product?.product_name}
                       </Text>
 
                       <View className="mt-3">
-                        <Text className="text-md text-left font-semibold text-white">
+                        <Text className="font-jakarta text-md text-left font-semibold text-white">
                           {product?.price?.replace('RP ', 'Rp')}
                         </Text>
                       </View>

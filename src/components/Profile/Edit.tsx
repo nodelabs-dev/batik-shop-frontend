@@ -102,13 +102,15 @@ export default function Edit() {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                className="rounded-lg border border-slate-300 p-4"
+                className="font-jakarta rounded-lg border border-slate-300 p-4"
               />
             )}
             name="Fullname"
           />
           {errors.Fullname && (
-            <Text className="mt-2 pl-4 text-red-500">Nomor hp wajib diisi</Text>
+            <Text className="font-jakarta mt-2 pl-4 text-red-500">
+              Nomor hp wajib diisi
+            </Text>
           )}
           <Controller
             control={control}
@@ -119,13 +121,15 @@ export default function Edit() {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                className="mt-6 rounded-lg border border-slate-300 p-4"
+                className="font-jakarta mt-6 rounded-lg border border-slate-300 p-4"
               />
             )}
             name="PhoneNumber"
           />
           {errors.PhoneNumber && (
-            <Text className="mt-2 pl-4 text-red-500">Nomor hp wajib diisi</Text>
+            <Text className="font-jakarta mt-2 pl-4 text-red-500">
+              Nomor hp wajib diisi
+            </Text>
           )}
 
           <Controller
@@ -137,13 +141,15 @@ export default function Edit() {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                className="mt-6 rounded-lg border border-slate-300 p-4"
+                className="font-jakarta mt-6 rounded-lg border border-slate-300 p-4"
               />
             )}
             name="Address"
           />
           {errors.Address && (
-            <Text className="mt-2 pl-4 text-red-500">Alamat wajib diisi</Text>
+            <Text className="font-jakarta mt-2 pl-4 text-red-500">
+              Alamat wajib diisi
+            </Text>
           )}
         </View>
         <TouchableOpacity
@@ -153,12 +159,12 @@ export default function Edit() {
           {isLoading ? (
             <>
               <ActivityIndicator size="small" color="#0000ff" />
-              <Text className="text-center text-xl font-semibold text-white">
+              <Text className="font-jakarta text-center text-xl font-semibold text-white">
                 Tunggu sebentar
               </Text>
             </>
           ) : (
-            <Text className="text-center text-xl font-semibold text-white">
+            <Text className="font-jakarta text-center text-xl font-semibold text-white">
               Simpan
             </Text>
           )}

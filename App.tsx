@@ -212,7 +212,7 @@ function App(): React.JSX.Element {
         <Stack.Screen
           name="ForgetPassword"
           component={ForgetPassword}
-          options={{headerShown: false}}
+          options={{title: 'Reset Password'}}
         />
       </Stack.Navigator>
     </NavigationContainer>

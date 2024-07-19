@@ -60,8 +60,8 @@ export default function ForgetPassword({navigation}: any) {
   return (
     <SafeAreaView className="flex flex-1 items-center justify-center">
       <View className="px-4">
-        <Text className="mb-3 text-center text-lg font-bold text-stone-800">
-          Reset Password
+        <Text className="font-jakarta mb-3 text-center text-lg font-bold text-stone-800">
+          Reset Password Anda
         </Text>
         <View className="mt-2">
           <Controller
@@ -73,13 +73,15 @@ export default function ForgetPassword({navigation}: any) {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                className="w-72 rounded-full border border-slate-300 p-4"
+                className="font-jakarta w-72 rounded-full border border-slate-300 p-4"
               />
             )}
             name="email"
           />
           {errors.email && (
-            <Text className="mt-2 pl-4 text-red-500">Email wajib diisi</Text>
+            <Text className="font-jakarta mt-2 pl-4 text-red-500">
+              Email wajib diisi
+            </Text>
           )}
         </View>
         <TouchableOpacity
@@ -89,12 +91,12 @@ export default function ForgetPassword({navigation}: any) {
           {isLoading ? (
             <>
               <ActivityIndicator size="small" color="#0000ff" />
-              <Text className="text-center text-xl font-semibold text-white">
+              <Text className="font-jakarta text-center text-xl font-semibold text-white">
                 Tunggu sebentar
               </Text>
             </>
           ) : (
-            <Text className="text-center text-xl font-semibold text-white">
+            <Text className="font-jakarta text-center text-xl font-semibold text-white">
               Reset
             </Text>
           )}

@@ -109,7 +109,7 @@ export default function Cart({navigation}: any) {
                       style={{width: '47.5%'}}
                       key={product?.id}>
                       <View className="flex flex-row items-center justify-between">
-                        <Text className="text-sm text-slate-700">
+                        <Text className="font-jakarta text-sm text-slate-700">
                           {product?.total_produk} Pcs
                         </Text>
                         <TouchableOpacity
@@ -129,8 +129,10 @@ export default function Cart({navigation}: any) {
                         className="mx-auto h-28 w-28"
                       />
                       <View className="p-2">
-                        <Text className="mt-2">{product?.nama_produk}</Text>
-                        <Text className="mt-1 font-semibold">
+                        <Text className="font-jakarta mt-2">
+                          {product?.nama_produk}
+                        </Text>
+                        <Text className="font-jakarta mt-1 font-semibold">
                           {product?.harga?.replace('RP ', 'Rp')}
                         </Text>
                       </View>
@@ -147,7 +149,7 @@ export default function Cart({navigation}: any) {
                     {isOrderLoading ? (
                       <ActivityIndicator size={'small'} color={'white'} />
                     ) : (
-                      <Text className="text-center text-lg font-medium text-white">
+                      <Text className="font-jakarta text-center text-lg font-medium text-white">
                         Pesan Sekarang
                       </Text>
                     )}
@@ -156,7 +158,7 @@ export default function Cart({navigation}: any) {
                   <TouchableOpacity
                     onPress={() => navigation.navigate('ProfileStack')}
                     className="mt-5 w-96 rounded-xl bg-stone-800 py-3">
-                    <Text className="text-center text-lg font-medium text-white">
+                    <Text className="font-jakarta text-center text-lg font-medium text-white">
                       Isi alamat terlebih dahulu
                     </Text>
                   </TouchableOpacity>
@@ -165,7 +167,9 @@ export default function Cart({navigation}: any) {
             </>
           ) : (
             <View>
-              <Text className="text-center text-lg">Keranjang Kosong</Text>
+              <Text className="font-jakarta text-center text-lg">
+                Keranjang Kosong
+              </Text>
             </View>
           )}
         </>

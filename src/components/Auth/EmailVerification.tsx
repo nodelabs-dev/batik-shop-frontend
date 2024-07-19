@@ -75,10 +75,10 @@ export default function EmailVerification({route, navigation}: any) {
     <SafeAreaView className="flex flex-1 items-center justify-center">
       <View>
         <View className="mb-8 max-w-[250px]">
-          <Text className="text-center text-lg font-semibold text-slate-800">
+          <Text className="font-jakarta text-center text-lg font-semibold text-slate-800">
             Verifikasi Email
           </Text>
-          <Text className="text-center">
+          <Text className="font-jakarta text-center">
             Kami telah mengirimkan kode verifikasi, cek email Anda!
           </Text>
         </View>
@@ -92,13 +92,13 @@ export default function EmailVerification({route, navigation}: any) {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                className="rounded-full border border-slate-300 p-4"
+                className="font-jakarta rounded-full border border-slate-300 p-4"
               />
             )}
             name="code"
           />
           {errors.code && (
-            <Text className="mt-2 pl-4 text-red-500">
+            <Text className="font-jakarta mt-2 pl-4 text-red-500">
               Kode verifikasi wajib diisi
             </Text>
           )}
@@ -110,12 +110,12 @@ export default function EmailVerification({route, navigation}: any) {
           {isLoading ? (
             <>
               <ActivityIndicator size="small" color="#0000ff" />
-              <Text className="text-center text-xl font-semibold text-white">
+              <Text className="font-jakarta text-center text-xl font-semibold text-white">
                 Tunggu sebentar
               </Text>
             </>
           ) : (
-            <Text className="text-center text-xl font-semibold text-white">
+            <Text className="font-jakarta text-center text-xl font-semibold text-white">
               Kirim
             </Text>
           )}

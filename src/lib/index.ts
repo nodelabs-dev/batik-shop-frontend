@@ -15,3 +15,8 @@ export const priceTotalWithoutOngkir = (ongkos: any, total: any) => {
     totalWithoutOngkir?.toString()?.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
   return formattedTotalWithoutOngkir;
 };
+
+export const capitalizeFirstLetter = (string: String) => {
+  if (!string) return '';
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};

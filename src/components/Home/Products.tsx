@@ -11,43 +11,14 @@ import {
   View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-
-const tabCategories = [
-  {
-    id: 1,
-
-    name: 'Batik Solo',
-  },
-
-  {
-    id: 2,
-
-    name: 'Batik Yogyakarta',
-  },
-
-  {
-    id: 3,
-
-    name: 'Batik Ngawi',
-  },
-
-  {
-    id: 4,
-
-    name: 'Batik Ponorogo',
-  },
-
-  {
-    id: 5,
-
-    name: 'Batik Magetan',
-  },
-];
+import {capitalizeFirstLetter} from '../../lib';
 
 export default function Products({navigation}: any) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [products, setProducts] = useState<any>(null);
+  const [productTypes, setProductTypes] = useState<any>(null);
   const [genderFilter, setGenderFilter] = useState<string>('');
+  const [jenisBatikFilter, setJenisBatikFilter] = useState<string>('');
 
   const getProductsHandler = async () => {
     setIsLoading(true);
@@ -61,45 +32,60 @@ export default function Products({navigation}: any) {
     }
   };
 
+  const getProductTypesHandler = async () => {
+    try {
+      const response = await axios.get(`${process.env.API_URL}/jenisbatik`);
+      console.log('JENIS BATIK === ', response?.data?.data);
+      setProductTypes(response?.data?.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useFocusEffect(
     useCallback(() => {
+      getProductTypesHandler();
       getProductsHandler();
     }, []),
   );
 
-  const toggleFilter = (gender: string) => {
+  const toggleGenderFilter = (gender: string) => {
     setGenderFilter(prevGender => (prevGender === gender ? '' : gender));
   };
 
-  const filteredProducts = genderFilter
-    ? products?.filter(
-        (product: any) => product.category_general === genderFilter,
-      )
-    : products;
+  const toggleJenisBatikFilter = (jenis: string) => {
+    setJenisBatikFilter(prevJenis => (prevJenis === jenis ? '' : jenis));
+  };
+
+  const filteredProducts = products?.filter(
+    (product: any) =>
+      (!genderFilter || product?.category_general === genderFilter) &&
+      (!jenisBatikFilter || product?.jenis_batik === jenisBatikFilter),
+  );
 
   return (
     <SafeAreaView>
       <ScrollView showsVerticalScrollIndicator={false}>
         <View className="p-2">
-          <Text className="text-xl font-bold text-stone-800">
+          <Text className="font-jakarta text-xl font-bold text-stone-800">
             👉 Pilih Kategori
           </Text>
           <View className="mt-4 flex flex-row justify-evenly space-x-2">
             <TouchableOpacity
               className={`flex w-44 flex-row items-center justify-center rounded-lg px-4 py-4 ${
-                genderFilter === 'batik' ? 'bg-lime-200' : 'bg-[#ECCD5F]'
+                genderFilter === 'batik' ? 'bg-lime-300' : 'bg-[#ECCD5F]'
               }`}
-              onPress={() => toggleFilter('batik')}>
-              <Text className="text-center text-lg font-bold text-stone-800">
+              onPress={() => toggleGenderFilter('batik')}>
+              <Text className="font-jakarta text-center text-lg font-bold text-stone-800">
                 BATIK
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               className={`flex w-44 flex-row items-center justify-center rounded-lg px-4 py-4 ${
-                genderFilter === 'tenun' ? 'bg-pink-200' : 'bg-[#ECCD5F]'
+                genderFilter === 'tenun' ? 'bg-lime-300' : 'bg-[#ECCD5F]'
               }`}
-              onPress={() => toggleFilter('tenun')}>
-              <Text className="text-center text-lg font-bold text-stone-800">
+              onPress={() => toggleGenderFilter('tenun')}>
+              <Text className="font-jakarta text-center text-lg font-bold text-stone-800">
                 TENUN
               </Text>
             </TouchableOpacity>
@@ -108,18 +94,23 @@ export default function Products({navigation}: any) {
             horizontal
             showsHorizontalScrollIndicator={false}
             className="mt-2 flex space-x-3 py-2">
-            {tabCategories.map(category => (
+            {productTypes?.map((category: any) => (
               <TouchableOpacity
-                key={category.id}
-                className="rounded-full bg-stone-800 px-5 py-3">
-                <Text className="text-lg font-medium text-white">
-                  {category.name}
+                key={category?.ID}
+                className={`rounded-full bg-stone-800 px-5 py-3 ${
+                  jenisBatikFilter === category?.NamaJenis
+                    ? 'bg-lime-300'
+                    : 'bg-stone-800'
+                }`}
+                onPress={() => toggleJenisBatikFilter(category?.NamaJenis)}>
+                <Text className="font-jakarta text-lg font-medium text-white">
+                  {capitalizeFirstLetter(category?.NamaJenis)}
                 </Text>
               </TouchableOpacity>
             ))}
           </ScrollView>
         </View>
-        <View className="mt-5 px-2">
+        <View className="mt-5 px-2 pb-3">
           {isLoading ? (
             <ActivityIndicator
               size={'large'}
@@ -128,7 +119,7 @@ export default function Products({navigation}: any) {
             />
           ) : (
             <View className="gap-y-3">
-              <Text className="text-xl font-bold text-stone-800">
+              <Text className="font-jakarta text-xl font-bold text-stone-800">
                 🙌 Yuk Beli Batik Pilihanmu
               </Text>
               {filteredProducts?.map((product: any) => (
@@ -142,27 +133,32 @@ export default function Products({navigation}: any) {
                     start={{x: 0, y: 0}}
                     end={{x: 1, y: 1}}
                     className="flex-row items-center justify-between rounded-2xl px-6 py-4">
-                    <View className="pl-3">
+                    <View>
                       <View className="mb-3">
-                        <View className="mb-2 w-16 rounded-full border border-yellow-100 bg-yellow-100 px-2 py-1">
-                          <Text className="text-center text-xs text-stone-800">
-                            {product?.category_general === 'batik'
-                              ? 'Batik'
-                              : 'Tenun'}
-                          </Text>
+                        <View className="flex flex-row space-x-1.5">
+                          <View className="mb-2 w-16 rounded-full border border-yellow-100 bg-yellow-100 px-2 py-1">
+                            <Text className="font-jakarta text-center text-xs text-stone-800">
+                              {capitalizeFirstLetter(product?.category_general)}
+                            </Text>
+                          </View>
+                          <View className="mb-2 w-auto rounded-full border border-yellow-100 bg-yellow-100 px-2 py-1">
+                            <Text className="font-jakarta text-center text-xs text-stone-800">
+                              {capitalizeFirstLetter(product?.jenis_batik)}
+                            </Text>
+                          </View>
                         </View>
                         <View className="w-28 rounded-full border border-lime-100 bg-lime-100 px-2 py-1">
-                          <Text className="text-left text-xs text-stone-800">
+                          <Text className="font-jakarta text-left text-xs text-stone-800">
                             🏠 {product?.nama_toko}
                           </Text>
                         </View>
                       </View>
-                      <Text className="max-w-[200px] text-2xl font-bold text-stone-700">
+                      <Text className="font-jakarta max-w-[200px] text-2xl font-bold text-stone-700">
                         {product?.product_name}
                       </Text>
 
                       <View className="mt-1">
-                        <Text className="text-md text-left font-semibold text-stone-700">
+                        <Text className="font-jakarta text-md text-left font-semibold text-stone-700">
                           {product?.price?.replace('RP ', 'Rp')}
                         </Text>
                       </View>
