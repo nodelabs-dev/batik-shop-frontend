@@ -38,6 +38,9 @@ export default function Login({navigation}: any): React.JSX.Element {
         Password: data.password,
       });
       await AsyncStorage.setItem('auth', JSON.stringify(response.data));
+
+      const verifyUser = await axios.get(`${process.env.API_URL}/verify/user`);
+      await AsyncStorage.setItem('user', JSON.stringify(verifyUser?.data));
       console.log(response.data);
       navigation.navigate('MainTabs');
       setIsLoading(false);
@@ -73,9 +76,23 @@ export default function Login({navigation}: any): React.JSX.Element {
             source={require('../../assets/images/login-ill.png')}
             className="flex-row items-center justify-center"
           />
-          <Text className="text-2xl font-semibold">Selamat datang!</Text>
+          <View className="flex flex-row">
+            <View>
+              <Text className="ml-0 self-start text-left text-2xl font-semibold">
+                Selamat datang!
+              </Text>
+              <Text className="mt-2 max-w-[260px] self-start text-slate-700">
+                Dengan masuk, Anda menyetujui ketentuan dan kebijakan privasi
+                kami.
+              </Text>
+            </View>
+            <Image
+              source={require('../../assets/images/logo.png')}
+              className="ml-3 h-20 w-20 flex-row items-center justify-center rounded-full"
+            />
+          </View>
         </View>
-        <View className="mt-10">
+        <View className="mt-6">
           <Controller
             control={control}
             rules={{required: true}}

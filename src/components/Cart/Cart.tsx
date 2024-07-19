@@ -21,8 +21,9 @@ export default function Cart({navigation}: any) {
   const [address, setAddress] = useState<any>(null);
 
   const getUserLoginHandler = async () => {
-    const user = await AsyncStorage.getItem('user');
-    const userAddress = JSON.parse(user || '');
+    const userdata = await AsyncStorage.getItem('user');
+    console.log('DATA CARTTT ==== ', userdata);
+    const userAddress = JSON.parse(userdata ? userdata : '');
     console.log('ADRESS USER ==== ', userAddress);
     setAddress(userAddress?.data?.Address);
   };
@@ -31,12 +32,7 @@ export default function Cart({navigation}: any) {
     setIsLoading(true);
     try {
       const response = await axios.get(`${process.env.API_URL}/keranjang`);
-      const processedCart = response?.data?.data?.map((product: any) => ({
-        ...product,
-        image: product?.UrlImage1?.replace('./', `${process.env.API_URL}/`),
-      }));
-      console.log('DATA DI KERANJANG ==== ', processedCart);
-      setCart(processedCart);
+      setCart(response?.data?.data);
       setIsLoading(false);
     } catch (error) {
       console.error(error);
@@ -105,7 +101,10 @@ export default function Cart({navigation}: any) {
                 className="px-2 py-2">
                 <View className="flex flex-row flex-wrap justify-between gap-2">
                   {cart?.map((product: any) => (
-                    <View
+                    <TouchableOpacity
+                      onPress={() =>
+                        navigation.navigate('ProductDetailCart', {product})
+                      }
                       className="rounded-lg bg-white p-2"
                       style={{width: '47.5%'}}
                       key={product?.id}>
@@ -121,7 +120,12 @@ export default function Cart({navigation}: any) {
                         </TouchableOpacity>
                       </View>
                       <Image
-                        source={{uri: product?.image}}
+                        source={{
+                          uri: product.image[0]?.replace(
+                            './',
+                            `${process.env.API_URL}/`,
+                          ),
+                        }}
                         className="mx-auto h-28 w-28"
                       />
                       <View className="p-2">
@@ -130,7 +134,7 @@ export default function Cart({navigation}: any) {
                           {product?.harga?.replace('RP ', 'Rp')}
                         </Text>
                       </View>
-                    </View>
+                    </TouchableOpacity>
                   ))}
                 </View>
               </ScrollView>

@@ -7,10 +7,10 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
+  ImageBackground,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import LinearGradient from 'react-native-linear-gradient';
 
 export default function Home({navigation}: any) {
   const [auth, setAuth] = useState<any>(null);
@@ -31,19 +31,14 @@ export default function Home({navigation}: any) {
       setIsRecommendationLoading(true);
       try {
         const response = await axios.get(`${process.env.API_URL}/produk`);
-        const processedProducts = response?.data?.data?.map((product: any) => ({
-          ...product,
-          image: product.image[0].url_image1.replace(
-            './',
-            `${process.env.API_URL}/`,
-          ),
-        }));
-        setProducts(processedProducts);
+        setProducts(response?.data?.data);
         setIsRecommendationLoading(false);
       } catch (error) {
         console.error(error);
         setIsRecommendationLoading(false);
       }
+
+      console.log('PROCESSED PRODUCT ===== ', products);
     };
 
     getProductsHandler();
@@ -57,7 +52,7 @@ export default function Home({navigation}: any) {
     const getUserData = async () => {
       const response = await axios.get(`${process.env.API_URL}/verify/user`);
       await AsyncStorage.setItem('user', JSON.stringify(response.data));
-      console.log('INI DATA USER === ', response.data);
+      console.log('INI DATA USERR === ', response.data);
     };
 
     getUserData();
@@ -67,13 +62,19 @@ export default function Home({navigation}: any) {
     ? [...products].sort((a, b) => b.count - a.count)
     : [];
 
+  console.log(products);
+
   return (
     <SafeAreaView>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentInsetAdjustmentBehavior="automatic"
         className="p-2">
-        <View className="flex-row items-center justify-between rounded-2xl bg-stone-800 px-4 py-2">
+        <ImageBackground
+          source={require('../../assets/images/border.png')}
+          resizeMode="cover"
+          imageStyle={{borderRadius: 20}}
+          className="flex-row items-center justify-between rounded-2xl bg-stone-800 px-4 py-2">
           <View>
             <Text className="max-w-[120px] text-2xl font-bold text-white">
               Batik Asli Indonesia
@@ -90,7 +91,7 @@ export default function Home({navigation}: any) {
             source={require('../../assets/images/batik/batik-1.png')}
             className="h-52 w-52"
           />
-        </View>
+        </ImageBackground>
 
         <View className="mt-5">
           <View className="flex flex-row items-center justify-between">
@@ -119,34 +120,39 @@ export default function Home({navigation}: any) {
                     navigation.navigate('ProductDetail', {product})
                   }
                   key={product?.ID}>
-                  <LinearGradient
-                    colors={['#ECCD5F', '#C5FF7B']}
-                    start={{x: 0, y: 0}}
-                    end={{x: 1, y: 1}}
-                    className="flex-row items-center justify-between rounded-2xl px-5 py-2">
-                    <View>
+                  <View
+                    className="flex-row items-center justify-between 
+                    rounded-2xl bg-amber-400 px-5 py-2">
+                    <View className="pl-4">
                       <View className="mb-4 max-w-[100px] rounded-full border border-lime-100 bg-lime-100 py-1">
                         <Text className="text-center text-xs text-stone-800">
                           🏠 {product?.nama_toko}
                         </Text>
                       </View>
 
-                      <Text className="max-w-[180px] text-xl font-bold text-stone-800">
+                      <Text className="max-w-[180px] text-xl font-bold text-white">
                         {product?.product_name}
                       </Text>
 
                       <View className="mt-3">
-                        <Text className="text-md text-left font-semibold text-stone-800">
+                        <Text className="text-md text-left font-semibold text-white">
                           {product?.price?.replace('RP ', 'Rp')}
                         </Text>
                       </View>
                     </View>
 
-                    <Image
-                      source={{uri: product?.image}}
-                      className="h-44 w-44"
-                    />
-                  </LinearGradient>
+                    {product?.image && (
+                      <Image
+                        source={{
+                          uri: product.image[0]?.replace(
+                            './',
+                            `${process.env.API_URL}/`,
+                          ),
+                        }}
+                        className="h-44 w-44"
+                      />
+                    )}
+                  </View>
                 </TouchableOpacity>
               ))}
             </ScrollView>
@@ -168,41 +174,46 @@ export default function Home({navigation}: any) {
             <ScrollView
               showsHorizontalScrollIndicator={false}
               horizontal
-              className="mt-4 flex space-x-3">
+              className="mt-4 flex space-x-3 pb-5">
               {popularProducts?.map((product: any) => (
                 <TouchableOpacity
                   onPress={() =>
                     navigation.navigate('ProductDetail', {product})
                   }
                   key={product?.ID}>
-                  <LinearGradient
-                    colors={['#ECCD5F', '#C5FF7B']}
-                    start={{x: 0, y: 0}}
-                    end={{x: 1, y: 1}}
-                    className="flex-row items-center justify-between rounded-2xl px-5 py-2">
-                    <View>
+                  <View
+                    className="flex-row items-center justify-between 
+                    rounded-2xl bg-lime-500 px-5 py-2">
+                    <View className="pl-4">
                       <View className="mb-4 max-w-[100px] rounded-full border border-lime-100 bg-lime-100 py-1">
                         <Text className="text-center text-xs text-stone-800">
                           🏠 {product?.nama_toko}
                         </Text>
                       </View>
 
-                      <Text className="max-w-[180px] text-xl font-bold text-stone-800">
+                      <Text className="max-w-[180px] text-xl font-bold text-white">
                         {product?.product_name}
                       </Text>
 
                       <View className="mt-3">
-                        <Text className="text-md text-left font-semibold text-stone-800">
+                        <Text className="text-md text-left font-semibold text-white">
                           {product?.price?.replace('RP ', 'Rp')}
                         </Text>
                       </View>
                     </View>
 
-                    <Image
-                      source={{uri: product?.image}}
-                      className="h-44 w-44"
-                    />
-                  </LinearGradient>
+                    {product?.image && (
+                      <Image
+                        source={{
+                          uri: product.image[0]?.replace(
+                            './',
+                            `${process.env.API_URL}/`,
+                          ),
+                        }}
+                        className="h-44 w-44"
+                      />
+                    )}
+                  </View>
                 </TouchableOpacity>
               ))}
             </ScrollView>

@@ -1,5 +1,5 @@
-import React, {useContext} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
+import {NavigationContainer, useFocusEffect} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -19,6 +19,8 @@ import EmailVerification from './src/components/Auth/EmailVerification';
 import Edit from './src/components/Profile/Edit';
 import Products from './src/components/Home/Products';
 import ForgetPassword from './src/components/Auth/ForgetPassword';
+import ProductDetailCart from './src/components/Cart/ProductDetail';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -34,7 +36,7 @@ function HomeStack() {
       <Stack.Screen
         name="Products"
         component={Products}
-        options={{headerShown: false}}
+        options={{headerShown: false, title: 'Produk'}}
       />
       <Stack.Screen
         name="ProductDetail"
@@ -62,6 +64,11 @@ function CartStack() {
         name="Success"
         component={Success}
         options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ProductDetailCart"
+        component={ProductDetailCart}
+        options={({route}: any) => ({title: route.params.product.nama_produk})}
       />
     </Stack.Navigator>
   );
@@ -107,6 +114,21 @@ function ProfileStack() {
 }
 
 function MainTabs() {
+  const [user, setUser] = useState<any>(null);
+
+  const getUserData = async () => {
+    const userData = await AsyncStorage.getItem('auth');
+    setUser(JSON.parse(userData || ''));
+  };
+
+  console.log('APP USER FROM APPTSX === ', user);
+
+  useFocusEffect(
+    useCallback(() => {
+      getUserData();
+    }, []),
+  );
+
   return (
     <Tab.Navigator
       initialRouteName="HomeStack"
@@ -136,16 +158,20 @@ function MainTabs() {
         component={HomeStack}
         options={{headerShown: false, title: 'Home'}}
       />
-      <Tab.Screen
-        name="CartStack"
-        component={CartStack}
-        options={{headerShown: false, title: 'Keranjang'}}
-      />
-      <Tab.Screen
-        name="HistoryStack"
-        component={HistoryStack}
-        options={{headerShown: false, title: 'Riwayat'}}
-      />
+      {user ? (
+        <>
+          <Tab.Screen
+            name="CartStack"
+            component={CartStack}
+            options={{headerShown: false, title: 'Keranjang'}}
+          />
+          <Tab.Screen
+            name="HistoryStack"
+            component={HistoryStack}
+            options={{headerShown: false, title: 'Riwayat'}}
+          />
+        </>
+      ) : null}
       <Tab.Screen
         name="ProfileStack"
         component={ProfileStack}
@@ -157,11 +183,11 @@ function MainTabs() {
 
 function App(): React.JSX.Element {
   const {auth}: any = useContext(AuthContext);
-  console.log('INI AUTH === ', auth);
 
+  console.log('AUTH CONTEXT ==== ', auth);
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="MainTabs">
         <Stack.Screen
           name="MainTabs"
           component={MainTabs}

@@ -10,7 +10,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 
 const tabCategories = [
   {
@@ -53,14 +52,7 @@ export default function Products({navigation}: any) {
     setIsLoading(true);
     try {
       const response = await axios.get(`${process.env.API_URL}/produk`);
-      const processedProducts = response?.data?.data?.map((product: any) => ({
-        ...product,
-        image: product.image[0].url_image1.replace(
-          './',
-          `${process.env.API_URL}/`,
-        ),
-      }));
-      setProducts(processedProducts);
+      setProducts(response?.data?.data);
       setIsLoading(false);
     } catch (error) {
       console.error(error);
@@ -93,26 +85,22 @@ export default function Products({navigation}: any) {
           </Text>
           <View className="mt-4 flex flex-row justify-evenly space-x-2">
             <TouchableOpacity
-              className={`flex w-44 flex-row items-center justify-between rounded-lg px-4 py-4 ${
-                genderFilter === 'L' ? 'bg-lime-200' : 'bg-[#ECCD5F]'
+              className={`flex w-44 flex-row items-center justify-center rounded-lg px-4 py-4 ${
+                genderFilter === 'batik' ? 'bg-lime-200' : 'bg-[#ECCD5F]'
               }`}
-              onPress={() => toggleFilter('L')}>
-              <Text className="text-lg font-semibold">Laki-laki</Text>
-              <Image
-                source={require('../../assets/images/men.png')}
-                className="rounded-full"
-              />
+              onPress={() => toggleFilter('batik')}>
+              <Text className="text-center text-lg font-bold text-stone-800">
+                BATIK
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              className={`flex w-44 flex-row items-center justify-between rounded-lg px-4 py-4 ${
-                genderFilter === 'P' ? 'bg-pink-200' : 'bg-[#ECCD5F]'
+              className={`flex w-44 flex-row items-center justify-center rounded-lg px-4 py-4 ${
+                genderFilter === 'tenun' ? 'bg-pink-200' : 'bg-[#ECCD5F]'
               }`}
-              onPress={() => toggleFilter('P')}>
-              <Text className="text-lg font-semibold">Perempuan</Text>
-              <Image
-                source={require('../../assets/images/women.png')}
-                className="rounded-full"
-              />
+              onPress={() => toggleFilter('tenun')}>
+              <Text className="text-center text-lg font-bold text-stone-800">
+                TENUN
+              </Text>
             </TouchableOpacity>
           </View>
           <ScrollView
@@ -148,42 +136,43 @@ export default function Products({navigation}: any) {
                     navigation.navigate('ProductDetail', {product})
                   }
                   key={product?.ID}>
-                  <LinearGradient
-                    colors={['#ECCD5F', '#C5FF7B']}
-                    start={{x: 0, y: 0}}
-                    end={{x: 1, y: 1}}
-                    className="flex-row items-center justify-between rounded-2xl px-6 py-4">
-                    <View>
+                  <View className="flex-row items-center justify-between rounded-2xl bg-lime-500 px-6 py-4">
+                    <View className="pl-3">
                       <View className="mb-3">
-                        <View className="mb-2 w-28 rounded-full border border-lime-100 bg-lime-100 px-2 py-1">
+                        <View className="mb-2 w-16 rounded-full border border-yellow-100 bg-yellow-100 px-2 py-1">
+                          <Text className="text-center text-xs text-stone-800">
+                            {product?.category_general === 'batik'
+                              ? 'Batik'
+                              : 'Tenun'}
+                          </Text>
+                        </View>
+                        <View className="w-28 rounded-full border border-lime-100 bg-lime-100 px-2 py-1">
                           <Text className="text-left text-xs text-stone-800">
                             🏠 {product?.nama_toko}
                           </Text>
                         </View>
-                        <View className="mb-0 w-28 rounded-full border border-yellow-100 bg-yellow-100 px-2 py-1">
-                          <Text className="text-left text-xs text-stone-800">
-                            {product?.category_general === 'P'
-                              ? '👩 Perempuan'
-                              : '👨 Laki-laki'}
-                          </Text>
-                        </View>
                       </View>
-                      <Text className="max-w-[200px] text-2xl font-bold text-stone-800">
+                      <Text className="max-w-[200px] text-2xl font-bold text-white">
                         {product?.product_name}
                       </Text>
 
                       <View className="mt-1">
-                        <Text className="text-md text-left font-semibold text-stone-800">
+                        <Text className="text-md text-left font-semibold text-white">
                           {product?.price?.replace('RP ', 'Rp')}
                         </Text>
                       </View>
                     </View>
 
                     <Image
-                      source={{uri: product?.image}}
+                      source={{
+                        uri: product.image[0]?.replace(
+                          './',
+                          `${process.env.API_URL}/`,
+                        ),
+                      }}
                       className="h-44 w-44"
                     />
-                  </LinearGradient>
+                  </View>
                 </TouchableOpacity>
               ))}
             </View>
