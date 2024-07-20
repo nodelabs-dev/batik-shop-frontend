@@ -48,7 +48,7 @@ export default function Order({route, navigation}: any) {
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentInsetAdjustmentBehavior="automatic"
-        className="p-4">
+        className="p-1.5">
         <View className="flex flex-row justify-between space-x-10 rounded-lg border border-slate-300 bg-white px-6 py-4">
           <View className="flex space-y-3">
             <Text className="font-jakarta text-slate-700">Nama Pemesan</Text>
@@ -63,7 +63,7 @@ export default function Order({route, navigation}: any) {
             <Text className="font-jakarta font-medium">{order?.address}</Text>
           </View>
         </View>
-        <View className="mt-3 flex space-y-4 rounded-lg border border-slate-300 bg-white px-6 py-4">
+        <View className="mt-1.5 flex space-y-4 rounded-lg border border-slate-300 bg-white px-6 py-4">
           {order?.Keranjang?.map((product: any) => (
             <View className="flex flex-row space-x-4" key={product.ID}>
               <View className="rounded-lg bg-slate-100">
@@ -86,7 +86,7 @@ export default function Order({route, navigation}: any) {
             </View>
           ))}
         </View>
-        <View className="mt-3 flex flex-row justify-between space-x-10 rounded-lg border border-slate-300 bg-white px-6 py-4">
+        <View className="mt-1.5 flex flex-row justify-between space-x-10 rounded-lg border border-slate-300 bg-white px-6 py-4">
           <View className="flex space-y-3">
             <Text className="font-jakarta text-slate-700">Jumlah item</Text>
             <Text className="font-jakarta text-slate-700">
@@ -113,13 +113,13 @@ export default function Order({route, navigation}: any) {
           </View>
         </View>
       </ScrollView>
-      <View className="mb-3 px-2">
+      <View className="mb-3 px-1.5">
         <TouchableOpacity
           disabled={isPaymentLoading}
           onPress={() => {
             postPaymentTransaction(order?.ID);
           }}
-          className="mt-5 flex items-center justify-center rounded-xl bg-stone-800 py-3">
+          className="mt-2 flex items-center justify-center rounded-xl bg-stone-800 py-3">
           {isPaymentLoading ? (
             <ActivityIndicator size={'small'} color={'white'} />
           ) : (

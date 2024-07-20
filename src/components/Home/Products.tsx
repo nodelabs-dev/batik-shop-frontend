@@ -66,13 +66,13 @@ export default function Products({navigation}: any) {
   return (
     <SafeAreaView>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View className="p-2">
+        <View className="p-1.5">
           <Text className="font-jakarta text-xl font-bold text-stone-800">
             👉 Pilih Kategori
           </Text>
-          <View className="mt-4 flex flex-row justify-evenly space-x-2">
+          <View className="mt-3 flex flex-row justify-evenly space-x-2">
             <TouchableOpacity
-              className={`flex w-44 flex-row items-center justify-center rounded-lg px-4 py-4 ${
+              className={`flex w-1/2 flex-row items-center justify-center rounded-lg px-4 py-4 ${
                 genderFilter === 'batik' ? 'bg-lime-300' : 'bg-[#ECCD5F]'
               }`}
               onPress={() => toggleGenderFilter('batik')}>
@@ -81,7 +81,7 @@ export default function Products({navigation}: any) {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              className={`flex w-44 flex-row items-center justify-center rounded-lg px-4 py-4 ${
+              className={`flex w-1/2 flex-row items-center justify-center rounded-lg px-4 py-4 ${
                 genderFilter === 'tenun' ? 'bg-lime-300' : 'bg-[#ECCD5F]'
               }`}
               onPress={() => toggleGenderFilter('tenun')}>
@@ -93,7 +93,7 @@ export default function Products({navigation}: any) {
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            className="mt-2 flex space-x-3 py-2">
+            className="mt-2 flex space-x-1.5 py-1.5">
             {productTypes?.map((category: any) => (
               <TouchableOpacity
                 key={category?.ID}
@@ -110,7 +110,7 @@ export default function Products({navigation}: any) {
             ))}
           </ScrollView>
         </View>
-        <View className="mt-5 px-2 pb-3">
+        <View className="mt-5 px-1.5 pb-3">
           {isLoading ? (
             <ActivityIndicator
               size={'large'}
@@ -118,7 +118,7 @@ export default function Products({navigation}: any) {
               className="h-44"
             />
           ) : (
-            <View className="gap-y-3">
+            <View className="gap-y-2">
               <Text className="font-jakarta text-xl font-bold text-stone-800">
                 🙌 Yuk Beli Batik Pilihanmu
               </Text>

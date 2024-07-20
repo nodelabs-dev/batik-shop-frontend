@@ -91,7 +91,7 @@ export default function Edit() {
 
   return (
     <SafeAreaView className="flex flex-1 bg-white">
-      <ScrollView className="p-4" showsVerticalScrollIndicator={false}>
+      <ScrollView className="p-1.5" showsVerticalScrollIndicator={false}>
         <View className="mt-1">
           <Controller
             control={control}
@@ -121,7 +121,7 @@ export default function Edit() {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                className="font-jakarta mt-6 rounded-lg border border-slate-300 p-4"
+                className="font-jakarta mt-2 rounded-lg border border-slate-300 p-4"
               />
             )}
             name="PhoneNumber"
@@ -141,7 +141,7 @@ export default function Edit() {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                className="font-jakarta mt-6 rounded-lg border border-slate-300 p-4"
+                className="font-jakarta mt-2 rounded-lg border border-slate-300 p-4"
               />
             )}
             name="Address"
@@ -155,7 +155,7 @@ export default function Edit() {
         <TouchableOpacity
           disabled={isLoading}
           onPress={handleSubmit(onSubmit)}
-          className="mt-5 flex flex-row items-center justify-center space-x-3 rounded-lg bg-amber-500 p-3">
+          className="mt-3 flex flex-row items-center justify-center space-x-3 rounded-lg bg-amber-500 p-3">
           {isLoading ? (
             <>
               <ActivityIndicator size="small" color="#0000ff" />

@@ -98,8 +98,8 @@ export default function Cart({navigation}: any) {
               <ScrollView
                 showsVerticalScrollIndicator={false}
                 contentInsetAdjustmentBehavior="automatic"
-                className="px-2 py-2">
-                <View className="flex flex-row flex-wrap justify-between gap-2">
+                className="px-1.5 py-1.5">
+                <View className="flex flex-row flex-wrap justify-between gap-1.5">
                   {cart?.map((product: any) => (
                     <TouchableOpacity
                       onPress={() =>
@@ -140,7 +140,7 @@ export default function Cart({navigation}: any) {
                   ))}
                 </View>
               </ScrollView>
-              <View className="mb-3 px-1">
+              <View className="mx-auto mb-3 px-1">
                 {address ? (
                   <TouchableOpacity
                     disabled={isOrderLoading}

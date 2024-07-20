@@ -72,14 +72,14 @@ export default function Register({navigation}: any): React.JSX.Element {
     ]);
   return (
     <SafeAreaView>
-      <ScrollView contentInsetAdjustmentBehavior="automatic" className="p-4">
+      <ScrollView contentInsetAdjustmentBehavior="automatic" className="p-1.5">
         <View className="mt-10 w-full flex-1 items-center justify-center">
           <Image
             source={require('../../assets/images/logo.png')}
             className="mb-3 h-28 w-28 flex-row items-center justify-center rounded-full"
           />
           <Text className="font-jakarta text-2xl font-semibold">
-            Selamat datang!
+            Buat Akun Baru!
           </Text>
         </View>
         <View className="mt-10">

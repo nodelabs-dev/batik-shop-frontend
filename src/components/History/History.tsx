@@ -53,11 +53,11 @@ export default function History({navigation}: any) {
             <ScrollView
               showsVerticalScrollIndicator={false}
               contentInsetAdjustmentBehavior="automatic"
-              className="px-2">
-              <View className="pb-4">
+              className="px-1.5">
+              <View className="pb-2">
                 {history?.map((order: any) => (
                   <View
-                    className="mt-3 flex space-y-4 rounded-xl border border-slate-300 bg-white px-6 py-4"
+                    className="mt-1.5 flex space-y-4 rounded-xl border border-slate-300 bg-white px-6 py-4"
                     key={order.ID}>
                     {order?.Keranjang?.map((product: any) => (
                       <View

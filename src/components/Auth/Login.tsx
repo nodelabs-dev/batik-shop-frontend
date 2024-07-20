@@ -69,8 +69,8 @@ export default function Login({navigation}: any): React.JSX.Element {
     ]);
 
   return (
-    <SafeAreaView className="p-5">
-      <ScrollView contentInsetAdjustmentBehavior="automatic" className="p-4">
+    <SafeAreaView>
+      <ScrollView contentInsetAdjustmentBehavior="automatic" className="p-1.5">
         <View className="mt-10 w-full flex-1 items-center justify-center">
           <Image
             source={require('../../assets/images/login-ill.png')}

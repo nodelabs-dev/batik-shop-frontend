@@ -66,8 +66,7 @@ export default function ProductDetail({route, navigation}: any) {
         <>
           <ScrollView
             showsVerticalScrollIndicator={false}
-            contentInsetAdjustmentBehavior="automatic"
-            className="pt-">
+            contentInsetAdjustmentBehavior="automatic">
             <View className="mx-auto">
               <SliderBox
                 autoplay={true}
@@ -78,7 +77,7 @@ export default function ProductDetail({route, navigation}: any) {
                 }
               />
             </View>
-            <View className="p-4">
+            <View className="p-1.5">
               <View className="mt-4 flex rounded-lg bg-white px-6 py-5">
                 <Text className="font-jakarta mt-2 text-center text-2xl font-semibold text-slate-800">
                   {product?.product_name}
@@ -107,7 +106,7 @@ export default function ProductDetail({route, navigation}: any) {
           </ScrollView>
 
           {user ? (
-            <View className="flex flex-row items-center justify-around px-2 py-2">
+            <View className="flex flex-row items-center justify-around pb-2">
               <View className="flex w-[80%] flex-row items-center justify-center space-x-4 rounded-lg bg-stone-800">
                 <TouchableOpacity
                   disabled={quantity === 1}

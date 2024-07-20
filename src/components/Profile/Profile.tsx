@@ -68,11 +68,11 @@ export default function Profile({navigation}: any) {
               {!user ? '-' : user.data?.Email}
             </Text>
           </View>
-          <View className="mt-6 p-2">
-            <Text className="font-jakarta text-2xl font-semibold text-slate-800">
+          <View className="mt-5 p-0">
+            <Text className="font-jakarta pl-1.5 text-xl font-semibold text-slate-800">
               Akun
             </Text>
-            <View className="mt-4 flex space-y-6 rounded-lg bg-white p-4">
+            <View className="mt-4 flex space-y-6 rounded-none bg-white p-4">
               {user?.data ? (
                 <TouchableOpacity
                   onPress={() => navigation.navigate('Edit')}
@@ -107,11 +107,11 @@ export default function Profile({navigation}: any) {
               </TouchableOpacity>
             </View>
           </View>
-          <View className="mt-4 p-2">
-            <Text className="font-jakarta text-2xl font-semibold text-slate-800">
+          <View className="mt-4">
+            <Text className="font-jakarta pl-1.5 text-xl font-semibold text-slate-800">
               Aksi
             </Text>
-            <View className="mt-4 flex space-y-6 rounded-lg bg-white p-4">
+            <View className="mt-4 flex space-y-6 bg-white p-4">
               <TouchableOpacity
                 onPress={() => {
                   Linking.openURL('https://wa.me/6285157711068');

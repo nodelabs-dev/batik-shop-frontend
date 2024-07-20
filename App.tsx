@@ -200,6 +200,7 @@ function MainTabs() {
         },
         tabBarActiveTintColor: 'tomato',
         tabBarInactiveTintColor: 'gray',
+        tabBarLabelStyle: {fontFamily: 'Plus Jakarta Sans'},
       })}>
       <Tab.Screen
         name="HomeStack"
