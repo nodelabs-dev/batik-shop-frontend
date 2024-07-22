@@ -70,7 +70,7 @@ export default function Home({navigation}: any) {
         showsVerticalScrollIndicator={false}
         contentInsetAdjustmentBehavior="automatic"
         className="p-0">
-        <View className="px-1.5">
+        <View className="px-1.5 pt-1.5">
           <ImageBackground
             source={require('../../assets/images/border.png')}
             resizeMode="cover"

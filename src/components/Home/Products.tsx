@@ -7,11 +7,13 @@ import {
   SafeAreaView,
   ScrollView,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {capitalizeFirstLetter} from '../../lib';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 export default function Products({navigation}: any) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -19,6 +21,7 @@ export default function Products({navigation}: any) {
   const [productTypes, setProductTypes] = useState<any>(null);
   const [genderFilter, setGenderFilter] = useState<string>('');
   const [jenisBatikFilter, setJenisBatikFilter] = useState<string>('');
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   const getProductsHandler = async () => {
     setIsLoading(true);
@@ -60,7 +63,11 @@ export default function Products({navigation}: any) {
   const filteredProducts = products?.filter(
     (product: any) =>
       (!genderFilter || product?.category_general === genderFilter) &&
-      (!jenisBatikFilter || product?.jenis_batik === jenisBatikFilter),
+      (!jenisBatikFilter || product?.jenis_batik === jenisBatikFilter) &&
+      (!searchQuery ||
+        product?.product_name
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase())),
   );
 
   return (
@@ -76,7 +83,7 @@ export default function Products({navigation}: any) {
                 genderFilter === 'batik' ? 'bg-lime-300' : 'bg-[#ECCD5F]'
               }`}
               onPress={() => toggleGenderFilter('batik')}>
-              <Text className="font-jakarta text-center text-lg font-bold text-stone-800">
+              <Text className="text-center font-jakarta text-lg font-bold text-stone-800">
                 BATIK
               </Text>
             </TouchableOpacity>
@@ -85,7 +92,7 @@ export default function Products({navigation}: any) {
                 genderFilter === 'tenun' ? 'bg-lime-300' : 'bg-[#ECCD5F]'
               }`}
               onPress={() => toggleGenderFilter('tenun')}>
-              <Text className="font-jakarta text-center text-lg font-bold text-stone-800">
+              <Text className="text-center font-jakarta text-lg font-bold text-stone-800">
                 TENUN
               </Text>
             </TouchableOpacity>
@@ -109,6 +116,17 @@ export default function Products({navigation}: any) {
               </TouchableOpacity>
             ))}
           </ScrollView>
+        </View>
+        <View className="relative mt-2 flex flex-row items-center px-1.5">
+          <TextInput
+            className="w-full rounded-full border border-stone-300 p-3"
+            value={searchQuery}
+            onChangeText={text => setSearchQuery(text)}
+            placeholder="Search products"
+          />
+          <TouchableOpacity className="absolute right-6">
+            <AntDesign name="search1" size={20} color={'gray'} />
+          </TouchableOpacity>
         </View>
         <View className="mt-5 px-1.5 pb-3">
           {isLoading ? (
@@ -137,28 +155,28 @@ export default function Products({navigation}: any) {
                       <View className="mb-3">
                         <View className="flex flex-row space-x-1.5">
                           <View className="mb-2 w-16 rounded-full border border-yellow-100 bg-yellow-100 px-2 py-1">
-                            <Text className="font-jakarta text-center text-xs text-stone-800">
+                            <Text className="text-center font-jakarta text-xs text-stone-800">
                               {capitalizeFirstLetter(product?.category_general)}
                             </Text>
                           </View>
                           <View className="mb-2 w-auto rounded-full border border-yellow-100 bg-yellow-100 px-2 py-1">
-                            <Text className="font-jakarta text-center text-xs text-stone-800">
+                            <Text className="text-center font-jakarta text-xs text-stone-800">
                               {capitalizeFirstLetter(product?.jenis_batik)}
                             </Text>
                           </View>
                         </View>
                         <View className="w-28 rounded-full border border-lime-100 bg-lime-100 px-2 py-1">
-                          <Text className="font-jakarta text-left text-xs text-stone-800">
+                          <Text className="text-left font-jakarta text-xs text-stone-800">
                             🏠 {product?.nama_toko}
                           </Text>
                         </View>
                       </View>
-                      <Text className="font-jakarta max-w-[200px] text-2xl font-bold text-stone-700">
+                      <Text className="max-w-[200px] font-jakarta text-2xl font-bold text-stone-700">
                         {product?.product_name}
                       </Text>
 
                       <View className="mt-1">
-                        <Text className="font-jakarta text-md text-left font-semibold text-stone-700">
+                        <Text className="text-md text-left font-jakarta font-semibold text-stone-700">
                           {product?.price?.replace('RP ', 'Rp')}
                         </Text>
                       </View>
