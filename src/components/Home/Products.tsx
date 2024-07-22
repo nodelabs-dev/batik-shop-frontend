@@ -106,7 +106,7 @@ export default function Products({navigation}: any) {
                 key={category?.ID}
                 className={`rounded-full bg-stone-800 px-5 py-3 ${
                   jenisBatikFilter === category?.NamaJenis
-                    ? 'bg-lime-300'
+                    ? 'bg-amber-400'
                     : 'bg-stone-800'
                 }`}
                 onPress={() => toggleJenisBatikFilter(category?.NamaJenis)}>

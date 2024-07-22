@@ -129,10 +129,10 @@ export default function Cart({navigation}: any) {
                         className="mx-auto h-28 w-28"
                       />
                       <View className="p-2">
-                        <Text className="font-jakarta mt-2">
+                        <Text className="mt-2 font-jakarta">
                           {product?.nama_produk}
                         </Text>
-                        <Text className="font-jakarta mt-1 font-semibold">
+                        <Text className="mt-1 font-jakarta font-semibold">
                           {product?.harga?.replace('RP ', 'Rp')}
                         </Text>
                       </View>
@@ -140,16 +140,16 @@ export default function Cart({navigation}: any) {
                   ))}
                 </View>
               </ScrollView>
-              <View className="mx-auto mb-3 px-1">
+              <View className="mb-3 px-1">
                 {address ? (
                   <TouchableOpacity
                     disabled={isOrderLoading}
                     onPress={postOrderHandler}
-                    className="mt-5 w-96 rounded-xl bg-stone-800 py-3">
+                    className="mt-5 w-full rounded-xl bg-stone-800 py-3">
                     {isOrderLoading ? (
                       <ActivityIndicator size={'small'} color={'white'} />
                     ) : (
-                      <Text className="font-jakarta text-center text-lg font-medium text-white">
+                      <Text className="text-center font-jakarta text-lg font-medium text-white">
                         Pesan Sekarang
                       </Text>
                     )}
@@ -157,8 +157,8 @@ export default function Cart({navigation}: any) {
                 ) : (
                   <TouchableOpacity
                     onPress={() => navigation.navigate('ProfileStack')}
-                    className="mt-5 w-96 rounded-xl bg-stone-800 py-3">
-                    <Text className="font-jakarta text-center text-lg font-medium text-white">
+                    className="mt-5 w-full rounded-xl bg-stone-800 py-3">
+                    <Text className="text-center font-jakarta text-lg font-medium text-white">
                       Isi alamat terlebih dahulu
                     </Text>
                   </TouchableOpacity>
@@ -167,7 +167,7 @@ export default function Cart({navigation}: any) {
             </>
           ) : (
             <View>
-              <Text className="font-jakarta text-center text-lg">
+              <Text className="text-center font-jakarta text-lg">
                 Keranjang Kosong
               </Text>
             </View>

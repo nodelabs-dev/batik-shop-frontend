@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Linking,
   ActivityIndicator,
+  Image,
 } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
@@ -60,16 +61,16 @@ export default function Profile({navigation}: any) {
           contentInsetAdjustmentBehavior="automatic"
           className="p-0">
           <View className="flex items-center justify-center rounded-b-3xl bg-stone-800 px-6 py-8">
-            <AntDesign name={'user'} size={128} color={'white'} />
-            <Text className="font-jakarta mt-4 text-center text-2xl font-semibold text-white">
+            <AntDesign name={'user'} size={90} color={'white'} />
+            <Text className="mt-4 text-center font-jakarta text-2xl font-semibold text-white">
               {!user ? 'Tamu' : user.data?.Fullname}
             </Text>
-            <Text className="font-jakarta text-center text-lg text-white">
+            <Text className="text-center font-jakarta text-lg text-white">
               {!user ? '-' : user.data?.Email}
             </Text>
           </View>
           <View className="mt-5 p-0">
-            <Text className="font-jakarta pl-1.5 text-xl font-semibold text-slate-800">
+            <Text className="pl-1.5 font-jakarta text-xl font-semibold text-slate-800">
               Akun
             </Text>
             <View className="mt-4 flex space-y-6 rounded-none bg-white p-4">
@@ -108,7 +109,7 @@ export default function Profile({navigation}: any) {
             </View>
           </View>
           <View className="mt-4">
-            <Text className="font-jakarta pl-1.5 text-xl font-semibold text-slate-800">
+            <Text className="pl-1.5 font-jakarta text-xl font-semibold text-slate-800">
               Aksi
             </Text>
             <View className="mt-4 flex space-y-6 bg-white p-4">
@@ -142,6 +143,12 @@ export default function Profile({navigation}: any) {
                 </TouchableOpacity>
               )}
             </View>
+          </View>
+          <View className="mx-auto mt-2">
+            <Image
+              source={require('../../assets/images/unmuh.png')}
+              className="h-14 w-14"
+            />
           </View>
         </ScrollView>
       )}

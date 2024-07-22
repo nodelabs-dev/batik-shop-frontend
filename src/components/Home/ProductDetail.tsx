@@ -79,11 +79,11 @@ export default function ProductDetail({route, navigation}: any) {
             </View>
             <View className="p-1.5">
               <View className="mt-4 flex rounded-lg bg-white px-6 py-5">
-                <Text className="font-jakarta mt-2 text-center text-2xl font-semibold text-slate-800">
+                <Text className="mt-2 text-center font-jakarta text-2xl font-semibold text-slate-800">
                   {product?.product_name}
                 </Text>
                 <View className="mx-auto mt-2 w-20 rounded-full bg-yellow-300 px-2 py-2">
-                  <Text className="font-jakarta text-center text-xs font-semibold text-slate-800">
+                  <Text className="text-center font-jakarta text-xs font-semibold text-slate-800">
                     Tersedia
                   </Text>
                 </View>
@@ -91,12 +91,14 @@ export default function ProductDetail({route, navigation}: any) {
                   <Text className="font-jakarta text-xl font-semibold text-slate-800">
                     {product?.price}
                   </Text>
-                  <Text className="font-jakarta text-md rounded-lg bg-lime-300 px-4 py-2 font-semibold text-slate-800">
-                    {product?.nama_toko}
-                  </Text>
+                  <View className="rounded-lg bg-lime-300 px-4 py-2">
+                    <Text className="text-md font-jakarta font-semibold text-slate-800">
+                      {product?.nama_toko}
+                    </Text>
+                  </View>
                 </View>
                 <View className="mt-4">
-                  <Text className="font-jakarta mb-2 font-semibold text-slate-500">
+                  <Text className="mb-2 font-jakarta font-semibold text-slate-500">
                     Deskripsi
                   </Text>
                   <Text className="font-jakarta ">{product?.deskripsi}</Text>
@@ -114,7 +116,7 @@ export default function ProductDetail({route, navigation}: any) {
                   className="flex flex-row items-center justify-center rounded-lg px-6 py-4">
                   <AntDesign name="minus" size={20} color={'white'} />
                 </TouchableOpacity>
-                <Text className="font-jakarta ext-center text-lg font-semibold text-slate-100">
+                <Text className="ext-center font-jakarta text-lg font-semibold text-slate-100">
                   {quantity}
                 </Text>
                 <TouchableOpacity
@@ -138,7 +140,7 @@ export default function ProductDetail({route, navigation}: any) {
               <TouchableOpacity
                 onPress={() => navigation.navigate('Login')}
                 className="mt-5 w-full rounded-lg bg-stone-800 py-3">
-                <Text className="font-jakarta text-center text-lg font-medium text-white">
+                <Text className="text-center font-jakarta text-lg font-medium text-white">
                   Masuk terlebih dahulu
                 </Text>
               </TouchableOpacity>

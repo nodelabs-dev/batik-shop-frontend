@@ -79,7 +79,7 @@ export default function Order({route, navigation}: any) {
                 <Text className="font-jakarta ">
                   {product?.harga?.replace('RP ', 'Rp')}
                 </Text>
-                <Text className="font-jakarta mt-3">
+                <Text className="mt-3 font-jakarta">
                   {product?.total_produk} Pcs
                 </Text>
               </View>
@@ -123,7 +123,7 @@ export default function Order({route, navigation}: any) {
           {isPaymentLoading ? (
             <ActivityIndicator size={'small'} color={'white'} />
           ) : (
-            <Text className="font-jakarta text-center text-lg font-medium text-white">
+            <Text className="text-center font-jakarta text-lg font-medium text-white">
               Buat Pesanan
             </Text>
           )}

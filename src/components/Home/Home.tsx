@@ -77,12 +77,12 @@ export default function Home({navigation}: any) {
             imageStyle={{borderRadius: 20}}
             className="flex-row items-center justify-between rounded-2xl bg-stone-800 px-4 py-2">
             <View>
-              <Text className="font-jakarta max-w-[120px] text-2xl font-bold text-white">
+              <Text className="max-w-[120px] font-jakarta text-2xl font-bold text-white">
                 Batik Asli Indonesia
               </Text>
 
               <View className="mt-2 rounded-full bg-orange-400 p-3">
-                <Text className="font-jakarta text-md text-center font-semibold text-white">
+                <Text className="text-md text-center font-jakarta font-semibold text-white">
                   Original
                 </Text>
               </View>
@@ -124,22 +124,22 @@ export default function Home({navigation}: any) {
                   key={product?.ID}>
                   <View
                     className={`flex-row items-center justify-between 
-                    rounded-2xl bg-amber-400 px-5 py-2 ${
+                    rounded-2xl bg-amber-400 py-2 ${
                       index === products.length - 1 ? 'mr-3' : ''
                     }`}>
                     <View className="pl-4">
                       <View className="mb-4 max-w-[100px] rounded-full border border-lime-100 bg-lime-100 py-1">
-                        <Text className="font-jakarta text-center text-xs text-stone-800">
+                        <Text className="text-center font-jakarta text-xs text-stone-800">
                           🏠 {product?.nama_toko}
                         </Text>
                       </View>
 
-                      <Text className="font-jakarta max-w-[180px] text-xl font-bold text-white">
+                      <Text className="max-w-[180px] font-jakarta text-xl font-bold text-white">
                         {product?.product_name}
                       </Text>
 
                       <View className="mt-3">
-                        <Text className="font-jakarta text-md text-left font-semibold text-white">
+                        <Text className="text-md text-left font-jakarta font-semibold text-white">
                           {product?.price?.replace('RP ', 'Rp')}
                         </Text>
                       </View>
@@ -153,7 +153,7 @@ export default function Home({navigation}: any) {
                             `${process.env.API_URL}/`,
                           ),
                         }}
-                        className="h-44 w-44"
+                        className="h-40 w-40"
                       />
                     )}
                   </View>
@@ -192,20 +192,20 @@ export default function Home({navigation}: any) {
                   }>
                   <View
                     className="flex-row items-center justify-between 
-                    rounded-2xl bg-lime-500 px-5 py-2">
+                    rounded-2xl bg-lime-500 py-2">
                     <View className="pl-4">
                       <View className="mb-4 max-w-[100px] rounded-full border border-lime-100 bg-lime-100 py-1">
-                        <Text className="font-jakarta text-center text-xs text-stone-800">
+                        <Text className="text-center font-jakarta text-xs text-stone-800">
                           🏠 {product?.nama_toko}
                         </Text>
                       </View>
 
-                      <Text className="font-jakarta max-w-[180px] text-xl font-bold text-white">
+                      <Text className="max-w-[180px] font-jakarta text-xl font-bold text-white">
                         {product?.product_name}
                       </Text>
 
                       <View className="mt-3">
-                        <Text className="font-jakarta text-md text-left font-semibold text-white">
+                        <Text className="text-md text-left font-jakarta font-semibold text-white">
                           {product?.price?.replace('RP ', 'Rp')}
                         </Text>
                       </View>
@@ -219,7 +219,7 @@ export default function Home({navigation}: any) {
                             `${process.env.API_URL}/`,
                           ),
                         }}
-                        className="h-44 w-44"
+                        className="h-40 w-40"
                       />
                     )}
                   </View>
