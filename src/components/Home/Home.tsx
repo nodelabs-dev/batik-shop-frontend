@@ -34,11 +34,8 @@ export default function Home({navigation}: any) {
         setProducts(response?.data?.data);
         setIsRecommendationLoading(false);
       } catch (error) {
-        console.log(error);
         setIsRecommendationLoading(false);
       }
-
-      console.log('PROCESSED PRODUCT ===== ', products);
     };
 
     getProductsHandler();
@@ -50,19 +47,33 @@ export default function Home({navigation}: any) {
     }
 
     const getUserData = async () => {
-      const response = await axios.get(`${process.env.API_URL}/verify/user`);
-      await AsyncStorage.setItem('user', JSON.stringify(response.data));
-      console.log('INI DATA USERR === ', response.data);
+      try {
+        const response = await axios.get(`${process.env.API_URL}/verify/user`);
+        await AsyncStorage.setItem('user', JSON.stringify(response.data));
+        console.log('INI DATA USERR === ', response);
+      } catch (error) {
+        console.error(error);
+        await AsyncStorage.removeItem('auth');
+        navigation.replace('Login');
+      }
     };
 
     getUserData();
   }, [auth]);
 
   const popularProducts = products
-    ? [...products].sort((a, b) => b.count - a.count)
+    ? [...products].sort((a, b) => b.count - a.count).slice(0, 10)
     : [];
 
-  console.log(products);
+  const newestProducts = products
+    ? [...products]
+        .sort((a, b) => {
+          const dateA = new Date(a.created_at).getTime();
+          const dateB = new Date(b.created_at).getTime();
+          return dateB - dateA;
+        })
+        .slice(0, 10)
+    : [];
 
   return (
     <SafeAreaView>
@@ -116,7 +127,7 @@ export default function Home({navigation}: any) {
               showsHorizontalScrollIndicator={false}
               horizontal
               className="mt-4 flex space-x-2 pl-1.5">
-              {products?.map((product: any, index: number) => (
+              {newestProducts?.map((product: any, index: number) => (
                 <TouchableOpacity
                   onPress={() =>
                     navigation.navigate('ProductDetail', {product})
