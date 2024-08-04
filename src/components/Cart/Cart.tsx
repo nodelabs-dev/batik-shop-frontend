@@ -126,7 +126,7 @@ export default function Cart({navigation}: any) {
                             `${process.env.API_URL}/`,
                           ),
                         }}
-                        className="mx-auto h-28 w-28"
+                        className="mx-auto mt-3 h-36 w-36 rounded-lg"
                       />
                       <View className="p-2">
                         <Text className="mt-2 font-jakarta">

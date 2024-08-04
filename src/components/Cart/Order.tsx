@@ -68,8 +68,13 @@ export default function Order({route, navigation}: any) {
             <View className="flex flex-row space-x-4" key={product.ID}>
               <View className="rounded-lg bg-slate-100">
                 <Image
-                  className="h-20 w-20"
-                  source={require('../../assets/images/batik/batik-2.png')}
+                  className="h-20 w-20 rounded-lg"
+                  source={{
+                    uri: product.UrlImage1?.replace(
+                      './',
+                      `${process.env.API_URL}/`,
+                    ),
+                  }}
                 />
               </View>
               <View className="flex flex-1">

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import {useFocusEffect} from '@react-navigation/native';
 
 const truncateText = (text: string, length: number) => {
   if (text.length > length) {
@@ -33,20 +34,24 @@ export default function Home({navigation}: any) {
     };
 
     getUserLogin();
-
-    const getProductsHandler = async () => {
-      setIsRecommendationLoading(true);
-      try {
-        const response = await axios.get(`${process.env.API_URL}/produk`);
-        setProducts(response?.data?.data);
-        setIsRecommendationLoading(false);
-      } catch (error) {
-        setIsRecommendationLoading(false);
-      }
-    };
-
-    getProductsHandler();
   }, []);
+
+  const getProductsHandler = async () => {
+    setIsRecommendationLoading(true);
+    try {
+      const response = await axios.get(`${process.env.API_URL}/produk`);
+      setProducts(response?.data?.data);
+      setIsRecommendationLoading(false);
+    } catch (error) {
+      setIsRecommendationLoading(false);
+    }
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      getProductsHandler();
+    }, []),
+  );
 
   useEffect(() => {
     if (auth) {
@@ -145,7 +150,7 @@ export default function Home({navigation}: any) {
                     rounded-2xl bg-amber-400 p-4 ${
                       index === products.length - 1 ? 'mr-3' : ''
                     }`}>
-                    <View className="pr-2">
+                    <View className="pr-5">
                       <View className="mb-4 max-w-[100px] rounded-full border border-lime-100 bg-lime-100 py-1.5">
                         <Text className="text-center font-jakarta text-xs text-stone-800">
                           🏠 {truncateText(product?.nama_toko, 10)}
@@ -213,7 +218,7 @@ export default function Home({navigation}: any) {
                     rounded-2xl bg-lime-500 p-4 ${
                       index === products.length - 1 ? 'mr-3' : ''
                     }`}>
-                    <View className="pr-2">
+                    <View className="pr-4">
                       <View className="mb-4 max-w-[100px] rounded-full border border-lime-100 bg-lime-100 py-1.5">
                         <Text className="text-center font-jakarta text-xs text-stone-800">
                           🏠 {truncateText(product?.nama_toko, 10)}

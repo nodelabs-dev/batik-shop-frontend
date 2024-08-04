@@ -65,7 +65,7 @@ export default function History({navigation}: any) {
                         key={product.ID}>
                         <View className="rounded-lg bg-slate-100">
                           <Image
-                            className="h-20 w-20"
+                            className="h-20 w-20 rounded-lg"
                             source={{
                               uri:
                                 process.env.API_URL +
@@ -74,13 +74,13 @@ export default function History({navigation}: any) {
                           />
                         </View>
                         <View className="flex flex-1">
-                          <Text className="font-jakarta text-md font-bold text-slate-800">
+                          <Text className="text-md font-jakarta font-bold text-slate-800">
                             {product?.NamaProduk}
                           </Text>
                           <Text className="font-jakarta ">
                             {product?.harga?.replace('RP ', 'Rp')}
                           </Text>
-                          <Text className="font-jakarta mt-3">
+                          <Text className="mt-3 font-jakarta">
                             {product?.total_produk} Pcs
                           </Text>
                         </View>
@@ -122,7 +122,7 @@ export default function History({navigation}: any) {
                               navigation.navigate('HistoryOrder', {order})
                             }
                             className="rounded-lg bg-stone-800 px-6 py-3">
-                            <Text className="font-jakarta text-center font-medium text-white">
+                            <Text className="text-center font-jakarta font-medium text-white">
                               Detail
                             </Text>
                           </TouchableOpacity>
@@ -137,7 +137,7 @@ export default function History({navigation}: any) {
                               size={18}
                               color={'white'}
                             />
-                            <Text className="font-jakarta text-center font-medium text-white">
+                            <Text className="text-center font-jakarta font-medium text-white">
                               Chat Penjual
                             </Text>
                           </TouchableOpacity>
@@ -150,7 +150,7 @@ export default function History({navigation}: any) {
             </ScrollView>
           ) : (
             <View className="">
-              <Text className="font-jakarta text-center text-lg">
+              <Text className="text-center font-jakarta text-lg">
                 Riwayat Kosong
               </Text>
             </View>

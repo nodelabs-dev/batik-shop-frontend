@@ -15,6 +15,13 @@ import LinearGradient from 'react-native-linear-gradient';
 import {capitalizeFirstLetter} from '../../lib';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
+const truncateText = (text: string, length: number) => {
+  if (text.length > length) {
+    return text.substring(0, length) + '...';
+  }
+  return text;
+};
+
 export default function Products({navigation}: any) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [products, setProducts] = useState<any>(null);
@@ -150,7 +157,7 @@ export default function Products({navigation}: any) {
                     colors={['#ECCD5F', '#C5FF7B']}
                     start={{x: 0, y: 0}}
                     end={{x: 1, y: 1}}
-                    className="flex-row items-center justify-between rounded-2xl px-6 py-4">
+                    className="flex-row items-center justify-between rounded-2xl p-5">
                     <View>
                       <View className="mb-3">
                         <View className="flex flex-row space-x-1.5">
@@ -165,17 +172,17 @@ export default function Products({navigation}: any) {
                             </Text>
                           </View>
                         </View>
-                        <View className="w-28 rounded-full border border-lime-100 bg-lime-100 px-2 py-1">
+                        <View className="w-36 rounded-full border border-lime-100 bg-lime-100 px-2 py-1">
                           <Text className="text-left font-jakarta text-xs text-stone-800">
-                            🏠 {product?.nama_toko}
+                            🏠 {truncateText(product?.nama_toko, 17)}
                           </Text>
                         </View>
                       </View>
-                      <Text className="max-w-[200px] font-jakarta text-2xl font-bold text-stone-700">
-                        {product?.product_name}
+                      <Text className="max-w-[160px] font-jakarta text-xl font-bold text-stone-700">
+                        {truncateText(product?.product_name, 30)}
                       </Text>
 
-                      <View className="mt-1">
+                      <View className="mt-3">
                         <Text className="text-md text-left font-jakarta font-semibold text-stone-700">
                           {product?.price?.replace('RP ', 'Rp')}
                         </Text>
@@ -189,7 +196,7 @@ export default function Products({navigation}: any) {
                           `${process.env.API_URL}/`,
                         ),
                       }}
-                      className="h-44 w-44"
+                      className="h-36 w-36 rounded-xl"
                     />
                   </LinearGradient>
                 </TouchableOpacity>
