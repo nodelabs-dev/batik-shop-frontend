@@ -12,6 +12,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {SliderBox} from 'react-native-image-slider-box';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useFocusEffect} from '@react-navigation/native';
+import Markdown from 'react-native-markdown-display';
 
 export default function ProductDetail({route, navigation}: any) {
   const [quantity, setQuantity] = useState(1);
@@ -101,7 +102,7 @@ export default function ProductDetail({route, navigation}: any) {
                   <Text className="mb-2 font-jakarta font-semibold text-slate-500">
                     Deskripsi
                   </Text>
-                  <Text className="font-jakarta ">{product?.deskripsi}</Text>
+                  <Markdown>{product?.deskripsi}</Markdown>
                 </View>
               </View>
             </View>
