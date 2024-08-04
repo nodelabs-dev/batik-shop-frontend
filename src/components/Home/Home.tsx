@@ -12,6 +12,13 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
+const truncateText = (text: string, length: number) => {
+  if (text.length > length) {
+    return text.substring(0, length) + '...';
+  }
+  return text;
+};
+
 export default function Home({navigation}: any) {
   const [auth, setAuth] = useState<any>(null);
   const [products, setProducts] = useState<any>(null);
@@ -135,18 +142,18 @@ export default function Home({navigation}: any) {
                   key={product?.ID}>
                   <View
                     className={`flex-row items-center justify-between 
-                    rounded-2xl bg-amber-400 py-2 ${
+                    rounded-2xl bg-amber-400 p-4 ${
                       index === products.length - 1 ? 'mr-3' : ''
                     }`}>
-                    <View className="pl-4">
-                      <View className="mb-4 max-w-[100px] rounded-full border border-lime-100 bg-lime-100 py-1">
+                    <View className="pr-2">
+                      <View className="mb-4 max-w-[100px] rounded-full border border-lime-100 bg-lime-100 py-1.5">
                         <Text className="text-center font-jakarta text-xs text-stone-800">
-                          🏠 {product?.nama_toko}
+                          🏠 {truncateText(product?.nama_toko, 10)}
                         </Text>
                       </View>
 
-                      <Text className="max-w-[180px] font-jakarta text-xl font-bold text-white">
-                        {product?.product_name}
+                      <Text className="max-w-[160px] font-jakarta text-xl font-bold text-white">
+                        {truncateText(product?.product_name, 26)}
                       </Text>
 
                       <View className="mt-3">
@@ -164,7 +171,7 @@ export default function Home({navigation}: any) {
                             `${process.env.API_URL}/`,
                           ),
                         }}
-                        className="h-40 w-40"
+                        className="h-36 w-36 rounded-xl"
                       />
                     )}
                   </View>
@@ -202,17 +209,19 @@ export default function Home({navigation}: any) {
                     index === popularProducts.length - 1 ? 'mr-3' : ''
                   }>
                   <View
-                    className="flex-row items-center justify-between 
-                    rounded-2xl bg-lime-500 py-2">
-                    <View className="pl-4">
-                      <View className="mb-4 max-w-[100px] rounded-full border border-lime-100 bg-lime-100 py-1">
+                    className={`flex-row items-center justify-between 
+                    rounded-2xl bg-lime-500 p-4 ${
+                      index === products.length - 1 ? 'mr-3' : ''
+                    }`}>
+                    <View className="pr-2">
+                      <View className="mb-4 max-w-[100px] rounded-full border border-lime-100 bg-lime-100 py-1.5">
                         <Text className="text-center font-jakarta text-xs text-stone-800">
-                          🏠 {product?.nama_toko}
+                          🏠 {truncateText(product?.nama_toko, 10)}
                         </Text>
                       </View>
 
-                      <Text className="max-w-[180px] font-jakarta text-xl font-bold text-white">
-                        {product?.product_name}
+                      <Text className="max-w-[160px] font-jakarta text-xl font-bold text-white">
+                        {truncateText(product?.product_name, 26)}
                       </Text>
 
                       <View className="mt-3">
@@ -230,7 +239,7 @@ export default function Home({navigation}: any) {
                             `${process.env.API_URL}/`,
                           ),
                         }}
-                        className="h-40 w-40"
+                        className="h-36 w-36 rounded-xl"
                       />
                     )}
                   </View>
