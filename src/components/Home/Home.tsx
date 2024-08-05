@@ -66,7 +66,7 @@ export default function Home({navigation}: any) {
       } catch (error) {
         console.error(error);
         await AsyncStorage.removeItem('auth');
-        navigation.replace('Login');
+        await AsyncStorage.removeItem('user');
       }
     };
 
