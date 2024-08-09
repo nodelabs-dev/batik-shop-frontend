@@ -92,7 +92,7 @@ export default function ProductDetail({route, navigation}: any) {
                   <Text className="font-jakarta text-xl font-semibold text-slate-800">
                     {product?.price}
                   </Text>
-                  <View className="rounded-lg bg-lime-300 px-4 py-2">
+                  <View className="max-w-[200px] rounded-lg bg-lime-300 px-4 py-2">
                     <Text className="text-md font-jakarta font-semibold text-slate-800">
                       {product?.nama_toko}
                     </Text>

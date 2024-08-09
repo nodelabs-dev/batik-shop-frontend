@@ -74,8 +74,8 @@ export default function ProductDetail({route, navigation}: any) {
             }
           />
         </View>
-        <View className="p-4">
-          <View className="mt-4 flex rounded-lg bg-white px-6 py-5">
+        <View className="px-1.5">
+          <View className="mt-4  flex rounded-lg bg-white px-6 py-5">
             <Text className="mt-2 text-center font-jakarta text-2xl font-semibold text-slate-800">
               {product?.nama_produk}
             </Text>
@@ -88,10 +88,13 @@ export default function ProductDetail({route, navigation}: any) {
               <Text className="font-jakarta text-xl font-semibold text-slate-800">
                 {product?.harga}
               </Text>
-              <Text className="text-md rounded-lg bg-lime-300 px-4 py-2 font-jakarta font-semibold text-slate-800">
-                {product?.nama_toko}
-              </Text>
+              <View className="max-w-[200px] rounded-lg bg-lime-300 px-4 py-2">
+                <Text className="text-md font-jakarta font-semibold text-slate-800">
+                  {product?.nama_toko}
+                </Text>
+              </View>
             </View>
+
             <View className="mt-4">
               <Text className="mb-2 font-jakarta font-semibold text-slate-500">
                 Deskripsi

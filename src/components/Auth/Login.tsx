@@ -78,16 +78,16 @@ export default function Login({navigation}: any): React.JSX.Element {
           />
           <View className="flex flex-row">
             <View>
-              <Text className="font-jakarta ml-0 self-start text-left text-2xl font-semibold">
+              <Text className="ml-0 self-start text-left font-jakarta text-2xl font-semibold">
                 Selamat datang!
               </Text>
-              <Text className="font-jakarta mt-2 max-w-[260px] self-start text-slate-700">
+              <Text className="mt-2 max-w-[260px] self-start font-jakarta text-slate-700">
                 Dengan masuk, Anda menyetujui ketentuan dan kebijakan privasi
                 kami.
               </Text>
             </View>
             <Image
-              source={require('../../assets/images/logo.png')}
+              source={require('../../assets/images/logo.jpg')}
               className="ml-3 h-20 w-20 flex-row items-center justify-center rounded-full"
             />
           </View>
@@ -108,7 +108,7 @@ export default function Login({navigation}: any): React.JSX.Element {
             name="email"
           />
           {errors.email && (
-            <Text className="font-jakarta mt-2 pl-4 text-red-500">
+            <Text className="mt-2 pl-4 font-jakarta text-red-500">
               Email wajib diisi
             </Text>
           )}
@@ -142,14 +142,14 @@ export default function Login({navigation}: any): React.JSX.Element {
           <View
             className={`flex flex-row items-center ${errors.password ? 'justify-between' : 'justify-end'}`}>
             {errors.password && (
-              <Text className="font-jakarta mt-2 pl-4 text-red-500">
+              <Text className="mt-2 pl-4 font-jakarta text-red-500">
                 Password wajib diisi
               </Text>
             )}
             <Pressable
               onPress={() => navigation.navigate('ForgetPassword')}
               className="mt-1">
-              <Text className="font-jakarta text-right text-lg text-amber-600">
+              <Text className="text-right font-jakarta text-lg text-amber-600">
                 Lupa password?
               </Text>
             </Pressable>
@@ -162,18 +162,18 @@ export default function Login({navigation}: any): React.JSX.Element {
           {isLoading ? (
             <>
               <ActivityIndicator size="small" color="#0000ff" />
-              <Text className="font-jakarta text-center text-xl font-semibold text-white">
+              <Text className="text-center font-jakarta text-xl font-semibold text-white">
                 Tunggu sebentar
               </Text>
             </>
           ) : (
-            <Text className="font-jakarta text-center text-xl font-semibold text-white">
+            <Text className="text-center font-jakarta text-xl font-semibold text-white">
               Masuk
             </Text>
           )}
         </TouchableOpacity>
         <View className="mt-5 flex-row items-center justify-center">
-          <Text className="font-jakarta h-14 text-lg">Belum punya akun?</Text>
+          <Text className="h-14 font-jakarta text-lg">Belum punya akun?</Text>
           <Pressable
             onPress={() => navigation.navigate('Register')}
             className="h-14">
