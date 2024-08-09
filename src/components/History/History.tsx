@@ -29,7 +29,6 @@ export default function History({navigation}: any) {
       setHistory(sortedHistory);
       setIsHistoryLoading(false);
     } catch (error) {
-      console.error(error);
       setIsHistoryLoading(false);
     }
   };
@@ -40,7 +39,6 @@ export default function History({navigation}: any) {
     }, []),
   );
 
-  console.log('RESPONSE HISTORY === ', history);
   return (
     <SafeAreaView className="flex flex-1 justify-center">
       {isHistoryLoading ? (

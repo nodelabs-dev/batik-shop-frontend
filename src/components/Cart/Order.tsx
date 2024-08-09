@@ -15,15 +15,12 @@ export default function Order({route, navigation}: any) {
   const {orderId} = route?.params;
   const [isPaymentLoading, setIsPaymentLoading] = useState(false);
   const [order, setOrder] = useState<any>(null);
-  console.log('ORDER ID ===== ', orderId);
 
   useEffect(() => {
     const getOrderByIdHandler = async () => {
       const response = await axios.get(
         `${process.env.API_URL}/pesanan/${orderId}`,
       );
-
-      console.log('ORDER DATA RESPONSE === ', response.data);
       setOrder(response.data.data);
     };
 
@@ -34,11 +31,9 @@ export default function Order({route, navigation}: any) {
     setIsPaymentLoading(true);
     try {
       const response = await axios.post(`${process.env.API_URL}/send/${id}`);
-      console.log(response.data);
       navigation.navigate('Success');
       setIsPaymentLoading(false);
     } catch (error) {
-      console.error(error);
       setIsPaymentLoading(false);
     }
   };

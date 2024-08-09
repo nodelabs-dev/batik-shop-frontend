@@ -14,7 +14,7 @@ import {
 export default function EmailVerification({route, navigation}: any) {
   const {email} = route.params;
   const [isLoading, setIsLoading] = useState(false);
-  console.log(email);
+
   const {
     control,
     handleSubmit,
@@ -27,7 +27,7 @@ export default function EmailVerification({route, navigation}: any) {
 
   const onSubmit = async (data: any) => {
     setIsLoading(true);
-    console.log(data);
+
     const userEmail = email;
     try {
       const response = await axios.post(
@@ -37,11 +37,9 @@ export default function EmailVerification({route, navigation}: any) {
           code: data.code,
         },
       );
-      console.log('REGISTER RESPONSE === ', response.data);
       navigation.navigate('Login');
       setIsLoading(false);
     } catch (error) {
-      console.error(error);
       setIsLoading(false);
       verifyErrorAlert();
     }
@@ -62,11 +60,7 @@ export default function EmailVerification({route, navigation}: any) {
           `${process.env.API_URL}/email/request-verification`,
           {email},
         );
-
-        console.log(response.data);
-      } catch (error) {
-        console.error(error);
-      }
+      } catch (error) {}
     };
 
     sendRequestCodeVerification();
@@ -75,10 +69,10 @@ export default function EmailVerification({route, navigation}: any) {
     <SafeAreaView className="flex flex-1 items-center justify-center">
       <View>
         <View className="mb-8 max-w-[250px]">
-          <Text className="font-jakarta text-center text-lg font-semibold text-slate-800">
+          <Text className="text-center font-jakarta text-lg font-semibold text-slate-800">
             Verifikasi Email Anda
           </Text>
-          <Text className="font-jakarta text-center">
+          <Text className="text-center font-jakarta">
             Kami telah mengirimkan kode verifikasi, cek email Anda!
           </Text>
         </View>
@@ -92,13 +86,13 @@ export default function EmailVerification({route, navigation}: any) {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                className="font-jakarta rounded-full border border-slate-300 p-4"
+                className="rounded-full border border-slate-300 p-4 font-jakarta"
               />
             )}
             name="code"
           />
           {errors.code && (
-            <Text className="font-jakarta mt-2 pl-4 text-red-500">
+            <Text className="mt-2 pl-4 font-jakarta text-red-500">
               Kode verifikasi wajib diisi
             </Text>
           )}
@@ -110,12 +104,12 @@ export default function EmailVerification({route, navigation}: any) {
           {isLoading ? (
             <>
               <ActivityIndicator size="small" color="#0000ff" />
-              <Text className="font-jakarta text-center text-xl font-semibold text-white">
+              <Text className="text-center font-jakarta text-xl font-semibold text-white">
                 Tunggu sebentar
               </Text>
             </>
           ) : (
-            <Text className="font-jakarta text-center text-xl font-semibold text-white">
+            <Text className="text-center font-jakarta text-xl font-semibold text-white">
               Kirim
             </Text>
           )}

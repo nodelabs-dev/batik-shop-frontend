@@ -32,11 +32,9 @@ export default function ForgetPassword({navigation}: any) {
           Email: data.email,
         },
       );
-      console.log(response.data);
       setIsLoading(false);
       resetSuccessAlert();
     } catch (error) {
-      console.error(error);
       setIsLoading(false);
       resetErrorAlert();
     }
@@ -60,7 +58,7 @@ export default function ForgetPassword({navigation}: any) {
   return (
     <SafeAreaView className="flex flex-1 items-center justify-center">
       <View className="px-4">
-        <Text className="font-jakarta mb-3 text-center text-lg font-bold text-stone-800">
+        <Text className="mb-3 text-center font-jakarta text-lg font-bold text-stone-800">
           Reset Password Anda
         </Text>
         <View className="mt-2">
@@ -73,13 +71,13 @@ export default function ForgetPassword({navigation}: any) {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                className="font-jakarta w-72 rounded-full border border-slate-300 p-4"
+                className="w-72 rounded-full border border-slate-300 p-4 font-jakarta"
               />
             )}
             name="email"
           />
           {errors.email && (
-            <Text className="font-jakarta mt-2 pl-4 text-red-500">
+            <Text className="mt-2 pl-4 font-jakarta text-red-500">
               Email wajib diisi
             </Text>
           )}
@@ -91,12 +89,12 @@ export default function ForgetPassword({navigation}: any) {
           {isLoading ? (
             <>
               <ActivityIndicator size="small" color="#0000ff" />
-              <Text className="font-jakarta text-center text-xl font-semibold text-white">
+              <Text className="text-center font-jakarta text-xl font-semibold text-white">
                 Tunggu sebentar
               </Text>
             </>
           ) : (
-            <Text className="font-jakarta text-center text-xl font-semibold text-white">
+            <Text className="text-center font-jakarta text-xl font-semibold text-white">
               Reset
             </Text>
           )}

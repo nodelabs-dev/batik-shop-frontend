@@ -23,11 +23,9 @@ export default function Profile({navigation}: any) {
     try {
       const response = await axios.get(`${process.env.API_URL}/verify/user`);
       await AsyncStorage.setItem('user', JSON.stringify(response.data));
-      console.log('INI DATA USERR === ', response.data);
       setUser(response?.data);
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
       setIsLoading(false);
     }
   };
@@ -43,14 +41,10 @@ export default function Profile({navigation}: any) {
       const response = await axios.post(`${process.env.API_URL}/logout`);
       await AsyncStorage.removeItem('user');
       await AsyncStorage.removeItem('auth');
-      console.log(response.data);
       navigation.replace('Login');
-    } catch (error) {
-      console.error(error);
-    }
+    } catch (error) {}
   };
 
-  console.log('INI USER DATA DI PROFILE USESTATE ==== ', user);
   return (
     <SafeAreaView className="flex flex-1 justify-center">
       {isLoading ? (

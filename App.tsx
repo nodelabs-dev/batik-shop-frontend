@@ -169,8 +169,6 @@ function MainTabs() {
     setUser(JSON.parse(userData || ''));
   };
 
-  console.log('APP USER FROM APPTSX === ', user);
-
   useFocusEffect(
     useCallback(() => {
       getUserData();
@@ -233,7 +231,6 @@ function MainTabs() {
 function App(): React.JSX.Element {
   const {auth}: any = useContext(AuthContext);
 
-  console.log('AUTH CONTEXT ==== ', auth);
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="MainTabs">

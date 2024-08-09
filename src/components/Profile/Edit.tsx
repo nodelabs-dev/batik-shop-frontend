@@ -35,8 +35,6 @@ export default function Edit() {
   const fetchtUserData = async () => {
     const response = await axios.get(`${process.env.API_URL}/verify/user`);
     await AsyncStorage.setItem('user', JSON.stringify(response.data));
-
-    console.log('INI DATA USER === ', response.data);
   };
 
   const onSubmit = async (data: any) => {
@@ -52,13 +50,10 @@ export default function Edit() {
           Address: data.Address,
         },
       );
-
-      console.log('EDIT DATA RESPONSE ====', response.data);
       setIsLoading(false);
       fetchtUserData();
       editSuccessAlert();
     } catch (error) {
-      console.error(error);
       setIsLoading(false);
     }
   };
@@ -75,7 +70,6 @@ export default function Edit() {
     const getUserProfile = async () => {
       const response = await AsyncStorage.getItem('user');
       const userData = JSON.parse(response ?? '');
-      console.log('USER DATA EDIT ====', userData);
       setUser(userData);
       reset({
         Fullname: userData?.data?.Fullname,
@@ -102,13 +96,13 @@ export default function Edit() {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                className="font-jakarta rounded-lg border border-slate-300 p-4"
+                className="rounded-lg border border-slate-300 p-4 font-jakarta"
               />
             )}
             name="Fullname"
           />
           {errors.Fullname && (
-            <Text className="font-jakarta mt-2 pl-4 text-red-500">
+            <Text className="mt-2 pl-4 font-jakarta text-red-500">
               Nomor hp wajib diisi
             </Text>
           )}
@@ -121,13 +115,13 @@ export default function Edit() {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                className="font-jakarta mt-2 rounded-lg border border-slate-300 p-4"
+                className="mt-2 rounded-lg border border-slate-300 p-4 font-jakarta"
               />
             )}
             name="PhoneNumber"
           />
           {errors.PhoneNumber && (
-            <Text className="font-jakarta mt-2 pl-4 text-red-500">
+            <Text className="mt-2 pl-4 font-jakarta text-red-500">
               Nomor hp wajib diisi
             </Text>
           )}
@@ -141,13 +135,13 @@ export default function Edit() {
                 onBlur={onBlur}
                 onChangeText={onChange}
                 value={value}
-                className="font-jakarta mt-2 rounded-lg border border-slate-300 p-4"
+                className="mt-2 rounded-lg border border-slate-300 p-4 font-jakarta"
               />
             )}
             name="Address"
           />
           {errors.Address && (
-            <Text className="font-jakarta mt-2 pl-4 text-red-500">
+            <Text className="mt-2 pl-4 font-jakarta text-red-500">
               Alamat wajib diisi
             </Text>
           )}
@@ -159,12 +153,12 @@ export default function Edit() {
           {isLoading ? (
             <>
               <ActivityIndicator size="small" color="#0000ff" />
-              <Text className="font-jakarta text-center text-xl font-semibold text-white">
+              <Text className="text-center font-jakarta text-xl font-semibold text-white">
                 Tunggu sebentar
               </Text>
             </>
           ) : (
-            <Text className="font-jakarta text-center text-xl font-semibold text-white">
+            <Text className="text-center font-jakarta text-xl font-semibold text-white">
               Simpan
             </Text>
           )}

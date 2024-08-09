@@ -37,7 +37,6 @@ export default function Products({navigation}: any) {
       setProducts(response?.data?.data);
       setIsLoading(false);
     } catch (error) {
-      console.error(error);
       setIsLoading(false);
     }
   };
@@ -45,11 +44,8 @@ export default function Products({navigation}: any) {
   const getProductTypesHandler = async () => {
     try {
       const response = await axios.get(`${process.env.API_URL}/jenisbatik`);
-      console.log('JENIS BATIK === ', response?.data?.data);
       setProductTypes(response?.data?.data);
-    } catch (error) {
-      console.error(error);
-    }
+    } catch (error) {}
   };
 
   useFocusEffect(

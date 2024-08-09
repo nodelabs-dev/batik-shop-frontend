@@ -54,17 +54,11 @@ export default function Home({navigation}: any) {
   );
 
   useEffect(() => {
-    if (auth) {
-      console.log('INI AUTH HOME === ', JSON.stringify(auth));
-    }
-
     const getUserData = async () => {
       try {
         const response = await axios.get(`${process.env.API_URL}/verify/user`);
         await AsyncStorage.setItem('user', JSON.stringify(response.data));
-        console.log('INI DATA USERR === ', response);
       } catch (error) {
-        console.error(error);
         await AsyncStorage.removeItem('auth');
         await AsyncStorage.removeItem('user');
       }

@@ -29,7 +29,6 @@ export default function ProductDetail({route, navigation}: any) {
       setUser(JSON.parse(userData || ''));
       setIsScreenLoading(false);
     } catch (error) {
-      console.log(error);
       setIsScreenLoading(false);
     }
   };
@@ -50,7 +49,6 @@ export default function ProductDetail({route, navigation}: any) {
       setIsLoading(false);
       navigation.navigate('CartStack');
     } catch (error) {
-      console.error(error);
       setIsLoading(false);
     }
   };

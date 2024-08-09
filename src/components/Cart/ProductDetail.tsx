@@ -23,11 +23,10 @@ export default function ProductDetail({route, navigation}: any) {
       setIsScreenLoading(true);
       try {
         const totalProduct = Number(product?.total_produk);
-        console.log(totalProduct);
+
         setQuantity(totalProduct);
         setIsScreenLoading(false);
       } catch (error) {
-        console.error(error);
         setIsScreenLoading(false);
       }
     };
@@ -47,12 +46,9 @@ export default function ProductDetail({route, navigation}: any) {
       setIsLoading(false);
       navigation.navigate('Cart');
     } catch (error) {
-      console.error(error);
       setIsLoading(false);
     }
   };
-
-  console.log('CART ID ===== ', product?.id);
 
   const filteredImages = product?.image
     ?.filter((img: any) => img && img?.trim() !== '')

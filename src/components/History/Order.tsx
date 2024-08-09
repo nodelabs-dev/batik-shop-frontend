@@ -14,17 +14,14 @@ import {priceTotalWithoutOngkir} from '../../lib';
 export default function Order({route, navigation}: any) {
   const {order} = route.params;
   const [isPaymentLoading, setIsPaymentLoading] = useState(false);
-  console.log('ORDER DATA ===== ', order);
 
   const postPaymentTransaction = async (id: any) => {
     setIsPaymentLoading(true);
     try {
       const response = await axios.post(`${process.env.API_URL}/send/${id}`);
-      console.log(response.data);
       navigation.replace('SuccessHistory');
       setIsPaymentLoading(false);
     } catch (error) {
-      console.error(error);
       setIsPaymentLoading(false);
     }
   };

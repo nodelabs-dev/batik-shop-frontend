@@ -22,9 +22,7 @@ export default function Cart({navigation}: any) {
 
   const getUserLoginHandler = async () => {
     const userdata = await AsyncStorage.getItem('user');
-    console.log('DATA CARTTT ==== ', userdata);
     const userAddress = JSON.parse(userdata ? userdata : '');
-    console.log('ADRESS USER ==== ', userAddress);
     setAddress(userAddress?.data?.Address);
   };
 
@@ -35,7 +33,6 @@ export default function Cart({navigation}: any) {
       setCart(response?.data?.data);
       setIsLoading(false);
     } catch (error) {
-      console.error(error);
       setIsLoading(false);
     }
   };
@@ -52,15 +49,12 @@ export default function Cart({navigation}: any) {
       const response = await axios.delete(
         `${process.env.API_URL}/keranjang/delete/${id}`,
       );
-      console.log(response.data);
       setCart((prevCart: any) =>
         prevCart.filter((item: any) => item.id !== id),
       );
       deleteProductAlert();
       getCartHandler();
-    } catch (error) {
-      console.error(error);
-    }
+    } catch (error) {}
   };
 
   const postOrderHandler = async () => {
@@ -69,12 +63,11 @@ export default function Cart({navigation}: any) {
       const response = await axios.post(
         `${process.env.API_URL}/pesanan/create`,
       );
-      console.log(response.data);
+
       const orderId = response.data.id;
       setIsOrderLoading(false);
       navigation.navigate('Order', {orderId});
     } catch (error) {
-      console.error(error);
       setIsOrderLoading(false);
     }
   };

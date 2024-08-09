@@ -41,11 +41,9 @@ export default function Login({navigation}: any): React.JSX.Element {
 
       const verifyUser = await axios.get(`${process.env.API_URL}/verify/user`);
       await AsyncStorage.setItem('user', JSON.stringify(verifyUser?.data));
-      console.log(response.data);
       navigation.navigate('MainTabs');
       setIsLoading(false);
     } catch (error) {
-      console.error(error);
       setIsLoading(false);
       loginErrorAlert();
     }
@@ -54,7 +52,6 @@ export default function Login({navigation}: any): React.JSX.Element {
   useEffect(() => {
     const getUserData = async () => {
       const userData = await AsyncStorage.getItem('auth');
-      console.log('INI LOGIN ASYNC ==== ', userData);
     };
 
     getUserData();

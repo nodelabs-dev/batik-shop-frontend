@@ -32,7 +32,6 @@ export default function Register({navigation}: any): React.JSX.Element {
 
   const onSubmit = async (data: any) => {
     setIsLoading(true);
-    console.log(data);
     try {
       const response = await axios.post(
         `${process.env.API_URL}/user/register`,
@@ -43,25 +42,14 @@ export default function Register({navigation}: any): React.JSX.Element {
           Password: data.password,
         },
       );
-      console.log('REGISTER RESPONSE === ', response.data);
       const email = data?.email;
       navigation.navigate('EmailVerification', {email});
       setIsLoading(false);
     } catch (error) {
-      console.error(error);
       setIsLoading(false);
       registerErrorAlert();
     }
   };
-
-  useEffect(() => {
-    const getUserData = async () => {
-      const userData = await AsyncStorage.getItem('user');
-      console.log('INI REGISTER ASYNC ==== ', userData);
-    };
-
-    getUserData();
-  }, []);
 
   const registerErrorAlert = () =>
     Alert.alert('Gagal Mendaftar', 'Email sudah digunakan.', [
