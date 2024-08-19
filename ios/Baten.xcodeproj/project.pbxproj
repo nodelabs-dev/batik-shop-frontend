@@ -79,7 +79,7 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = testapp/main.m; sourceTree = "<group>"; };
 		1533A2EB1C39EB08B36996D6 /* libPods-Baten.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Baten.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22ACED694028436395A07A04 /* BootSplash.storyboard */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = BootSplash.storyboard; path = testapp/BootSplash.storyboard; sourceTree = "<group>"; };
-		291DB3FE0B224F4D9EB21FF9 /* Plus Jakarta Sans.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Plus Jakarta Sans.ttf"; path = "../src/assets/fonts/Plus Jakarta Sans.ttf"; sourceTree = "<group>"; };
+		291DB3FE0B224F4D9EB21FF9 /* Plus Jakarta Sans.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Plus Jakarta Sans.ttf"; path = "../src/assets/fonts/Plus Jakarta Sans.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-testapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testapp.debug.xcconfig"; path = "Target Support Files/Pods-testapp/Pods-testapp.debug.xcconfig"; sourceTree = "<group>"; };
 		408C608669CB9FC1ACA88AD4 /* Pods-Baten-BatenTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Baten-BatenTests.debug.xcconfig"; path = "Target Support Files/Pods-Baten-BatenTests/Pods-Baten-BatenTests.debug.xcconfig"; sourceTree = "<group>"; };
 		56A22B1AE6EF88B696EE36EB /* libPods-Baten-BatenTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Baten-BatenTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -179,7 +179,6 @@
 				291DB3FE0B224F4D9EB21FF9 /* Plus Jakarta Sans.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -735,10 +734,7 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -806,10 +802,7 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;

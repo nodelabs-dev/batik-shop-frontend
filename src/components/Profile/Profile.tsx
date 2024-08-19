@@ -92,7 +92,7 @@ export default function Profile({navigation}: any) {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  Linking.openURL('https://nodelabs.my.id');
+                  Linking.openURL('https://forms.gle/6sRwSQCYy9Ggm9cs8');
                 }}
                 className="flex flex-row items-center space-x-3">
                 <AntDesign name={'shoppingcart'} size={20} color={'grey'} />

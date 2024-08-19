@@ -83,18 +83,18 @@ export default function Products({navigation}: any) {
           <View className="mt-3 flex flex-row justify-evenly space-x-2">
             <TouchableOpacity
               className={`flex w-1/2 flex-row items-center justify-center rounded-lg px-4 py-4 ${
-                genderFilter === 'batik' ? 'bg-lime-300' : 'bg-[#ECCD5F]'
+                genderFilter === 'Batik' ? 'bg-lime-300' : 'bg-[#ECCD5F]'
               }`}
-              onPress={() => toggleGenderFilter('batik')}>
+              onPress={() => toggleGenderFilter('Batik')}>
               <Text className="text-center font-jakarta text-lg font-bold text-stone-800">
                 BATIK
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               className={`flex w-1/2 flex-row items-center justify-center rounded-lg px-4 py-4 ${
-                genderFilter === 'tenun' ? 'bg-lime-300' : 'bg-[#ECCD5F]'
+                genderFilter === 'Tenun' ? 'bg-lime-300' : 'bg-[#ECCD5F]'
               }`}
-              onPress={() => toggleGenderFilter('tenun')}>
+              onPress={() => toggleGenderFilter('Tenun')}>
               <Text className="text-center font-jakarta text-lg font-bold text-stone-800">
                 TENUN
               </Text>

@@ -13,7 +13,6 @@ import {
 } from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Register({navigation}: any): React.JSX.Element {
   const [isLoading, setIsLoading] = useState(false);
@@ -63,7 +62,7 @@ export default function Register({navigation}: any): React.JSX.Element {
       <ScrollView contentInsetAdjustmentBehavior="automatic" className="p-1.5">
         <View className="mt-10 w-full flex-1 items-center justify-center">
           <Image
-            source={require('../../assets/images/logo.jpg')}
+            source={require('../../assets/images/logo-original.jpg')}
             className="mb-3 h-28 w-28 flex-row items-center justify-center rounded-full"
           />
           <Text className="font-jakarta text-2xl font-semibold">

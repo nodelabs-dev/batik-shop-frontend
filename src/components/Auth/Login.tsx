@@ -84,7 +84,7 @@ export default function Login({navigation}: any): React.JSX.Element {
               </Text>
             </View>
             <Image
-              source={require('../../assets/images/logo.jpg')}
+              source={require('../../assets/images/logo-original.jpg')}
               className="ml-3 h-20 w-20 flex-row items-center justify-center rounded-full"
             />
           </View>
